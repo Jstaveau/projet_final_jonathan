@@ -9,7 +9,7 @@
         content="Hurst – Furniture Store eCommerce HTML Template is a clean and elegant design – suitable for selling flower, cookery, accessories, fashion, high fashion, accessories, digital, kids, watches, jewelries, shoes, kids, furniture, sports….. It has a fully responsive width adjusts automatically to any screen size or resolution.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/favicon.ico')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- Google Font -->
@@ -18,37 +18,37 @@
 
     <!-- all css here -->
     <!-- bootstrap v5 css -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- animate css -->
-    <link rel="stylesheet" href="{{asset('css/animate.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}">
     <!-- meanmenu css -->
-    <link rel="stylesheet" href="{{asset('css/meanmenu.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/meanmenu.min.css') }}">
     <!-- nivo-slider css -->
-    <link rel="stylesheet" href="{{asset('lib/css/nivo-slider.css')}}">
-    <link rel="stylesheet" href="{{asset('lib/css/preview.css')}}">
+    <link rel="stylesheet" href="{{ asset('lib/css/nivo-slider.css') }}">
+    <link rel="stylesheet" href="{{ asset('lib/css/preview.css') }}">
     <!-- slick css -->
-    <link rel="stylesheet" href="{{asset('css/slick.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/slick.min.css') }}">
     <!-- lightbox css -->
-    <link rel="stylesheet" href="{{asset('css/lightbox.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <!-- material-design-iconic-font css -->
-    <link rel="stylesheet" href="{{asset('css/material-design-iconic-font.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/material-design-iconic-font.css') }}">
     <!-- All common css of theme -->
-    <link rel="stylesheet" href="{{asset('css/default.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/default.css') }}">
     <!-- style css -->
-    <link rel="stylesheet" href="{{asset('style.css')}}">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
     <!-- shortcode css -->
-    <link rel="stylesheet" href="{{asset('css/shortcode.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/shortcode.css') }}">
     <!-- responsive css -->
-    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <!-- modernizr css -->
-    <script src="{{asset('js/vendor/modernizr-3.11.2.min.js')}}"></script>
+    <script src="{{ asset('js/vendor/modernizr-3.11.2.min.js') }}"></script>
 </head>
 
 <body>
     <!-- WRAPPER START -->
-    <div class="wrapper">
+    <div class="wrapper {{ !Request::is('/') ? 'bg-dark-white' : '' }}">
 
         <!-- Mobile-header-top Start -->
         <div class="mobile-header-top d-block d-md-none">
@@ -213,7 +213,7 @@
         <!-- FOOTER START -->
         <footer>
             <!-- Footer-area start -->
-            <div class="footer-area">
+            <div class="footer-area {{!Request::is('/') ? 'footer-2' : ''}}">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
@@ -250,33 +250,47 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-footer">
-                                <h3 class="footer-title  title-border">your choice Products</h3>
-                                <div class="footer-product">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-12">
-                                            <div class="footer-thumb">
-                                                <a href="#"><img src="img/footer/1.jpg" alt="" /></a>
-                                                <div class="footer-thumb-info">
-                                                    <p><a href="#">Furniture Product<br>Name</a></p>
-                                                    <h4 class="price-3">$ 60.00</h4>
+                        @if (Request::is('/'))
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-footer">
+                                    <h3 class="footer-title  title-border">your choice Products</h3>
+                                    <div class="footer-product">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-12">
+                                                <div class="footer-thumb">
+                                                    <a href="#"><img src="img/footer/1.jpg" alt="" /></a>
+                                                    <div class="footer-thumb-info">
+                                                        <p><a href="#">Furniture Product<br>Name</a></p>
+                                                        <h4 class="price-3">$ 60.00</h4>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6 col-12">
-                                            <div class="footer-thumb">
-                                                <a href="#"><img src="img/footer/1.jpg" alt="" /></a>
-                                                <div class="footer-thumb-info">
-                                                    <p><a href="#">Furniture Product<br>Name</a></p>
-                                                    <h4 class="price-3">$ 60.00</h4>
+                                            <div class="col-sm-6 col-12">
+                                                <div class="footer-thumb">
+                                                    <a href="#"><img src="img/footer/1.jpg" alt="" /></a>
+                                                    <div class="footer-thumb-info">
+                                                        <p><a href="#">Furniture Product<br>Name</a></p>
+                                                        <h4 class="price-3">$ 60.00</h4>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        @else
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-footer newsletter-item">
+                                <h3 class="footer-title  title-border">Email Newsletters</h3>
+                                <div class="footer-subscribe">
+                                    <form action="#">
+                                        <input type="text" name="email" placeholder="Email Address..." />
+                                        <button class="button-one submit-btn-4" type="submit" data-text="Subscribe">Subscribe</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -382,33 +396,35 @@
 
     <!-- all js here -->
     <!-- jquery latest version -->
-    <script src="{{asset('js/vendor/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{asset('js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
+    <script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
     <!-- bootstrap js -->
-    <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <!-- jquery.meanmenu js -->
-    <script src="{{asset('js/jquery.meanmenu.js')}}"></script>
+    <script src="{{ asset('js/jquery.meanmenu.js') }}"></script>
     <!-- slick.min js -->
-    <script src="{{asset('js/slick.min.js')}}"></script>
+    <script src="{{ asset('js/slick.min.js') }}"></script>
     <!-- jquery.treeview js -->
-    <script src="{{asset('js/jquery.treeview.js')}}"></script>
+    <script src="{{ asset('js/jquery.treeview.js') }}"></script>
     <!-- lightbox.min js -->
-    <script src="{{asset('js/lightbox.min.js')}}"></script>
+    <script src="{{ asset('js/lightbox.min.js') }}"></script>
     <!-- jquery-ui js -->
-    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <!-- jquery.nivo.slider js -->
-    <script src="{{asset('lib/js/jquery.nivo.slider.js')}}"></script>
-    <script src="{{asset('lib/home.js')}}"></script>
+    <script src="{{ asset('lib/js/jquery.nivo.slider.js') }}"></script>
+    <script src="{{ asset('lib/home.js') }}"></script>
     <!-- jquery.nicescroll.min js -->
-    <script src="{{asset('js/jquery.nicescroll.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
     <!-- countdon.min js -->
-    <script src="{{asset('js/countdon.min.j')}}s"></script>
+    <script src="{{ asset('js/countdon.min.j') }}s"></script>
     <!-- wow js -->
-    <script src="{{asset('js/wow.min.js')}}"></script>
+    <script src="{{ asset('js/wow.min.js') }}"></script>
     <!-- plugins js -->
-    <script src="{{asset('js/plugins.js')}}"></script>
+    <script src="{{ asset('js/plugins.js') }}"></script>
     <!-- main js -->
-    <script src="{{asset('js/main.js')}}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+
+    @yield('contact')
 </body>
 
 </html>
