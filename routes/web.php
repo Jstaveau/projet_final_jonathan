@@ -34,3 +34,9 @@ Route::get('/cart', function () {
 Route::get('/checkout', function () {
     return view('pages.checkout');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
