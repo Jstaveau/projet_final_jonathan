@@ -270,6 +270,33 @@ pre {
 .main-menu > nav {}
 .main-menu > nav > ul {}
 .main-menu > nav > ul > li {}
+.main-menu > nav > ul > li > form {
+  background: transparent none repeat scroll 0 0;
+  color: #666;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 45px;
+  padding: 0 0 0 70px;
+  position:relative;
+  text-transform: uppercase;
+  z-index: 1;
+}
+.main-menu > nav > ul > li > form > a{
+  color: #666;
+}
+.main-menu > nav > ul > li > form {
+  background: transparent none repeat scroll 0 0;
+  color: #666;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 45px;
+  padding: 0 0 0 70px;
+  position:relative;
+  text-transform: uppercase;
+  z-index: 1;
+}
 .main-menu > nav > ul > li > a {
   background: transparent none repeat scroll 0 0;
   color: #666;
@@ -282,6 +309,16 @@ pre {
   text-transform: uppercase;
   z-index: 1;
 }
+.main-menu > nav > ul > li > form::before {
+  background: #c8a165 none repeat scroll 0 0;
+  content: "";
+  height: 100%;
+  left: -100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
 .main-menu > nav > ul > li > a::before {
   background: #c8a165 none repeat scroll 0 0;
   content: "";
@@ -291,6 +328,12 @@ pre {
   top: 0;
   width: 100%;
   z-index: -1;
+}
+.main-menu > nav > ul > li:hover > form > a {
+  color: #fff;
+}
+.main-menu > nav > ul > li:hover > form::before {
+  left: 0;
 }
 .main-menu > nav > ul > li:hover > a {
   color: #fff;

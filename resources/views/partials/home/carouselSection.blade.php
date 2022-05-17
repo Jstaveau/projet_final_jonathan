@@ -140,14 +140,19 @@
                     </li>
                     <li><a href="#" title="Login"><i class="zmdi zmdi-lock"></i></a>
                         <div class="customer-login text-left">
-                            <form action="#">
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
                                 <h4 class="title-1 title-border text-uppercase mb-30">Registered customers</h4>
                                 <p class="text-gray">If you have an account with us, Please login!</p>
-                                <input type="text" name="email" placeholder="Email here..." />
-                                <input type="password" placeholder="Password" />
-                                <p><a class="text-gray" href="#">Forget your password?</a></p>
+                                <input type="text" name="email" :value="old('email')" required autofocus name="email" placeholder="Email here..." />
+                                <input type="password" name="password"
+                                required autocomplete="current-password" placeholder="Password" />
+                                @if ((Route::has('password.request')))
+                                    <p><a class="text-gray" href="{{ route('password.request') }}">Forget your password?</a></p>
+                                @endif
                                 <button class="button-one submit-button mt-15" data-text="login"
                                     type="submit">login</button>
+                                <button class="button-one submit-button mt-15" data-text="register" onclick="window.location.href='/register'">register</button>
                             </form>
                         </div>
                     </li>
