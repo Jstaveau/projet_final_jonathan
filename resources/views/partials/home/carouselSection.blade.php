@@ -154,8 +154,7 @@
                                     @endif
                                     <button class="button-one submit-button mt-15" data-text="login"
                                         type="submit">login</button>
-                                    <button class="button-one submit-button mt-15" data-text="register"
-                                        onclick="window.location.href='/register'">register</button>
+                                    <button class="button-one submit-button mt-15" data-text="register" onclick="window.location.href='/register'">register</button>
                                 @else
                                     <h4 class="title-1 title-border text-uppercase mb-30">Registered customers</h4>
                                     <p class="text-grey">You're logged in</p>

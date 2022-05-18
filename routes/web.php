@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +36,9 @@ Route::get('/checkout', function () {
     return view('pages.checkout');
 });
 Route::get('/account', function () {
-    return view('pages.myAccount');
+    $user = Auth::user();
+    $billing = $user->billing;
+    return view('pages.myAccount', compact('user', 'billing'));
 });
 
 Route::get('/dashboard', function () {

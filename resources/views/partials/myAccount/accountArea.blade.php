@@ -14,19 +14,19 @@
                             <div id="my-info" class="panel-collapse collapse show" data-bs-parent="#accordion">
                                 <div class="panel-body">
                                     <form class="billing-details shop-cart-table">
-                                        <input type="text" placeholder="Your name here...">
-                                        <input type="text" placeholder="Email address here...">
-                                        <input type="text" placeholder="Phone here...">
-                                        <input type="text" placeholder="Company neme here...">
-                                        <select class="custom-select mb-15">
-                                            <option>Contry</option>
+                                        <input name="name" value="{{$user->name}}" type="text" placeholder="Your name here...">
+                                        <input name="email" value="{{$user->email}}" type="text" placeholder="Email address here...">
+                                        <input name="phone" value="{{$user->phone}}" type="text" placeholder="Phone here...">
+                                        <input name="company_name" value="{{$user->company_name}}" type="text" placeholder="Company neme here...">
+                                        <select name="country" class="custom-select mb-15">
+                                            <option>Country</option>
                                             <option>Bangladesh</option>
                                             <option>United States</option>
                                             <option>united Kingdom</option>
                                             <option>Australia</option>
                                             <option>Canada</option>
                                         </select>
-                                        <select class="custom-select mb-15">
+                                        <select name="state" class="custom-select mb-15">
                                             <option>State</option>
                                             <option>Dhaka</option>
                                             <option>New York</option>
@@ -34,7 +34,7 @@
                                             <option>Melbourne</option>
                                             <option>Ottawa</option>
                                         </select>
-                                        <select class="custom-select mb-15">
+                                        <select name="city" class="custom-select mb-15">
                                             <option>Town / City</option>
                                             <option>Dhaka</option>
                                             <option>New York</option>
@@ -42,7 +42,7 @@
                                             <option>Melbourne</option>
                                             <option>Ottawa</option>
                                         </select>
-                                        <textarea placeholder="Your address here..." class="custom-textarea"></textarea>
+                                        <textarea name="address" placeholder="Your address here..." class="custom-textarea">{{$user->address}}</textarea>
                                         <button type="submit" data-text="update" class="submit-button submit-btn-2 button-one mt-2">Update</button>
                                     </form>
                                 </div>
@@ -57,19 +57,19 @@
                             <div id="my-billing" class="panel-collapse collapse" data-bs-parent="#accordion">
                                 <div class="panel-body">
                                     <form class="billing-details shop-cart-table">
-                                        <input type="text" placeholder="Your name here...">
-                                        <input type="text" placeholder="Email address here...">
-                                        <input type="text" placeholder="Phone here...">
-                                        <input type="text" placeholder="Company neme here...">
-                                        <select class="custom-select mb-15">
-                                            <option>Contry</option>
+                                        <input name="name" value="{{$billing->name}}" type="text" placeholder="Your name here...">
+                                        <input name="email" value="{{$billing->email}}" type="text" placeholder="Email address here...">
+                                        <input name="phone" value="{{$billing->phone}}" type="text" placeholder="Phone here...">
+                                        <input name="company_name" value="{{$billing->company_name}}" type="text" placeholder="Company neme here...">
+                                        <select name="country" class="custom-select mb-15">
+                                            <option>Country</option>
                                             <option>Bangladesh</option>
                                             <option>United States</option>
                                             <option>united Kingdom</option>
                                             <option>Australia</option>
                                             <option>Canada</option>
                                         </select>
-                                        <select class="custom-select mb-15">
+                                        <select name="state" class="custom-select mb-15">
                                             <option>State</option>
                                             <option>Dhaka</option>
                                             <option>New York</option>
@@ -77,7 +77,7 @@
                                             <option>Melbourne</option>
                                             <option>Ottawa</option>
                                         </select>
-                                        <select class="custom-select mb-15">
+                                        <select name="city" class="custom-select mb-15">
                                             <option>Town / City</option>
                                             <option>Dhaka</option>
                                             <option>New York</option>
@@ -85,7 +85,7 @@
                                             <option>Melbourne</option>
                                             <option>Ottawa</option>
                                         </select>
-                                        <textarea placeholder="Your address here..." class="custom-textarea"></textarea>
+                                        <textarea name="address" placeholder="Your address here..." class="custom-textarea">{{$billing->address}}</textarea>
                                         <button type="submit" data-text="update" class="submit-button submit-btn-2 button-one mt-2">Update</button>
                                     </form>
                                 </div>
