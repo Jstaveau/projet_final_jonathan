@@ -27,7 +27,7 @@
                             <input type="checkbox" id="newsletter" name="newsletter" checked>
                             <label for="newsletter"><span>Sign up for our newsletter!</span></label>
                         </p>
-                        <button type="submit" data-text="regiter" class="button-one submit-button mt-15">regiter</button>
+                        <button type="submit" data-text="register" class="button-one submit-button mt-15">regiter</button>
                     </div>					
                 </form>
             </div>

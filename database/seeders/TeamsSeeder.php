@@ -41,8 +41,8 @@ class TeamsSeeder extends Seeder
                 'boss' => false,
             ],
             [
-                'name' => 'Alain Térieur',
-                'post' => 'Vigile',
+                'name' => 'Phil Dentaire',
+                'post' => 'Dentiste',
                 'description' => 'Lorem ipsum dolor sit amet. Et suscipit odio aut unde nulla ea fuga molestias et laudantium assumenda. Qui dolor omnis non vitae sequi aut voluptas error. Eum alias minima non quidem animi et illum nobis sed voluptatem atque sit minima necessitatibus nam voluptas adipisci.',
                 'boss' => false,
             ],

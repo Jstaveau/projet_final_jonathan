@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\BillingAddress;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -44,11 +45,22 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
         event(new Registered($user));
+
+        $user_id = User::latest()->first();
+
+        $billing = new BillingAddress();
+        $billing->name = $request->name;
+        $billing->email = $request->email;
+        $billing->user_id = $user_id->id;
+        $billing->save();
+
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+    public function edit(){
+
     }
 }

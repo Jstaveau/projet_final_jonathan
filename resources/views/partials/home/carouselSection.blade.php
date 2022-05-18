@@ -5,8 +5,7 @@
         <div class="table">
             <div class="table-cell">
                 <ul>
-                    <li><a href="#" target="_blank" title="Google Plus"><i
-                                class="zmdi zmdi-google-plus"></i></a></li>
+                    <li><a href="#" target="_blank" title="Google Plus"><i class="zmdi zmdi-google-plus"></i></a></li>
                     <li><a href="#" target="_blank" title="Twitter"><i class="zmdi zmdi-twitter"></i></a></li>
                     <li><a href="#" target="_blank" title="Facebook"><i class="zmdi zmdi-facebook"></i></a></li>
                     <li><a href="#" target="_blank" title="Linkedin"><i class="zmdi zmdi-linkedin"></i></a></li>
@@ -142,21 +141,30 @@
                         <div class="customer-login text-left">
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-                                <h4 class="title-1 title-border text-uppercase mb-30">Registered customers</h4>
-                                <p class="text-gray">If you have an account with us, Please login!</p>
-                                <input type="text" name="email" :value="old('email')" required autofocus name="email" placeholder="Email here..." />
-                                <input type="password" name="password"
-                                required autocomplete="current-password" placeholder="Password" />
-                                @if ((Route::has('password.request')))
-                                    <p><a class="text-gray" href="{{ route('password.request') }}">Forget your password?</a></p>
+                                @if (!Auth::user())
+                                    <h4 class="title-1 title-border text-uppercase mb-30">Registered customers</h4>
+                                    <p class="text-gray">If you have an account with us, Please login!</p>
+                                    <input type="text" name="email" :value="old('email')" required autofocus
+                                        name="email" placeholder="Email here..." />
+                                    <input type="password" name="password" required autocomplete="current-password"
+                                        placeholder="Password" />
+                                    @if (Route::has('password.request'))
+                                        <p><a class="text-gray" href="{{ route('password.request') }}">Forget
+                                                your password?</a></p>
+                                    @endif
+                                    <button class="button-one submit-button mt-15" data-text="login"
+                                        type="submit">login</button>
+                                    <button class="button-one submit-button mt-15" data-text="register"
+                                        onclick="window.location.href='/register'">register</button>
+                                @else
+                                    <h4 class="title-1 title-border text-uppercase mb-30">Registered customers</h4>
+                                    <p class="text-grey">You're logged in</p>
                                 @endif
-                                <button class="button-one submit-button mt-15" data-text="login"
-                                    type="submit">login</button>
-                                <button class="button-one submit-button mt-15" data-text="register" onclick="window.location.href='/register'">register</button>
+
                             </form>
                         </div>
                     </li>
-                    <li><a href="my-account.html" title="My-Account"><i class="zmdi zmdi-account"></i></a></li>
+                    <li><a href="/account" title="My-Account"><i class="zmdi zmdi-account"></i></a></li>
                 </ul>
             </div>
         </div>

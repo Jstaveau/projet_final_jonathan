@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->longText('address')->nullable();
+            $table->foreignId('avatar_id')->nullable()->constrained();
             $table->foreignId('role_id')->default(1)->constrained();
             $table->boolean('newsletter')->default(false);
             $table->string('email')->unique();

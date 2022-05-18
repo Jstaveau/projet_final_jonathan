@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
                 RoleSeeder::class,
                 UserSeeder::class,
                 TeamsSeeder::class,
+                InfoSeeder::class,
+                CategorySeeder::class,
+                BillingAddressSeeder::class,
             ]
         );
     }

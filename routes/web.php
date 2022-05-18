@@ -34,6 +34,9 @@ Route::get('/cart', function () {
 Route::get('/checkout', function () {
     return view('pages.checkout');
 });
+Route::get('/account', function () {
+    return view('pages.myAccount');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

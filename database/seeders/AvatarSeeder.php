@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class ArticleCategorySeeder extends Seeder
+class AvatarSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class ArticleCategorySeeder extends Seeder
      */
     public function run()
     {
-        
+        //
     }
 }

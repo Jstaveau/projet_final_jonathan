@@ -13,7 +13,7 @@
                             </div>
                             <div id="my-info" class="panel-collapse collapse show" data-bs-parent="#accordion">
                                 <div class="panel-body">
-                                    <div class="billing-details shop-cart-table">
+                                    <form class="billing-details shop-cart-table">
                                         <input type="text" placeholder="Your name here...">
                                         <input type="text" placeholder="Email address here...">
                                         <input type="text" placeholder="Phone here...">
@@ -43,7 +43,8 @@
                                             <option>Ottawa</option>
                                         </select>
                                         <textarea placeholder="Your address here..." class="custom-textarea"></textarea>
-                                    </div>
+                                        <button type="submit" data-text="update" class="submit-button submit-btn-2 button-one mt-2">Update</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +56,7 @@
                             </div>
                             <div id="my-billing" class="panel-collapse collapse" data-bs-parent="#accordion">
                                 <div class="panel-body">
-                                    <div class="billing-details shop-cart-table">
+                                    <form class="billing-details shop-cart-table">
                                         <input type="text" placeholder="Your name here...">
                                         <input type="text" placeholder="Email address here...">
                                         <input type="text" placeholder="Phone here...">
@@ -85,7 +86,8 @@
                                             <option>Ottawa</option>
                                         </select>
                                         <textarea placeholder="Your address here..." class="custom-textarea"></textarea>
-                                    </div>
+                                        <button type="submit" data-text="update" class="submit-button submit-btn-2 button-one mt-2">Update</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
