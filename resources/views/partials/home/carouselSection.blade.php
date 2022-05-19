@@ -44,9 +44,12 @@
         <div class="slider-area">
             <div class="bend niceties preview-2">
                 <div id="ensign-nivoslider" class="slides">
-                    <img src="img/slider/slider-1/1.jpg" alt="" title="#slider-direction-1" />
-                    <img src="img/slider/slider-1/2.jpg" alt="" title="#slider-direction-2" />
-                    <img src="img/slider/slider-1/3.jpg" alt="" title="#slider-direction-3" />
+                    @foreach ($carous as $carou)
+                    {{-- {{dd($carou->src)}} --}}
+                        <img src="{{'img/images_site/1220x800/'.$carou->src}}" alt="" title="#slider-direction-{{$loop->iteration}}" />
+                    @endforeach
+                    {{-- <img src="img/slider/slider-1/2.jpg" alt="" title="#slider-direction-2" />
+                    <img src="img/slider/slider-1/3.jpg" alt="" title="#slider-direction-3" /> --}}
                 </div>
                 <!-- direction 1 -->
                 <div id="slider-direction-1" class="t-cn slider-direction">

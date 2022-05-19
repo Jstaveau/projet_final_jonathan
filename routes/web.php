@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NewsletterController;
+use App\Models\Diapo;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,9 @@ Route::get('/', function () {
     $star = Product::where('star', true)->first();
     $image = Image::where('pp', true)->where('product_id', $star->id)->first();
     $imageLast = Image::where('pp', true)->where('product_id', $latest->id)->first();
-    return view('welcome', compact('star', 'image', 'latest', 'imageLast'));
+    $carous = Diapo::all()->take(3);
+    $featureds = Product::all()->random(5);
+    return view('welcome', compact('star', 'image', 'latest', 'imageLast', 'carous', 'featureds'));
 });
 Route::get('/products', function () {
     return view('pages.shopList');
