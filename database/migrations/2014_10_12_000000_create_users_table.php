@@ -24,7 +24,6 @@ return new class extends Migration
             $table->longText('address')->nullable();
             $table->foreignId('avatar_id')->constrained();
             $table->foreignId('role_id')->default(5)->constrained();
-            $table->boolean('newsletter')->default(false);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
