@@ -15,6 +15,16 @@ class ArticleCategorySeeder extends Seeder
      */
     public function run()
     {
-        
+        DB::table('article_categories')->insert([
+            [
+                'name' => 'Life Style',
+            ],
+            [
+                'name' => 'Room',
+            ],
+            [
+                'name' => 'Kitchen',
+            ],
+        ]);
     }
 }

@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('article_categories', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->longText('content');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('article_category_id')->constrained();
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_categories');
+        Schema::dropIfExists('articles');
     }
 };

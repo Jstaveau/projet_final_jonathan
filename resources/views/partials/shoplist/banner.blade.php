@@ -9,7 +9,7 @@
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
-                            <li><a href="#">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li>Product list view</li>
                         </ul>
                     </div>

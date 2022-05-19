@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('post');
             $table->longText('description');
             $table->boolean('boss');
+            $table->foreignId('avatar_id')->constrained();
             $table->timestamps();
         });
     }
