@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\BillingAddress;
+use App\Models\Newsletter;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -46,6 +47,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         event(new Registered($user));
+
+        if ($request->newsletter) {
+            $newsletter = new Newsletter();
+            $newsletter->email = $request->email;
+            $newsletter->save();
+        }
 
         $user_id = User::latest()->first();
 

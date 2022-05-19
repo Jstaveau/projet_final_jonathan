@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('src');
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->boolean('pp')->nullable();
             $table->foreignId('product_id')->nullable()->constrained();
             $table->foreignId('article_id')->nullable()->constrained();
-            $table->boolean('principale_img')->default(false);
             $table->timestamps();
         });
     }

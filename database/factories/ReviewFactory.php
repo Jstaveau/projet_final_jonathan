@@ -19,7 +19,7 @@ class ReviewFactory extends Factory
         return [
             'content'=> $this->faker->paragraph(),
             'user_id'=> $this->faker->numberBetween($min = 1, $max = 5),
-            'product_id'=> $this->faker->numberBetween($min = 1, $max = 9),
+            'product_id'=> $this->faker->numberBetween($min = 1, $max = 8),
         ];
     }
 }

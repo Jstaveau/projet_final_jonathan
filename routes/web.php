@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
+use App\Models\Image;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $latest = Product::latest()->first();
+    $star = Product::where('star', true)->first();
+    $image = Image::where('pp', true)->where('product_id', $star->id)->first();
+    $imageLast = Image::where('pp', true)->where('product_id', $latest->id)->first();
+    return view('welcome', compact('star', 'image', 'latest', 'imageLast'));
 });
 Route::get('/products', function () {
     return view('pages.shopList');
@@ -44,5 +51,7 @@ Route::get('/account', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::resource('newsletter', NewsletterController::class);
 
 require __DIR__.'/auth.php';

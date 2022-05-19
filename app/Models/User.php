@@ -45,4 +45,11 @@ class User extends Authenticatable
     public function billing(){
         return $this->hasOne(BillingAddress::class);
     }
+
+    public function article(){
+        return $this->hasMany(Article::class);
+    }
+    public function comment(){
+        return $this->hasMany(Comment::class);
+    }
 }

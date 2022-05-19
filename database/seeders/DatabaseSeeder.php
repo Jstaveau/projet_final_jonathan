@@ -32,11 +32,12 @@ class DatabaseSeeder extends Seeder
                 ArticleSeeder::class,
                 CategorySeeder::class,
                 TagSeeder::class,
+                ProductSeeder::class,
                 ImageSeeder::class,
                 BannerSeeder::class,
-                ProductSeeder::class,
                 CommentSeeder::class,
                 ReviewSeeder::class,
+                DiapoSeeder::class,
             ]
         );
     }
