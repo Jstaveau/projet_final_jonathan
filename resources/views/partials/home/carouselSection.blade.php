@@ -30,7 +30,7 @@
             <div class="single-banner banner-2">
                 <a class="banner-thumb" href="#"><img src="{{'img/images_site/450x375/'.$latest->pp->src}}" alt="" /></a>
                 <div class="banner-brief">
-                    <h2 class="banner-title"><a href="#">New Product 2021</a></h2>
+                    <h2 class="banner-title"><a href="#">{{$latest->name}}</a></h2>
                     <p class="hidden-md hidden-sm d-none d-md-block">Lorem Ipsum is simply dummy text of the
                         printing and types sate industry. Lorem Ipsum has been the industry.</p>
                     <a href="#" class="button-one font-16px" data-text="Buy now">Buy now</a>
@@ -44,12 +44,10 @@
         <div class="slider-area">
             <div class="bend niceties preview-2">
                 <div id="ensign-nivoslider" class="slides">
+                    <img src="{{'img/images_site/1220x800/'.$firstCarou->src}}" alt="" title="#slider-direction-1" />
                     @foreach ($carous as $carou)
-                    {{-- {{dd($carou->src)}} --}}
-                        <img src="{{'img/images_site/1220x800/'.$carou->src}}" alt="" title="#slider-direction-{{$loop->iteration}}" />
+                        <img src="{{'img/images_site/1220x800/'.$carou->src}}" alt="" title="#slider-direction-{{$loop->iteration + 1}}" />
                     @endforeach
-                    {{-- <img src="img/slider/slider-1/2.jpg" alt="" title="#slider-direction-2" />
-                    <img src="img/slider/slider-1/3.jpg" alt="" title="#slider-direction-3" /> --}}
                 </div>
                 <!-- direction 1 -->
                 <div id="slider-direction-1" class="t-cn slider-direction">

@@ -17,7 +17,7 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            'title'=> $this->faker->sentence($nbWords = 6),
+            'title'=> $this->faker->sentence($nbWords = 2),
             'content'=> $this->faker->paragraph(),
             'user_id'=> $this->faker->numberBetween($min = 1, $max = 5),
             'article_category_id'=> $this->faker->numberBetween($min = 1, $max = 3),

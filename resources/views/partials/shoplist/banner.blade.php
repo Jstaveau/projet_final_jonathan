@@ -1,5 +1,5 @@
 <!-- HEADING-BANNER START -->
-<div class="heading-banner-area overlay-bg">
+<div class="heading-banner-area overlay-bg" style="background-image: url('{{'img/images_site/1920x300/'.$banner->image->src}}');">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -10,7 +10,7 @@
                     <div class="breadcumbs pb-15">
                         <ul>
                             <li><a href="/">Home</a></li>
-                            <li>Product list view</li>
+                            <li>{{$banner->title}}</li>
                         </ul>
                     </div>
                 </div>

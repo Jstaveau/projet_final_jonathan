@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\NewsletterController;
+use App\Models\Article;
+use App\Models\Banner;
 use App\Models\Diapo;
 use App\Models\Image;
 use App\Models\Product;
@@ -19,14 +21,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $latest = Product::latest()->first();
-    $star = Product::where('star', true)->first();
-    $carous = Diapo::all()->take(3);
-    $featureds = Product::all()->random(5);
-    return view('welcome', compact('star', 'latest', 'carous', 'featureds'));
+    $latest = Product::latest()->first(); //last product
+    $star = Product::where('star', true)->first(); //star product
+    $firstCarou = Diapo::where('first', true)->first(); //image selected as first for carousel
+    $carous = Diapo::all()->random(2); //2 others images for the carousel
+    $featureds = Product::all()->random(5); //5 random products for the section featured products
+    $articles = Article::all()->take(2); //2 last articles
+    return view('welcome', compact('star', 'latest', 'carous', 'featureds', 'articles', 'firstCarou'));
 });
 Route::get('/products', function () {
-    return view('pages.shopList');
+    $banner = Banner::where('id', 1)->first();
+    return view('pages.shopList', compact('banner'));
 });
 Route::get('/blog', function () {
     return view('pages.blog');
