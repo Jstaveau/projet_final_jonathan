@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
                 CommentSeeder::class,
                 ReviewSeeder::class,
                 DiapoSeeder::class,
+                PpSeeder::class,
             ]
         );
     }

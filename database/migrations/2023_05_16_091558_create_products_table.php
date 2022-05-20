@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->integer('price');
+            $table->integer('discount')->nullable();
             $table->string('size');
             $table->boolean('star')->default(false);
+            $table->boolean('new')->default(false);
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });

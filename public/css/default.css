@@ -87,6 +87,9 @@
 .pro-label.sale-label {
   background: #c87065 none repeat scroll 0 0;
 }
+.pro-label.both-label {
+  background: #2b7cce none repeat scroll 0 0;
+}
 .single-banner .pro-label {
   left: 30px;
 }
