@@ -5,8 +5,8 @@
             <div class="col-lg-3 order-2 order-lg-1">
                 <!-- Widget-Search start -->
                 <aside class="widget widget-search mb-30">
-                    <form action="#">
-                        <input type="text" placeholder="Search here..." />
+                    <form action="/products">
+                        <input name="search" type="text" placeholder="Search here..." />
                         <button type="submit">
                             <i class="zmdi zmdi-search"></i>
                         </button>
@@ -20,16 +20,9 @@
                     </div>
                     <div id="cat-treeview"  class="widget-info product-cat boxscrol2">
                         <ul>
-                            <li><span>Chair</span>
-                            </li>          
-                            <li><span>Table</span>
-                            </li>          
-                            <li><span>Accessories</span>
-                            </li>
-                            <li><span>Decoration</span>
-                            </li>
-                            <li><span>Cabinet</span>
-                            </li>
+                            @foreach ($all_categories as $all_category)    
+                                <li><span><a href="/products/{{$all_category->name}}">{{$all_category->name}}</a></span></li>          
+                            @endforeach
                         </ul>
                     </div>
                 </aside>
@@ -72,7 +65,7 @@
                                         <div class="product-img">
                                             <span class="pro-label new-label">new</span>
                                             <span class="pro-price-2">$ {{$product->price}}</span>
-                                            <a href="single-product.html"><img src="{{'img/images_site/270x270/'.$product->pp->src}}" alt="" /></a>
+                                            <a href="single-product.html"><img src="{{asset('img/images_site/270x270/'.$product->pp->src)}}" alt="" /></a>
                                         </div>
                                         <div class="product-info clearfix text-center">
                                             <div class="fix">
@@ -105,7 +98,7 @@
                                             @else
                                                 <span class="pro-price-2">$ {{$product->price}}</span>
                                             @endif
-                                            <a href="single-product.html"><img src="{{'img/images_site/270x270/'.$product->pp->src}}" alt="" /></a>
+                                            <a href="single-product.html"><img src="{{asset('img/images_site/270x270/'.$product->pp->src)}}" alt="" /></a>
                                         </div>
                                         <div class="product-info">
                                             <div class="fix">

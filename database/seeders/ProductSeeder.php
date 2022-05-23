@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
     {
         DB::table('products')->insert([
             [
-                'name' => 'Long chair',
+                'name' => 'long chair',
                 'description' => "There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humour, or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum, you neede be sure there isn't anythin going to use a passage embarrassing.",
                 'price' => 200,
                 'discount' => 10,
@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
                 'star' => false,
             ],
             [
-                'name' => 'Table Clouburg',
+                'name' => 'table Clouburg',
                 'description' => "There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humour, or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum, you neede be sure there isn't anythin going to use a passage embarrassing.",
                 'price' => 800,
                 'discount' => 20,
@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder
                 'star' => false,
             ],
             [
-                'name' => 'Magical Mirror',
+                'name' => 'magical Mirror',
                 'description' => "There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humour, or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum, you neede be sure there isn't anythin going to use a passage embarrassing.",
                 'price' => 350,
                 'discount' => null,
@@ -47,7 +47,7 @@ class ProductSeeder extends Seeder
                 'star' => true,
             ],
             [
-                'name' => 'Picasso was here',
+                'name' => 'picasso was here',
                 'description' => "There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humour, or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum, you neede be sure there isn't anythin going to use a passage embarrassing.",
                 'price' => 20000,
                 'discount' => null,
@@ -57,7 +57,7 @@ class ProductSeeder extends Seeder
                 'star' => false,
             ],
             [
-                'name' => 'Cabinet but not wc',
+                'name' => 'cabinet but not wc',
                 'description' => "There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humour, or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum, you neede be sure there isn't anythin going to use a passage embarrassing.",
                 'price' => 100,
                 'discount' => null,
@@ -67,7 +67,7 @@ class ProductSeeder extends Seeder
                 'star' => false,
             ],
             [
-                'name' => 'Desk chair',
+                'name' => 'desk chair',
                 'description' => "There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humour, or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum, you neede be sure there isn't anythin going to use a passage embarrassing.",
                 'price' => 99,
                 'discount' => null,
@@ -77,7 +77,7 @@ class ProductSeeder extends Seeder
                 'star' => false,
             ],
             [
-                'name' => 'Desk table',
+                'name' => 'desk table',
                 'description' => "There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humour, or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum, you neede be sure there isn't anythin going to use a passage embarrassing.",
                 'price' => 100,
                 'discount' => null,
@@ -87,7 +87,7 @@ class ProductSeeder extends Seeder
                 'star' => false,
             ],
             [
-                'name' => 'Knife of my life',
+                'name' => 'knife of my life',
                 'description' => "There are many variations of passages of Lorem Ipsum available, but the majority have be suffered alteration in some form, by injected humour, or randomised words which donot look even slightly believable. If you are going to use a passage of Lorem Ipsum, you neede be sure there isn't anythin going to use a passage embarrassing.",
                 'price' => 10,
                 'discount' => null,

@@ -1,5 +1,5 @@
 <!-- HEADING-BANNER START -->
-<div class="heading-banner-area overlay-bg" style="background-image: url('{{'img/images_site/1920x300/'.$banner->image->src}}');">
+<div class="heading-banner-area overlay-bg" style="background-image: url('{{asset('img/images_site/1920x300/'.$banner->image->src)}}');">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
