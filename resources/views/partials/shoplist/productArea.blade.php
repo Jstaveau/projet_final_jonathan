@@ -34,11 +34,10 @@
                     </div>
                     <div class="widget-info size-filter clearfix">
                         <ul>
-                            <li><a class="active" href="#">S</a></li>
-                            <li><a href="#">M</a></li>
-                            <li><a href="#">L</a></li>
-                            <li><a href="#">SL</a></li>
-                            <li><a href="#">XL</a></li>
+                            <li><a href="/products/size/S">S</a></li>
+                            <li><a href="/products/size/M">M</a></li>
+                            <li><a href="/products/size/L">L</a></li>
+                            <li><a href="/products/size/XL">XL</a></li>
                         </ul>
                     </div>
                 </aside>
@@ -133,21 +132,7 @@
                         </div>
                     </div>
                     <!-- Pagination start -->
-                    
                     {{ $products->links() }}
-                    {{-- <div class="shop-pagination  text-center">
-                        <div class="pagination">
-                            <ul>
-                                <li><a href="#"><i class="zmdi zmdi-long-arrow-left"></i></a></li>
-                                <li><a href="#">01</a></li>
-                                <li><a class="active" href="#">02</a></li>
-                                <li><a href="#">03</a></li>
-                                <li><a href="#">04</a></li>
-                                <li><a href="#">05</a></li>
-                                <li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                            </ul>
-                        </div>
-                    </div> --}}
                     <!-- Pagination end -->
                 </div>
                 <!-- Shop-Content End -->

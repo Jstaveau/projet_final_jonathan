@@ -51,12 +51,19 @@ Route::get('/products', function (Request $request) {
     return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
 });
 
-Route::get('/products/{category}', function ($category) {
+Route::get('/products/{category}', function ($category) { // category filter
     $all_categories = Category::all();
     $banner = Banner::where('id', 1)->first(); // banner img
     $category_id = Category::where('name', $category)->first();
     $products = Product::where('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(6);
     $lists = Product::where('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(5);
+    return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
+});
+Route::get('/products/size/{size}', function ($size) { //size filter
+    $banner = Banner::where('id', 1)->first(); // banner img
+    $all_categories = Category::all();
+    $products = Product::where('size', $size)->orderBy('id', 'desc')->paginate(6);
+    $lists = Product::where('size', $size)->orderBy('id', 'desc')->paginate(5);
     return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
 });
 
