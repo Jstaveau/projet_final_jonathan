@@ -334,6 +334,12 @@ class ImageSeeder extends Seeder
                 'article_id' => null,
                 'product_id' => 3,
             ],
+            [
+                'name' => 'about1',
+                'src' => 'about1.jpg',
+                'article_id' => null,
+                'product_id' => null,
+            ],
         ]);
     }
 }

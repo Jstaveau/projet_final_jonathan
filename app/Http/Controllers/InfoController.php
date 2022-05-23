@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Info;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class InfoController extends Controller
      */
     public function index()
     {
-        //
+        $banner = Banner::where('id', 2)->first(); // banner img
+        return view('pages.aboutUs', compact('banner'));
     }
 
     /**

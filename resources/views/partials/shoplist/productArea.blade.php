@@ -50,7 +50,7 @@
                         <!-- Nav tabs -->
                         <ul class="nav d-block shop-tab">
                             <li><a href="#grid-view" data-bs-toggle="tab"><i class="zmdi zmdi-view-module"></i></a></li>
-                            <li><a class="active" href="#list-view"  data-bs-toggle="tab"><i class="zmdi zmdi-view-list"></i></a></li>
+                            <li><a class="active" href="#list-view" data-bs-toggle="tab"><i class="zmdi zmdi-view-list"></i></a></li>
                         </ul>
                     </div>
                     <!-- Tab panes -->
@@ -62,7 +62,11 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="single-product">
                                         <div class="product-img">
-                                            <span class="pro-label new-label">new</span>
+                                            @if ($product->new && $product->discount != null)                                            
+                                                <span class="pro-label both-label">new and sale</span>
+                                            @elseif ($product->new)
+                                                <span class="pro-label new-label">new</span>    
+                                            @endif
                                             <span class="pro-price-2">$ {{$product->price}}</span>
                                             <a href="single-product.html"><img src="{{asset('img/images_site/270x270/'.$product->pp->src)}}" alt="" /></a>
                                         </div>
@@ -71,7 +75,7 @@
                                                 <h4 class="post-title"><a href="#">{{$product->name}}</a></h4>
                                             </div>
                                             <div class="product-action clearfix">
-                                                <a href="#" data-bs-toggle="modal"  data-bs-target="#productModal" title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
+                                                <a href="/product/{{$product->id}}" title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
                                                 <a href="cart.html" data-bs-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
                                             </div>
                                         </div>

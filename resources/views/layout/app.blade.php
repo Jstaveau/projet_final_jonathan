@@ -152,9 +152,9 @@
                     <ul>
                         <li><a href="/">home</a>
                         </li>
-                        <li><a href="/products">products</a></li>
-                        <li><a href="/blog">blog</a></li>
-                        <li><a href="/about-us">about us</a></li>
+                        <li><a href="/product">products</a></li>
+                        <li><a href="/article">blog</a></li>
+                        <li><a href="/about">about us</a></li>
                         <li><a href="/contact">contact</a></li>
                     </ul>
                 </nav>
@@ -188,7 +188,7 @@
         <!-- FOOTER START -->
         <footer>
             <!-- Footer-area start -->
-            <div class="footer-area {{!Request::is('/') ? 'footer-2' : ''}}">
+            <div class="footer-area {{ !Request::is('/') ? 'footer-2' : '' }}">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
@@ -254,17 +254,18 @@
                                 </div>
                             </div>
                         @else
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-footer newsletter-item">
-                                <h3 class="footer-title  title-border">Email Newsletters</h3>
-                                <div class="footer-subscribe">
-                                    <form action="#">
-                                        <input type="text" name="email" placeholder="Email Address..." />
-                                        <button class="button-one submit-btn-4" type="submit" data-text="Subscribe">Subscribe</button>
-                                    </form>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-footer newsletter-item">
+                                    <h3 class="footer-title  title-border">Email Newsletters</h3>
+                                    <div class="footer-subscribe">
+                                        <form action="#">
+                                            <input type="text" name="email" placeholder="Email Address..." />
+                                            <button class="button-one submit-btn-4" type="submit"
+                                                data-text="Subscribe">Subscribe</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                 </div>
@@ -295,7 +296,9 @@
             <!-- Copyright-area start -->
         </footer>
         <!-- FOOTER END -->
-        <!-- QUICKVIEW PRODUCT -->
+
+        @yield('modal')
+        {{-- <!-- QUICKVIEW PRODUCT -->
         <div id="quickview-wrapper">
             <!-- Modal -->
             <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
@@ -364,8 +367,7 @@
             </div>
             <!-- END Modal -->
         </div>
-        <!-- END QUICKVIEW PRODUCT -->
-
+        <!-- END QUICKVIEW PRODUCT --> --}}
     </div>
     <!-- WRAPPER END -->
 

@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
                 ReviewSeeder::class,
                 DiapoSeeder::class,
                 PpSeeder::class,
+                AboutSeeder::class,
             ]
         );
     }

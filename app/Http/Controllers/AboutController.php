@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
+use App\Models\About;
 use App\Models\Banner;
+use App\Models\Teams;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $banner = Banner::where('id', 2)->first(); // banner img
-        $articles = Article::orderBy('id', 'desc')->paginate(6);
-        return view('pages.blog', compact('banner', 'articles'));
+        $banner = Banner::where('id', 3)->first(); // banner img
+        $about = About::first();
+        $boss = Teams::where('boss', true)->first();
+        $teams = Teams::where('boss', false)->inRandomOrder()->limit(3)->get();
+        return view('pages.aboutUs', compact('banner', 'about', 'boss', 'teams'));
     }
 
     /**
@@ -44,10 +47,10 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(About $about)
     {
         //
     }
@@ -55,10 +58,10 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(About $about)
     {
         //
     }
@@ -67,10 +70,10 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, About $about)
     {
         //
     }
@@ -78,10 +81,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(About $about)
     {
         //
     }

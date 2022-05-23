@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,9 +14,25 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $all_categories = Category::all();    $banner = Banner::where('id', 1)->first(); // banner img
+    //search bar
+    $search = $request->input('search'); //input content
+    if ($search != '') {
+        $category_id = Category::where('name', 'LIKE', "%{$search}")->first(); //to get the category id for the query builder
+        if ($category_id) { //prevent error if no category selected
+            $products = Product::where('name', 'LIKE', "%{$search}")->orWhere('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(6);
+            $lists = Product::where('name', 'LIKE', "%{$search}")->orWhere('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(5);
+        } else {
+            $products = Product::where('name', 'LIKE', "%{$search}")->paginate(6);
+            $lists = Product::where('name', 'LIKE', "%{$search}")->paginate(5);
+        }
+    } else {
+        $products = Product::orderBy('id', 'desc')->paginate(6); //grid products
+        $lists = Product::orderBy('id', 'desc')->paginate(5); //list products
+    }
+    return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
     }
 
     /**
@@ -46,7 +64,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('partials.modal', compact('product'));
     }
 
     /**

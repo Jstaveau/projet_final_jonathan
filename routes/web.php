@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\ProductController;
 use App\Models\Article;
 use App\Models\Banner;
 use App\Models\Category;
@@ -31,25 +34,25 @@ Route::get('/', function () {
     $articles = Article::all()->take(2); //2 last articles
     return view('welcome', compact('star', 'latest', 'carous', 'featureds', 'articles', 'firstCarou'));
 });
-Route::get('/products', function (Request $request) {
-    $all_categories = Category::all();    $banner = Banner::where('id', 1)->first(); // banner img
-    //search bar
-    $search = $request->input('search'); //input content
-    if ($search != '') {
-        $category_id = Category::where('name', 'LIKE', "%{$search}")->first(); //to get the category id for the query builder
-        if ($category_id) { //prevent error if no category selected
-            $products = Product::where('name', 'LIKE', "%{$search}")->orWhere('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(6);
-            $lists = Product::where('name', 'LIKE', "%{$search}")->orWhere('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(5);
-        } else {
-            $products = Product::where('name', 'LIKE', "%{$search}")->paginate(6);
-            $lists = Product::where('name', 'LIKE', "%{$search}")->paginate(5);
-        }
-    } else {
-        $products = Product::orderBy('id', 'desc')->paginate(6); //grid products
-        $lists = Product::orderBy('id', 'desc')->paginate(5); //list products
-    }
-    return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
-});
+// Route::get('/products', function (Request $request) {
+//     $all_categories = Category::all();    $banner = Banner::where('id', 1)->first(); // banner img
+//     //search bar
+//     $search = $request->input('search'); //input content
+//     if ($search != '') {
+//         $category_id = Category::where('name', 'LIKE', "%{$search}")->first(); //to get the category id for the query builder
+//         if ($category_id) { //prevent error if no category selected
+//             $products = Product::where('name', 'LIKE', "%{$search}")->orWhere('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(6);
+//             $lists = Product::where('name', 'LIKE', "%{$search}")->orWhere('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(5);
+//         } else {
+//             $products = Product::where('name', 'LIKE', "%{$search}")->paginate(6);
+//             $lists = Product::where('name', 'LIKE', "%{$search}")->paginate(5);
+//         }
+//     } else {
+//         $products = Product::orderBy('id', 'desc')->paginate(6); //grid products
+//         $lists = Product::orderBy('id', 'desc')->paginate(5); //list products
+//     }
+//     return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
+// });
 
 Route::get('/products/{category}', function ($category) { // category filter
     $all_categories = Category::all();
@@ -67,14 +70,6 @@ Route::get('/products/size/{size}', function ($size) { //size filter
     return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
 });
 
-
-
-Route::get('/blog', function () {
-    return view('pages.blog');
-});
-Route::get('/about-us', function () {
-    return view('pages.aboutUs');
-});
 Route::get('/contact', function () {
     return view('pages.contact');
 });
@@ -95,5 +90,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('newsletter', NewsletterController::class);
+Route::resource('product', ProductController::class);
+Route::resource('article', ArticleController::class);
+Route::resource('about', AboutController::class);
 
 require __DIR__.'/auth.php';

@@ -12,6 +12,9 @@ class Image extends Model
     public function banner(){
         return $this->hasOne(Banner::class);
     }
+    public function about(){
+        return $this->hasOne(About::class);
+    }
     public function product(){
         return $this->belongsTo(Product::class);
     }
