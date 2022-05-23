@@ -9,18 +9,17 @@
                         <ul>
                             <li>
                                 <i class="zmdi zmdi-pin"></i>
-                                <span>28 Green Tower, Street Name,</span>
-                                <span>New York City, USA</span>
+                                <span>{{$info->address}}</span>
                             </li>
                             <li>
                                 <i class="zmdi zmdi-phone"></i>
-                                <span>+880 1234 123456</span>
-                                <span>+880 1234 123456</span>
+                                <span>{{$info->phone}}</span>
+                                <span>{{$info->phone2}}</span>
                             </li>
                             <li>
                                 <i class="zmdi zmdi-email"></i>
-                                <span>company-email@gmail.com</span>
-                                <span>your-email@gmail.com</span>
+                                <span>{{$info->mail}}</span>
+                                <span>{{$info->mail2}}</span>
                             </li>
                         </ul>
                     </div>

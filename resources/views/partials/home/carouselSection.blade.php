@@ -164,7 +164,9 @@
                             </form>
                         </div>
                     </li>
-                    <li><a href="/account" title="My-Account"><i class="zmdi zmdi-account"></i></a></li>
+                    @can('authentification')
+                        <li><a href="/account" title="My-Account"><i class="zmdi zmdi-account"></i></a></li>
+                    @endcan
                 </ul>
             </div>
         </div>

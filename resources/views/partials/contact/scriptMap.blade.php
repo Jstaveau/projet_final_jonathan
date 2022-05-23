@@ -29,7 +29,7 @@
 
         var styles = 
         [
-            {
+            
                 "featureType": "all",
                 "elementType": "labels.text.fill",
                 "stylers": [

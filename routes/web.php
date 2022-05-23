@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProductController;
 use App\Models\Article;
@@ -69,10 +70,6 @@ Route::get('/products/size/{size}', function ($size) { //size filter
     $lists = Product::where('size', $size)->orderBy('id', 'desc')->paginate(5);
     return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
 });
-
-Route::get('/contact', function () {
-    return view('pages.contact');
-});
 Route::get('/cart', function () {
     return view('pages.cart');
 });
@@ -93,5 +90,6 @@ Route::resource('newsletter', NewsletterController::class);
 Route::resource('product', ProductController::class);
 Route::resource('article', ArticleController::class);
 Route::resource('about', AboutController::class);
+Route::resource('contact', InfoController::class);
 
 require __DIR__.'/auth.php';

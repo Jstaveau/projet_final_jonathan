@@ -15,8 +15,9 @@ class InfoController extends Controller
      */
     public function index()
     {
-        $banner = Banner::where('id', 2)->first(); // banner img
-        return view('pages.aboutUs', compact('banner'));
+        $banner = Banner::where('id', 4)->first(); // banner img
+        $info = Info::first();
+        return view('pages.contact', compact('banner', 'info'));
     }
 
     /**
