@@ -133,7 +133,9 @@
                         </div>
                     </div>
                     <!-- Pagination start -->
-                    <div class="shop-pagination  text-center">
+                    
+                    {{ $products->links() }}
+                    {{-- <div class="shop-pagination  text-center">
                         <div class="pagination">
                             <ul>
                                 <li><a href="#"><i class="zmdi zmdi-long-arrow-left"></i></a></li>
@@ -145,7 +147,7 @@
                                 <li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i></a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- Pagination end -->
                 </div>
                 <!-- Shop-Content End -->
