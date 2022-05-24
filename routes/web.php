@@ -35,27 +35,7 @@ Route::get('/', function () {
     $articles = Article::all()->take(2); //2 last articles
     return view('welcome', compact('star', 'latest', 'carous', 'featureds', 'articles', 'firstCarou'));
 });
-// Route::get('/products', function (Request $request) {
-//     $all_categories = Category::all();    $banner = Banner::where('id', 1)->first(); // banner img
-//     //search bar
-//     $search = $request->input('search'); //input content
-//     if ($search != '') {
-//         $category_id = Category::where('name', 'LIKE', "%{$search}")->first(); //to get the category id for the query builder
-//         if ($category_id) { //prevent error if no category selected
-//             $products = Product::where('name', 'LIKE', "%{$search}")->orWhere('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(6);
-//             $lists = Product::where('name', 'LIKE', "%{$search}")->orWhere('category_id', $category_id->id)->orderBy('id', 'desc')->paginate(5);
-//         } else {
-//             $products = Product::where('name', 'LIKE', "%{$search}")->paginate(6);
-//             $lists = Product::where('name', 'LIKE', "%{$search}")->paginate(5);
-//         }
-//     } else {
-//         $products = Product::orderBy('id', 'desc')->paginate(6); //grid products
-//         $lists = Product::orderBy('id', 'desc')->paginate(5); //list products
-//     }
-//     return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
-// });
-
-Route::get('/product/{category}', function ($category) { // category filter
+Route::get('/product/tri/{category}', function ($category) { // category filter
     $all_categories = Category::all();
     $banner = Banner::where('id', 1)->first(); // banner img
     $category_id = Category::where('name', $category)->first();

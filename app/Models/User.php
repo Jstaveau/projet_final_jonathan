@@ -46,10 +46,18 @@ class User extends Authenticatable
         return $this->hasOne(BillingAddress::class);
     }
 
+    public function avatar(){
+        return $this->belongsTo(Avatar::class);
+    }
+
     public function article(){
         return $this->hasMany(Article::class);
     }
     public function comment(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function review(){
+        return $this->hasMany(Review::class);
     }
 }

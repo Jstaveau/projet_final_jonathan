@@ -52,6 +52,10 @@ class BannerSeeder extends Seeder
                 'title' => 'REGISTRATION',
                 'image_id' => 9,
             ],
+            [
+                'title' => 'SINGLE PRODUCT',
+                'image_id' => 10,
+            ],
         ]);
     }
 }

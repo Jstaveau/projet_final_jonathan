@@ -18,9 +18,9 @@
                                         @elseif ($featured->discount != null)
                                             <span class="pro-label sale-label">Sale</span>
                                         @endif
-                                        <a href="single-product.html"><img src="{{'img/images_site/270x270/'.$featured->pp->src}}" alt="" /></a>
+                                        <a href="/product/{{$featured->id}}"><img src="{{'img/images_site/270x270/'.$featured->pp->src}}" alt="" /></a>
                                         <div class="product-action clearfix">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#productModal-{{$featured->id}}"
                                                 title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
                                             <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
                                                 title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="product-info clearfix">
                                         <div class="fix">
-                                            <h4 class="post-title floatleft"><a href="#">{{$featured->name}}</a></h4>
+                                            <h4 class="post-title floatleft"><a href="/product/{{$featured->id}}">{{$featured->name}}</a></h4>
                                             <p class="floatright hidden-sm d-none d-md-block">{{$featured->category->name}}</p>
                                         </div>
                                         <div class="fix">

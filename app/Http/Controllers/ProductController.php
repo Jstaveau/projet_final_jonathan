@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -64,7 +66,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('partials.modal', compact('product'));
+        $reviews = Review::where('product_id', $product->id)->orderBy('id', 'desc')->get();
+        $banner = Banner::where('id', 10)->first();
+        return view('pages.showProduct', compact('product', 'banner', 'reviews'));
     }
 
     /**

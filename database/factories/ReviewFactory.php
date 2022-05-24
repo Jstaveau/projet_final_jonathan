@@ -17,7 +17,7 @@ class ReviewFactory extends Factory
     public function definition()
     {
         return [
-            'content'=> $this->faker->paragraph(),
+            'content'=> $this->faker->paragraph($nbSentences = 4),
             'user_id'=> $this->faker->numberBetween($min = 1, $max = 5),
             'product_id'=> $this->faker->numberBetween($min = 1, $max = 8),
         ];

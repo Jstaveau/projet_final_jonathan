@@ -22,7 +22,7 @@
                         <ul>
                             @foreach ($all_categories as $all_category)
                                 <li><span><a
-                                            href="/product/{{ $all_category->name }}">{{ $all_category->name }}</a></span>
+                                            href="/product/tri/{{ $all_category->name }}">{{ $all_category->name }}</a></span>
                                 </li>
                             @endforeach
                         </ul>
@@ -71,19 +71,19 @@
                                                     <span class="pro-label new-label">new</span>
                                                 @endif
                                                 <span class="pro-price-2">$ {{ $product->price }}</span>
-                                                <a href="single-product.html"><img
+                                                <a href="{{'/product/'.$product->id}}"><img
                                                         src="{{ asset('img/images_site/270x270/' . $product->pp->src) }}"
                                                         alt="" /></a>
                                             </div>
                                             <div class="product-info clearfix text-center">
                                                 <div class="fix">
-                                                    <h4 class="post-title"><a href="#">{{ $product->name }}</a></h4>
+                                                    <h4 class="post-title"><a href="{{'/product/'.$product->id}}">{{ $product->name }}</a></h4>
                                                 </div>
                                                 <div class="product-action clearfix">
                                                     <a href="#" data-bs-toggle="modal"
                                                         data-bs-target="#productModal-{{ $product->id }}"
                                                         title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                                    <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
+                                                    <a href="{{'/product/'.$product->id}}" data-bs-toggle="tooltip" data-placement="top"
                                                         title="Add To Cart"><i
                                                             class="zmdi zmdi-shopping-cart-plus"></i></a>
                                                 </div>
@@ -110,14 +110,14 @@
                                                 @else
                                                     <span class="pro-price-2">$ {{ $product->price }}</span>
                                                 @endif
-                                                <a href="single-product.html"><img
+                                                <a href="{{'/product/'.$product->id}}"><img
                                                         src="{{ asset('img/images_site/270x270/' . $product->pp->src) }}"
                                                         alt="" /></a>
                                             </div>
                                             <div class="product-info">
                                                 <div class="fix">
                                                     <h4 class="post-title floatleft"><a
-                                                            href="#">{{ $product->name }}</a></h4>
+                                                            href="{{'/product/'.$product->id}}">{{ $product->name }}</a></h4>
                                                 </div>
                                                 <div class="fix mb-20">
                                                     @if ($product->discount != null)

@@ -12,4 +12,7 @@ class Avatar extends Model
     public function team(){
         return $this->hasOne(Teams::class);
     }
+    public function user(){
+        return $this->hasOne(User::class);
+    }
 }

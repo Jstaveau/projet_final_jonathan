@@ -18,22 +18,22 @@
         <!-- Slider-banner start -->
         <div class="slider-banner">
             <div class="single-banner banner-1">
-                <a class="banner-thumb" href="#"><img src="{{'img/images_site/450x375/'.$star->pp->src}}" alt="" /></a>
+                <a class="banner-thumb" href="/product/{{$star->id}}"><img src="{{'img/images_site/450x375/'.$star->pp->src}}" alt="" /></a>
                 <span class="pro-label new-label">new</span>
                 <span class="price">${{$star->price}}</span>
                 <div class="banner-brief">
-                    <h2 class="banner-title"><a href="#">{{$star->name}}</a></h2>
+                    <h2 class="banner-title"><a href="/product/{{$star->id}}">{{$star->name}}</a></h2>
                     <p class="mb-0">{{$star->category->name}}</p>
                 </div>
-                <a href="#" class="button-one font-16px" data-text="Buy now">Buy now</a>
+                <a href="/product/{{$star->id}}" class="button-one font-16px" data-text="Buy now">Buy now</a>
             </div>
             <div class="single-banner banner-2">
-                <a class="banner-thumb" href="#"><img src="{{'img/images_site/450x375/'.$latest->pp->src}}" alt="" /></a>
+                <a class="banner-thumb" href="/product/{{$latest->id}}"><img src="{{'img/images_site/450x375/'.$latest->pp->src}}" alt="" /></a>
                 <div class="banner-brief">
-                    <h2 class="banner-title"><a href="#">{{$latest->name}}</a></h2>
+                    <h2 class="banner-title"><a href="/product/{{$latest->id}}">{{$latest->name}}</a></h2>
                     <p class="hidden-md hidden-sm d-none d-md-block">Lorem Ipsum is simply dummy text of the
                         printing and types sate industry. Lorem Ipsum has been the industry.</p>
-                    <a href="#" class="button-one font-16px" data-text="Buy now">Buy now</a>
+                    <a href="/product/{{$latest->id}}" class="button-one font-16px" data-text="Buy now">Buy now</a>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                                     <h3 class="slider-title2 text-uppercase">gallery 2021</h3>
                                 </div>
                                 <div class="wow fadeIn" data-wow-duration="2.5s" data-wow-delay="3.5s">
-                                    <a href="#" class="button-one style-2 text-uppercase mt-20"
+                                    <a href="/product" class="button-one style-2 text-uppercase mt-20"
                                         data-text="Shop now">Shop now</a>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                         believable</p>
                                 </div>
                                 <div class="wow fadeInUpBig" data-wow-duration="2.5s" data-wow-delay="0.5s">
-                                    <a href="#" class="button-one style-2 text-uppercase mt-20"
+                                    <a href="/product" class="button-one style-2 text-uppercase mt-20"
                                         data-text="Shop now">Shop now</a>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                         believable</p>
                                 </div>
                                 <div class="wow fadeInUpBig" data-wow-duration="3s" data-wow-delay="0.5s">
-                                    <a href="#" class="button-one style-2 text-uppercase mt-20"
+                                    <a href="/product" class="button-one style-2 text-uppercase mt-20"
                                         data-text="Shop now">Shop now</a>
                                 </div>
                             </div>
