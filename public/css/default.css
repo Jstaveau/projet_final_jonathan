@@ -646,26 +646,26 @@ button {
 .tooltip .tooltip-arrow { border-top-color:#C8A165 !important; }
 /* Quickview */
 .modal { z-index: 13000;}
-#productModal .modal-dialog {
+[id^=productModal-] .modal-dialog {
     margin: 5% auto;
     max-width: 96%;
     min-height: 300px;
     padding: 20px;
     width: 870px;
 }
-#productModal .modal-header {
+[id^=productModal-] .modal-header {
     border: 0 none;
     min-height: auto;
     padding: 0;
 }
-#productModal button.close {
+[id^=productModal-] button.close {
   opacity: 1;
   position: absolute;
   right: 10px;
   top: 10px;
   z-index: 2;
 }
-#productModal button.close span {
+[id^=productModal-] button.close span {
   border: 1px solid #909295;
   border-radius: 100%;
   color: #909295;
@@ -676,7 +676,7 @@ button {
   text-align: center;
   width: 30px;
 }
-#productModal button.close:hover span {
+[id^=productModal-] button.close:hover span {
   opacity: 1;
   border: 1px solid #F6416C;
   color: #F6416C;

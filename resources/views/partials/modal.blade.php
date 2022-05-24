@@ -1,7 +1,7 @@
     <!-- QUICKVIEW PRODUCT -->
 <div id="quickview-wrapper">
     <!-- Modal -->
-    <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="productModal-{{$product->id}}" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -21,7 +21,7 @@
                             <div class="price-box-3">
                                 <hr />
                                 <div class="s-price-box">
-                                    <span class="new-price">$</span>
+                                    <span class="new-price">$ {{$product->price}}</span>
                                     <span class="old-price">$190.00</span>
                                 </div>
                                 <hr />

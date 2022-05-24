@@ -3,7 +3,9 @@
     @include('partials.shoplist.banner')
     @include('partials.shoplist.productArea')
 @endsection
-{{-- @section('modal')
-    @include('partials.modal')
-@endsection --}}
+@section('modal')
+    @foreach ($products as $product)
+        @include('partials.modal')
+    @endforeach
+@endsection
 
