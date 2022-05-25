@@ -52,8 +52,8 @@
                                 <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
                             </div>
                             <div class="product-action clearfix">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#productModal" title="Quick View"><i
-                                        class="zmdi zmdi-zoom-in"></i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#productModal-{{ $product->id }}"
+                                    title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
                                 <a href="cart.html" data-bs-toggle="tooltip" data-placement="top" title="Add To Cart"><i
                                         class="zmdi zmdi-shopping-cart-plus"></i></a>
                             </div>
@@ -103,51 +103,58 @@
                                     <h3 class="tab-title title-border mb-30">Customer review</h3>
                                     <ul class="product-comments clearfix">
                                         @foreach ($reviews as $review)
-                                            <li class="{{$loop->iteration == 1 ? 'mb-30' : 'threaded-comments'}}">
+                                            <li class="{{ $loop->iteration == 1 ? 'mb-30' : 'threaded-comments' }}">
                                                 <div class="pro-reviewer">
-                                                    <img src="{{asset('img/images_site/90x100/'.$review->user->avatar->src)}}" alt="" />
+                                                    <img src="{{ asset('img/images_site/90x100/' . $review->user->avatar->src) }}"
+                                                        alt="" />
                                                 </div>
                                                 <div class="pro-reviewer-comment">
                                                     <div class="fix">
                                                         <div class="floatleft mbl-center">
-                                                            <h5 class="text-uppercase mb-0"><strong>{{$review->user->name}}</strong>
+                                                            <h5 class="text-uppercase mb-0">
+                                                                <strong>{{ $review->user->name }}</strong>
                                                             </h5>
-                                                            <p class="reply-date">{{$review->created_at->format('d F, Y').' at '.$review->created_at->format('h:ia')}}</p>
+                                                            <p class="reply-date">
+                                                                {{ $review->created_at->format('d F, Y') . ' at ' . $review->created_at->format('h:ia') }}
+                                                            </p>
                                                         </div>
                                                         <div class="comment-reply floatright">
                                                             <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
                                                             <a href="#"><i class="zmdi zmdi-close"></i></a>
                                                         </div>
                                                     </div>
-                                                    <p class="mb-0">{{$review->content}}</p>
+                                                    <p class="mb-0">{{ $review->content }}</p>
                                                 </div>
                                             </li>
                                         @endforeach
                                     </ul>
                                 </div>
-                                <div class="leave-review">
-                                    <h3 class="tab-title title-border mb-30">Leave your review</h3>
+                                @can('authentification')
+                                    <div class="leave-review">
+                                        <h3 class="tab-title title-border mb-30">Leave your review</h3>
 
-                                    <div class="reply-box">
-                                        <form action="#">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <input type="text" placeholder="Your name here..." name="name" />
+                                        <div class="reply-box">
+                                            <form action="/review" method="POST">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input type="text" placeholder="Your name here..." />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="text" placeholder="Subject..." />
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <input type="text" placeholder="Subject..." name="name" />
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <textarea class="custom-textarea" name="content" placeholder="Your review here..."></textarea>
+                                                        <button type="submit" data-text="submit review"
+                                                            class="button-one submit-button mt-20">submit review</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <textarea class="custom-textarea" name="message" placeholder="Your review here..."></textarea>
-                                                    <button type="submit" data-text="submit review"
-                                                        class="button-one submit-button mt-20">submit review</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
+                                @endcan
                             </div>
                         </div>
                         <div class="tab-pane" id="information">

@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use App\Models\Article;
 use App\Models\Banner;
 use App\Models\Category;
@@ -71,5 +72,6 @@ Route::resource('product', ProductController::class);
 Route::resource('article', ArticleController::class);
 Route::resource('about', AboutController::class);
 Route::resource('contact', InfoController::class);
+Route::resource('review', ReviewController::class);
 
 require __DIR__.'/auth.php';
