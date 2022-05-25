@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\Banner;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -46,9 +49,13 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $articleCategories = ArticleCategory::all();
+        $articles = Article::whereHas('tag', function($q) use($tag) {
+            $q->whereIn('tag_id', $tag);
+        })->paginate(6);
+        $banner = Banner::where('id', 2)->first(); // banner img
+        return view('pages.blog', compact('banner', 'articles', 'articleCategories'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *

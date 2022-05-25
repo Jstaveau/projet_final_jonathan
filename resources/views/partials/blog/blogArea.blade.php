@@ -38,7 +38,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-blog mb-30">
                             <div class="blog-photo">
-                                <a href="#"><img src="{{asset('img/images_site/320x200/'.$article->image->src)}}" alt="" /></a>
+                                <a href="/article/{{$article->id}}"><img src="{{asset('img/images_site/320x200/'.$article->image->src)}}" alt="" /></a>
                                 <div class="like-share text-center fix">
                                     <a href="#"><i class="zmdi zmdi-favorite"></i><span>89 Like</span></a>
                                     <a href="#"><i class="zmdi zmdi-comments"></i><span>{{count($article->comment)}} Comments</span></a>
@@ -49,12 +49,12 @@
                                     <div class="post-date floatleft"><span class="text-dark-red">{{ $article->created_at->format('d') }}</span></div>
                                     <div class="post-year floatleft">
                                         <p class="text-uppercase text-dark-red mb-0">{{ $article->created_at->format('F, Y') }}</p>
-                                        <h4 class="post-title"><a href="#" tabindex="0">{{ $article->title }}</a>
+                                        <h4 class="post-title"><a href="/article/{{$article->id}}" tabindex="0">{{ $article->title }}</a>
                                         </h4>
                                     </div>
                                 </div>
                                 <p>{{ substr($article->content, 0, 200) }}...</p>
-                                <a href="#" class="button-2 text-dark-red">Read more...</a>
+                                <a href="/article/{{$article->id}}" class="button-2 text-dark-red">Read more...</a>
                             </div>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\InfoController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\TagController;
 use App\Models\Article;
 use App\Models\Banner;
 use App\Models\Category;
@@ -75,5 +76,6 @@ Route::resource('about', AboutController::class);
 Route::resource('contact', InfoController::class);
 Route::resource('review', ReviewController::class);
 Route::resource('article-category', ArticleCategoryController::class);
+Route::resource('tag', TagController::class);
 
 require __DIR__.'/auth.php';

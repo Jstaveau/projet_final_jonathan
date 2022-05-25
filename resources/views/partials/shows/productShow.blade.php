@@ -138,10 +138,10 @@
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input type="text" placeholder="Your name here..." />
+                                                        <input type="text" value="{{Auth::user()->name}}" placeholder="Your name here..." />
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" placeholder="Subject..." />
+                                                        <input type="text" placeholder="Subject..."/>
                                                     </div>
                                                 </div>
                                                 <div class="row">

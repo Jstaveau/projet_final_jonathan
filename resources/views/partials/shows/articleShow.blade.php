@@ -38,7 +38,7 @@
                                 <div class="post-share post-tag floatright">
                                     <span class="text-uppercase"><strong>tags</strong></span>
                                     @foreach ($article->tag as $tag)
-                                        <a href="#">{{ $tag->name }}</a>
+                                        <a href="/tag/{{$tag->id}}">{{ $tag->name }}</a>
                                     @endforeach
                                 </div>
                             </div>
