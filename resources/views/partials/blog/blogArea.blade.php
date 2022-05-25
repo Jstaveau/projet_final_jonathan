@@ -18,12 +18,10 @@
                                     </div>
                                     <div id="cat-treeview" class="widget-info product-cat boxscrol2">
                                         <ul>
-                                            <li><span>life style</span>
-                                            </li>
-                                            <li class="open"><span>room</span>
-                                            </li>
-                                            <li><span>kitchen</span>
-                                            </li>
+                                            <li><span><a href="/article">All</a></span>
+                                            @foreach ($articleCategories as $category)
+                                                <li><span><a href="/article-category/{{$category->id}}">{{$category->name}}</a></span>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </aside>
@@ -55,8 +53,7 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <p>{{ $article->content }}
-                                </p>
+                                <p>{{ substr($article->content, 0, 200) }}...</p>
                                 <a href="#" class="button-2 text-dark-red">Read more...</a>
                             </div>
                         </div>

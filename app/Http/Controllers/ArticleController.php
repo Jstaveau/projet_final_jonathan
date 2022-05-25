@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\Banner;
 use App\Models\Comment;
+use GuzzleHttp\Psr7\Uri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
@@ -18,9 +20,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $articleCategories = ArticleCategory::all();
         $banner = Banner::where('id', 2)->first(); // banner img
         $articles = Article::orderBy('id', 'desc')->paginate(6);
-        return view('pages.blog', compact('banner', 'articles'));
+        return view('pages.blog', compact('banner', 'articles', 'articleCategories'));
     }
 
     /**

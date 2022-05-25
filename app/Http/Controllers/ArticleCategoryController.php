@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class ArticleCategoryController extends Controller
@@ -46,7 +48,10 @@ class ArticleCategoryController extends Controller
      */
     public function show(ArticleCategory $articleCategory)
     {
-        //
+        $banner = Banner::where('id', 2)->first(); // banner img
+        $articleCategories = ArticleCategory::all();
+        $articles = Article::where('article_category_id', $articleCategory->id)->paginate(6);
+        return view('pages.blog', compact('articles', 'banner', 'articleCategories'));
     }
 
     /**

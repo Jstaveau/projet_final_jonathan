@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\NewsletterController;
@@ -73,5 +74,6 @@ Route::resource('article', ArticleController::class);
 Route::resource('about', AboutController::class);
 Route::resource('contact', InfoController::class);
 Route::resource('review', ReviewController::class);
+Route::resource('article-category', ArticleCategoryController::class);
 
 require __DIR__.'/auth.php';
