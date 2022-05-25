@@ -1,7 +1,7 @@
 <!-- SHOPPING-CART-AREA START -->
 <div class="login-area  pt-80 pb-80">
     <div class="container">
-        <div>	
+        <div>
             <div class="row">
                 <form method="POST" action="{{ route('login') }}" class="col-lg-6">
                     @csrf
@@ -12,9 +12,9 @@
                         <input required type="password" placeholder="Password" name="password">
                         <p><a href="#" class="text-gray">Forget your password?</a></p>
                         <button type="submit" data-text="login" class="button-one submit-button mt-15">login</button>
-                    </div>					
+                    </div>
                 </form>
-                <form method="POST" action="{{ route('register') }}" class="col-lg-6">
+                <form method="POST" action="{{ route('register') }}" class="col-lg-6" enctype="multipart/form-data">
                     @csrf
                     <div class="customer-login text-left">
                         <h4 class="title-1 title-border text-uppercase mb-30">new customers</h4>
@@ -23,12 +23,14 @@
                         <input required type="text" placeholder="Email address here..." name="email">
                         <input required type="password" placeholder="Password" name="password">
                         <input required type="password" placeholder="Confirm password" name="password_confirmation">
+                        <input type="file" name="file" class="custom-file-input" id="chooseFile">
                         <p class="mb-0">
                             <input type="checkbox" id="newsletter" name="newsletter" checked>
                             <label for="newsletter"><span>Sign up for our newsletter!</span></label>
                         </p>
-                        <button type="submit" data-text="register" class="button-one submit-button mt-15">regiter</button>
-                    </div>					
+                        <button type="submit" data-text="register"
+                            class="button-one submit-button mt-15">regiter</button>
+                    </div>
                 </form>
             </div>
         </div>

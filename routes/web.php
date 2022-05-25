@@ -6,6 +6,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ResizeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TagController;
 use App\Models\Article;
@@ -77,5 +78,8 @@ Route::resource('contact', InfoController::class);
 Route::resource('review', ReviewController::class);
 Route::resource('article-category', ArticleCategoryController::class);
 Route::resource('tag', TagController::class);
+
+Route::get('/file-resize', [ResizeController::class, 'index']);
+Route::post('/resize-file', [ResizeController::class, 'resizeImage'])->name('resizeImage');
 
 require __DIR__.'/auth.php';

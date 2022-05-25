@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ContactMail;
+use App\Models\Avatar;
 use App\Models\BillingAddress;
 use App\Models\Newsletter;
 use App\Models\User;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 use Illuminate\Validation\Rules;
+use Jona;
 
 class RegisteredUserController extends Controller
 {
@@ -43,9 +45,24 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $avatar = new Avatar();
+        $image = $request->file('file');
+        $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+
+        $destinationPath = public_path('/img/images_site/90x100');
+        $imgFile = Jona::make($image->getRealPath());
+        $imgFile->resize(90, 100, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $input['file']);
+        $destinationPath = public_path('/uploads');
+        $image->move($destinationPath, $input['file']);
+        $avatar->src = $input['file'];
+        $avatar->save();
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'avatar_id' => $avatar->id,
             'password' => Hash::make($request->password),
         ]);
         event(new Registered($user));
@@ -70,7 +87,6 @@ class RegisteredUserController extends Controller
         $billing->user_id = $user_id->id;
         $billing->save();
 
-
         Auth::login($user);
 
         $details = [
@@ -79,7 +95,7 @@ class RegisteredUserController extends Controller
             'mail' => $request->email,
             'message' => 'Merci pour votre inscription !',
         ];
-        
+
         FacadesMail::to($request->email)->send(new ContactMail($details));
 
         return redirect(RouteServiceProvider::HOME);
