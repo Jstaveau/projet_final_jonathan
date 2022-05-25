@@ -56,6 +56,10 @@ class BannerSeeder extends Seeder
                 'title' => 'SINGLE PRODUCT',
                 'image_id' => 10,
             ],
+            [
+                'title' => 'SINGLE BLOG',
+                'image_id' => 11,
+            ],
         ]);
     }
 }

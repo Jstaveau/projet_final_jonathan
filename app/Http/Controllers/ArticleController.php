@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Banner;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -49,7 +50,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        $banner = Banner::where('id', 11)->first();
+        return view('pages.showArticle', compact('banner', 'article'));
     }
 
     /**

@@ -25,7 +25,7 @@
                                         <div class="post-year floatleft">
                                             <p class="text-uppercase text-dark-red mb-0">
                                                 {{ $article->created_at->format('F, Y') }}</p>
-                                            <h4 class="post-title"><a href="#"
+                                            <h4 class="post-title"><a href="/article/{{$article->id}}"
                                                     tabindex="0">{{ $article->title }}</a></h4>
                                         </div>
                                     </div>
@@ -37,12 +37,12 @@
                                         <a href="#"><i class="zmdi zmdi-share"></i><span>29 Share</span></a>
                                     </div>
                                     <p>{{ $article->content }}</p>
-                                    <a href="#" class="button-2 text-dark-red">Read more...</a>
+                                    <a href="/article/{{$article->id}}" class="button-2 text-dark-red">Read more...</a>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-md-5">
                                 <div class="blog-photo">
-                                    <a href="#"><img src="{{ 'img/images_site/270x230/' . $article->image->src }}"
+                                    <a href="/article/{{$article->id}}"><img src="{{ 'img/images_site/270x230/' . $article->image->src }}"
                                             alt="" /></a>
                                 </div>
                             </div>

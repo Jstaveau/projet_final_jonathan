@@ -18,4 +18,7 @@ class Article extends Model
     public function image(){
         return $this->hasOne(Image::class);
     }
+    public function tag(){
+        return $this->belongsToMany(Tag::class);
+    }
 }

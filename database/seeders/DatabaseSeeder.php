@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
                 DiapoSeeder::class,
                 PpSeeder::class,
                 AboutSeeder::class,
+                ArticleTagSeeder::class,
             ]
         );
     }
