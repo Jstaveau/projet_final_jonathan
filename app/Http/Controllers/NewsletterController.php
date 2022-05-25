@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewsletterMail;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class NewsletterController extends Controller
 {
@@ -35,9 +37,25 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-        $newsletter = new Newsletter();
-        $newsletter->email = $request->email;
-        $newsletter->save();
+        $newsletters = Newsletter::all();
+        $mailsNewsletter = array();
+        foreach ($newsletters as $newsletter) {
+            array_push($mailsNewsletter, $newsletter->email);
+        }
+        if (!in_array($request->email, $mailsNewsletter)) {
+            $newsletter = new Newsletter();
+            $newsletter->email = $request->email;
+            $newsletter->save();
+
+            $details = [
+                'subject' => 'Newsletter',
+                'mail' => $request->email,
+                'message' => 'Merci pour votre inscription à la newsletter',
+            ];
+            
+            Mail::to($request->email)->send(new NewsletterMail($details));
+        }
+
 
         return redirect()->back();
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
 use App\Models\BillingAddress;
 use App\Models\Newsletter;
 use App\Models\User;
@@ -11,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail as FacadesMail;
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
@@ -48,7 +50,13 @@ class RegisteredUserController extends Controller
         ]);
         event(new Registered($user));
 
-        if ($request->newsletter) {
+        $newsletters = Newsletter::all();
+        $mailsNewsletter = array();
+        foreach ($newsletters as $newsletter) {
+            array_push($mailsNewsletter, $newsletter->email);
+        }
+
+        if ($request->newsletter && !in_array($request->email, $mailsNewsletter)) {
             $newsletter = new Newsletter();
             $newsletter->email = $request->email;
             $newsletter->save();
@@ -64,6 +72,15 @@ class RegisteredUserController extends Controller
 
 
         Auth::login($user);
+
+        $details = [
+            'name' => $request->name,
+            'subject' => 'Inscription réussie',
+            'mail' => $request->email,
+            'message' => 'Merci pour votre inscription !',
+        ];
+        
+        FacadesMail::to($request->email)->send(new ContactMail($details));
 
         return redirect(RouteServiceProvider::HOME);
     }
