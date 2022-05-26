@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactMail;
 use App\Models\Avatar;
+use App\Models\Banner;
 use App\Models\BillingAddress;
 use App\Models\Newsletter;
 use App\Models\User;
@@ -26,7 +27,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $banner = Banner::where('id', 9)->first();
+        return view('auth.register', compact('banner'));
     }
 
     /**
