@@ -3,6 +3,8 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProductController;
@@ -15,6 +17,7 @@ use App\Models\Category;
 use App\Models\Diapo;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -67,8 +70,19 @@ Route::get('/account', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $users = User::all();
+    return view('dashboard', compact('users'));
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/dashboard/products', function () {
+    $products = Product::all();
+    return view('pages.pagesDashboard.products', compact('products'));
+})->middleware(['auth']);
+
+Route::get('/user/{id}/edit', [RegisteredUserController::class, 'edit']);
+Route::put('/user/{id}/update', [RegisteredUserController::class, 'update']);
+
+Route::put('/image/{id}/reset', [ImageController::class, 'reset_product']);
 
 Route::resource('newsletter', NewsletterController::class);
 Route::resource('product', ProductController::class);
@@ -78,6 +92,7 @@ Route::resource('contact', InfoController::class);
 Route::resource('review', ReviewController::class);
 Route::resource('article-category', ArticleCategoryController::class);
 Route::resource('tag', TagController::class);
+Route::resource('image', ImageController::class);
 
 Route::get('/file-resize', [ResizeController::class, 'index']);
 Route::post('/resize-file', [ResizeController::class, 'resizeImage'])->name('resizeImage');

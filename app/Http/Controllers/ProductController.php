@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -79,7 +80,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $images = Image::where('product_id', $product->id)->get();
+        return view('pages.pagesDashboard.edit.editProduct', compact('product', 'images'));
     }
 
     /**

@@ -215,7 +215,7 @@
 /* -----------------------------------------------------
 	Input
 ----------------------------------------------------- */
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="number"], input[type="password"], select, textarea {
   background: #f6f6f6 none repeat scroll 0 0;
   border: medium none;
   box-shadow: none;

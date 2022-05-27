@@ -159,6 +159,7 @@ table {
 
 button,
 input,
+select,
 optgroup,
 select,
 textarea {
@@ -212,7 +213,7 @@ Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/
 /*
 Add the correct vertical alignment in Chrome and Firefox.
 */
-
+  
 progress {
   vertical-align: baseline;
 }

@@ -8,6 +8,7 @@ use App\Models\Avatar;
 use App\Models\Banner;
 use App\Models\BillingAddress;
 use App\Models\Newsletter;
+use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -101,5 +102,18 @@ class RegisteredUserController extends Controller
         FacadesMail::to($request->email)->send(new ContactMail($details));
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function edit($id){
+        $roles = Role::all();
+        $edit = User::find($id);
+        return view('pages.pagesDashboard.edit.editUser', compact('edit', 'roles'));
+    }
+    public function update(Request $request, $id){
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->role_id = $request->role_id;
+        $user->save();
+        return redirect()->back();
     }
 }

@@ -121,18 +121,15 @@
             </div>
             <div class="col-md-4 offset-md-4 col-7">
                 <div class="logo text-md-center">
-                    <a href="/"><img src=" img/logo/logo.png " alt="" /></a>
+                    <a href="/"><img src=" {{asset('img/logo/logo.png')}} " alt="" /></a>
                 </div>
             </div>
             <div class="main-menu  d-none d-md-block">
                 <nav>
                     <ul>
-                        <li><a href="/">Back to website</a>
-                        </li>
-                        <li><a href="/products">products</a></li>
-                        <li><a href="/blog">blog</a></li>
-                        <li><a href="/about-us">about us</a></li>
-                        <li><a href="/contact">contact</a></li>
+                        <li><a href="/">Back to website</a></li>
+                        <li><a href="/dashboard">Users</a></li>
+                        <li><a href="/dashboard/products">Products</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -168,10 +165,127 @@
                 </div>
             </div>
         </div>
+
+        @include('partials.dashboard.banner')
         <!-- Mobile-menu end -->
         @yield('content')
         
-
+        <!-- FOOTER START -->
+        <footer>
+            <!-- Footer-area start -->
+            @php
+                use App\Models\Info;
+                $contact = Info::all()->first();
+            @endphp
+            <div class="footer-area {{ !Request::is('/') ? 'footer-2' : '' }}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-footer">
+                                <h3 class="footer-title  title-border">Contact Us</h3>
+                                <ul class="footer-contact">
+                                    <li><span>Address :</span>{{$contact->address}}</li>
+                                    <li><span>Cell-Phone :</span>{{$contact->phone}} - {{$contact->phone2}}</li>
+                                    <li><span>Email :</span>{{$contact->mail}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-sm-6">
+                            <div class="single-footer">
+                                <h3 class="footer-title  title-border">accounts</h3>
+                                <ul class="footer-menu">
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>My Account</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>My Wishlist</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>My Cart</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Sign In</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Check out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-sm-6">
+                            <div class="single-footer">
+                                <h3 class="footer-title  title-border">shipping</h3>
+                                <ul class="footer-menu">
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>New Products</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Top Sellers</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Manufactirers</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Suppliers</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-dot-circle"></i>Specials</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        @if (Request::is('/'))
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-footer">
+                                    <h3 class="footer-title  title-border">your choice Products</h3>
+                                    <div class="footer-product">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-12">
+                                                <div class="footer-thumb">
+                                                    <a href="#"><img src="img/footer/1.jpg" alt="" /></a>
+                                                    <div class="footer-thumb-info">
+                                                        <p><a href="#">Furniture Product<br>Name</a></p>
+                                                        <h4 class="price-3">$ 60.00</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-12">
+                                                <div class="footer-thumb">
+                                                    <a href="#"><img src="img/footer/1.jpg" alt="" /></a>
+                                                    <div class="footer-thumb-info">
+                                                        <p><a href="#">Furniture Product<br>Name</a></p>
+                                                        <h4 class="price-3">$ 60.00</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-footer newsletter-item">
+                                    <h3 class="footer-title  title-border">Email Newsletters</h3>
+                                    <div class="footer-subscribe">
+                                        <form action="/newsletter" method="POST">
+                                            @csrf
+                                            <input type="text" name="email" placeholder="Email Address..." />
+                                            <button class="button-one submit-btn-4" type="submit"
+                                                data-text="Subscribe">Subscribe</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <!-- Footer-area end -->
+            <!-- Copyright-area start -->
+            <div class="copyright-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="copyright">
+                                <p class="mb-0">&copy; <a
+                                        href=" https://themeforest.net/user/codecarnival/portfolio " target="_blank">
+                                        CodeCarnival </a> 2021. All Rights Reserved.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="payment  text-md-end">
+                                <a href="#"><img src="img/payment/1.png" alt="" /></a>
+                                <a href="#"><img src="img/payment/2.png" alt="" /></a>
+                                <a href="#"><img src="img/payment/3.png" alt="" /></a>
+                                <a href="#"><img src="img/payment/4.png" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Copyright-area start -->
+        </footer>
+        <!-- FOOTER END -->
     <!-- all js here -->
     <!-- jquery latest version -->
     <script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>

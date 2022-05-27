@@ -82,4 +82,12 @@ class ImageController extends Controller
     {
         //
     }
+
+    public function reset_product($id)
+    {
+        $image = Image::find($id);
+        $image->product_id = null;
+        $image->save();
+        return redirect()->back();
+    }
 }
