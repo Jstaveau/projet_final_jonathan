@@ -42,7 +42,7 @@
                     <label for="desc">Description</label>
                     <textarea name="description" id="desc" cols="30" rows="10">{{ $product->description }}</textarea>
                     <p class="mb-0">
-                        <input type="checkbox" id="new" name="new" checked>
+                        <input type="checkbox" id="new" name="new" {{$product->new ? 'checked' : ''}}>
                         <label for="new"><span>New product</span></label>
                     </p>
                     <button class="button-one submit-button mt-20" data-text="update" type="submit">Update</button>

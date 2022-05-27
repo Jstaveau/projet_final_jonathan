@@ -1,6 +1,6 @@
-<h1 class="text-center m-5">Users</h1>
+<h1 class="text-center m-5">Products</h1>
 <div class="tab-content container m-auto mb-5 row">
-    <div class="tab-pane active" id="elements-preview-3">
+    <div class="tab-pane active pb-5" id="elements-preview-3">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -18,6 +18,9 @@
                     </th>
                     <th>
                         Size
+                    </th>
+                    <th>
+                        New
                     </th>
                     <th>
                         Actions
@@ -44,7 +47,10 @@
                         <td>
                             {{ $product->size }}
                         </td>
-                        <td class="d-flex">
+                        <td class="{{ $product->new ? 'bg-success' : 'bg-danger' }}">
+                            
+                        </td>
+                        <td class="d-flex h-100">
                             <a href="/product/{{$product->id}}/edit"><button data-text="Edit" class="submit-button submit-btn-2 button-one">Edit</button></a>
                             <form class="ms-2" action="/product/{{$product->id}}" method="POST">
                                 @csrf
@@ -58,5 +64,6 @@
                 @endforeach
             </tbody>
         </table>
+        <a data-text="Add a product" class="button-one style-2 text-uppercase" href="/product/create">Add a product</a><br>
     </div>
 </div>
