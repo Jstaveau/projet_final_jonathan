@@ -44,8 +44,15 @@
                         <td>
                             {{ $product->size }}
                         </td>
-                        <td>
+                        <td class="d-flex">
                             <a href="/product/{{$product->id}}/edit"><button data-text="Edit" class="submit-button submit-btn-2 button-one">Edit</button></a>
+                            <form class="ms-2" action="/product/{{$product->id}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button data-text="delete" class="submit-button submit-btn-2 button-one" type="submit">
+                                    delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

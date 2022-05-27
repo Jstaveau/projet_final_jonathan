@@ -140,6 +140,7 @@ class ProductController extends Controller
 
         $product->name = $request->name;
         $product->size = $request->size;
+        $product->stock = $request->stock;
         $product->price = $request->price;
         if ($request->discount == 0) {
             $product->discount = null;
@@ -166,6 +167,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->back();
     }
 }

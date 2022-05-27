@@ -34,7 +34,10 @@
                     <input id="price" min="0" type="number" value="{{ $product->price }}" name="price"
                         placeholder="Product price here..." />
                     <label for="discount">Discount (in %) - leave it empty if you don't want a discount</label>
-                    <input id="discount" type="number" value="{{ $product->discount }}" name="discount"
+                    <input id="discount" min="0" type="number" value="{{ $product->discount }}" name="discount"
+                        placeholder="Discount (in %) - leave it empty if you don't want a discount" />
+                    <label for="stock">Stock</label>
+                    <input id="stock" min="0" type="number" value="{{ $product->stock }}" name="stock"
                         placeholder="Discount (in %) - leave it empty if you don't want a discount" />
                     <label for="desc">Description</label>
                     <textarea name="description" id="desc" cols="30" rows="10">{{ $product->description }}</textarea>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->integer('price');
+            $table->integer('stock')->default(30);
             $table->integer('discount')->nullable();
             $table->string('size');
             $table->boolean('star')->default(false);
