@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 use App\Mail\ContactMail;
 use App\Models\Avatar;
 use App\Models\Banner;
@@ -48,6 +49,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        //resize image
         $avatar = new Avatar();
         $image = $request->file('file');
         $input['file'] = time() . '.' . $image->getClientOriginalExtension();
@@ -70,6 +72,7 @@ class RegisteredUserController extends Controller
         ]);
         event(new Registered($user));
 
+        //newsletter
         $newsletters = Newsletter::all();
         $mailsNewsletter = array();
         foreach ($newsletters as $newsletter) {
@@ -82,6 +85,7 @@ class RegisteredUserController extends Controller
             $newsletter->save();
         }
 
+        //billing addresses
         $user_id = User::latest()->first();
 
         $billing = new BillingAddress();

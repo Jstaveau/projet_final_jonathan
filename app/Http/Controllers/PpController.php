@@ -35,7 +35,7 @@ class PpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

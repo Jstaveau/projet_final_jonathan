@@ -67,7 +67,7 @@ Route::get('/account', function () {
     $user = Auth::user();
     $billing = $user->billing;
     return view('pages.myAccount', compact('user', 'billing'));
-});
+})->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     $users = User::all();
