@@ -97,7 +97,46 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        
+
+        if ($request->file) {
+
+            $current_pp = Pp::where('product_id', $product->id)->first();
+            $current_pp->product_id = null;
+            $current_pp->save();
+
+            $pp = new Pp();
+            $image = $request->file('file');
+            $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+
+            $destinationPath = public_path('/img/images_site/450x375');
+            $imgFile = Jona::make($image->getRealPath());
+            $imgFile->resize(450, 375, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+            $image->move($destinationPath, $input['file']);
+            $destinationPath = public_path('/img/images_site/370x450');
+            $imgFile->resize(370, 450, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+            $destinationPath = public_path('/img/images_site/70x83');
+            $imgFile->resize(70, 83, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+
+            $destinationPath = public_path('/img/images_site/270x270');
+            $imgFile->resize(270, 270, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+
+            $pp->src = $input['file'];
+            $pp->name = $input['file'];
+            $pp->product_id = $product->id;
+            $pp->save();
+        }
 
         $product->name = $request->name;
         $product->size = $request->size;

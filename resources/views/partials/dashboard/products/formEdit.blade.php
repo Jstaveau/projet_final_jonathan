@@ -9,11 +9,11 @@
                         {{ $product->name }} -
                         {{ $product->size }}</h4>
                 </div>
-                <form action="/product/{{$product->id}}" method="POST">
+                <form action="/product/{{$product->id}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-
-
+                    <label for="pp">Change photo</label><br>
+                    <input type="file" name="file" class="custom-file-input" id="chooseFile">
                     <label for="name">Product Name</label>
                     <input id="name" type="text" value="{{ $product->name }}" name="name"
                         placeholder="Product name here..." />
