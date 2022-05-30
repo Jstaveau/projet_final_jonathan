@@ -79,6 +79,11 @@ Route::get('/dashboard/products', function () {
     return view('pages.pagesDashboard.products', compact('products'));
 })->middleware(['auth']);
 
+Route::get('/dashboard/articles', function () {
+    $articles = Article::all();
+    return view('pages.pagesDashboard.articles', compact('articles'));
+})->middleware(['auth']);
+
 Route::get('/user/{id}/edit', [RegisteredUserController::class, 'edit']);
 Route::put('/user/{id}/update', [RegisteredUserController::class, 'update']);
 

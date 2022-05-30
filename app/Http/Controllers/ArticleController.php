@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleTag;
 use App\Models\Banner;
+use App\Models\Category;
 use App\Models\Comment;
-use GuzzleHttp\Psr7\Uri;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class ArticleController extends Controller
@@ -72,7 +75,13 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        $categories = Category::all();
+        $articleTagsArray = array();
+        $tags = Tag::all();
+        foreach ($article->tag as $tagArticle) {
+            array_push($articleTagsArray, $tagArticle->name);
+        }
+        return view('pages.pagesDashboard.edit.editArticle', compact('article', 'categories', 'tags', 'articleTagsArray'));
     }
 
     /**
@@ -84,7 +93,21 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $article->title = $request->title;
+        $article->content = $request->content;
+        $article->article_category_id = $request->article_category_id;
+        $article->save();
+
+        DB::table('article_tag')->where('article_id', $article->id)->delete();
+
+        foreach ($request->tags as $tag) {
+            $art_tag = new ArticleTag;
+            $art_tag->article_id = $article->id;
+            $art_tag->tag_id = $tag;
+            $art_tag->save();
+        }
+
+        return redirect()->back();
     }
 
     /**

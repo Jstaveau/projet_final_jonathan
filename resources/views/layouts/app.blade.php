@@ -48,7 +48,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
     <!-- Place favicon.ico in the root directory -->
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
@@ -121,7 +121,7 @@
             </div>
             <div class="col-md-4 offset-md-4 col-7">
                 <div class="logo text-md-center">
-                    <a href="/"><img src=" {{asset('img/logo/logo.png')}} " alt="" /></a>
+                    <a href="/"><img src=" {{ asset('img/logo/logo.png') }} " alt="" /></a>
                 </div>
             </div>
             <div class="main-menu  d-none d-md-block">
@@ -130,10 +130,11 @@
                         <li><a href="/">Back to website</a></li>
                         <li><a href="/dashboard">Users</a></li>
                         <li><a href="/dashboard/products">Products</a></li>
+                        <li><a href="/dashboard/articles">Articles</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <a href="{{route('logout')}}" onclick="event.preventDefault();
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                 this.closest('form').submit();">logout</a>
                             </form>
                         </li>
@@ -169,7 +170,7 @@
         @include('partials.dashboard.banner')
         <!-- Mobile-menu end -->
         @yield('content')
-        
+
         <!-- FOOTER START -->
         <footer>
             <!-- Footer-area start -->
@@ -184,9 +185,10 @@
                             <div class="single-footer">
                                 <h3 class="footer-title  title-border">Contact Us</h3>
                                 <ul class="footer-contact">
-                                    <li><span>Address :</span>{{$contact->address}}</li>
-                                    <li><span>Cell-Phone :</span>{{$contact->phone}} - {{$contact->phone2}}</li>
-                                    <li><span>Email :</span>{{$contact->mail}}</li>
+                                    <li><span>Address :</span>{{ $contact->address }}</li>
+                                    <li><span>Cell-Phone :</span>{{ $contact->phone }} - {{ $contact->phone2 }}
+                                    </li>
+                                    <li><span>Email :</span>{{ $contact->mail }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -286,38 +288,42 @@
             <!-- Copyright-area start -->
         </footer>
         <!-- FOOTER END -->
-    <!-- all js here -->
-    <!-- jquery latest version -->
-    <script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
-    <!-- bootstrap js -->
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <!-- jquery.meanmenu js -->
-    <script src="{{ asset('js/jquery.meanmenu.js') }}"></script>
-    <!-- slick.min js -->
-    <script src="{{ asset('js/slick.min.js') }}"></script>
-    <!-- jquery.treeview js -->
-    <script src="{{ asset('js/jquery.treeview.js') }}"></script>
-    <!-- lightbox.min js -->
-    <script src="{{ asset('js/lightbox.min.js') }}"></script>
-    <!-- jquery-ui js -->
-    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-    <!-- jquery.nivo.slider js -->
-    <script src="{{ asset('lib/js/jquery.nivo.slider.js') }}"></script>
-    <script src="{{ asset('lib/home.js') }}"></script>
-    <!-- jquery.nicescroll.min js -->
-    <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
-    <!-- countdon.min js -->
-    <script src="{{ asset('js/countdon.min.j') }}s"></script>
-    <!-- wow js -->
-    <script src="{{ asset('js/wow.min.js') }}"></script>
-    <!-- plugins js -->
-    <script src="{{ asset('js/plugins.js') }}"></script>
-    <!-- main js -->
-    <script src="{{ asset('js/main.js') }}"></script>
-
-    @yield('contact')
+        <!-- all js here -->
+        <!-- jquery latest version -->
+        <script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>
+        <script src="{{ asset('js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
+        <!-- bootstrap js -->
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+        <!-- jquery.meanmenu js -->
+        <script src="{{ asset('js/jquery.meanmenu.js') }}"></script>
+        <!-- slick.min js -->
+        <script src="{{ asset('js/slick.min.js') }}"></script>
+        <!-- jquery.treeview js -->
+        <script src="{{ asset('js/jquery.treeview.js') }}"></script>
+        <!-- lightbox.min js -->
+        <script src="{{ asset('js/lightbox.min.js') }}"></script>
+        <!-- jquery-ui js -->
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        <!-- jquery.nivo.slider js -->
+        <script src="{{ asset('lib/js/jquery.nivo.slider.js') }}"></script>
+        <script src="{{ asset('lib/home.js') }}"></script>
+        <!-- jquery.nicescroll.min js -->
+        <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
+        <!-- countdon.min js -->
+        <script src="{{ asset('js/countdon.min.j') }}s"></script>
+        <!-- wow js -->
+        <script src="{{ asset('js/wow.min.js') }}"></script>
+        <!-- plugins js -->
+        <script src="{{ asset('js/plugins.js') }}"></script>
+        <!-- main js -->
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-multiple').select2();
+            });
+        </script>
+        @yield('contact')
 </body>
 
 </html>
-

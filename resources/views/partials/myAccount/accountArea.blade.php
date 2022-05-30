@@ -1,4 +1,4 @@
-<!-- MY-ACCOUNT-AREA START -->
+ <!-- MY-ACCOUNT-AREA START -->
 <div class="my-account-area  pt-80 pb-80">
     <div class="container">	
         <div class="my-account">
