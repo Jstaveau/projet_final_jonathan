@@ -37,7 +37,11 @@ class ArticleCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new ArticleCategory();
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect()->back();
     }
 
     /**

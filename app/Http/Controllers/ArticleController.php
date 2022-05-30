@@ -38,7 +38,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('pages.pagesDashboard.store.storeArticle', compact('categories', 'tags'));
     }
 
     /**
@@ -49,11 +51,49 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = new Comment();
-        $comment->content = $request->content;
-        $comment->user_id = Auth::user()->id;
-        $comment->article_id = substr(URL::previous(), -1);
-        $comment->save();
+        //creation article
+        $article = new Article();
+        $article->title = $request->title;
+        $article->content = $request->content;
+        $article->article_category_id = $request->article_category_id;
+        $article->user_id = Auth::user()->id;
+
+        $article->save();
+        
+        $articleId = Article::latest()->first();
+
+        //resize image
+        $avatar = new Image();
+        $image = $request->file('file');
+        $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+
+        $destinationPath = public_path('/img/images_site/270x230');
+        $imgFile = Jona::make($image->getRealPath());
+        $imgFile->resize(270, 230, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $input['file']);
+        $destinationPath = public_path('/uploads');
+        $image->move($destinationPath, $input['file']);
+        $destinationPath = public_path('/img/images_site/320x200');
+        $imgFile->resize(320, 200, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $input['file']);
+        $destinationPath = public_path('/img/images_site/1090x450');
+        $imgFile->resize(1090, 450, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $input['file']);
+        $avatar->src = $input['file'];
+        $avatar->name = $input['file'];
+        $avatar->article_id = $articleId->id;
+        $avatar->save();
+
+        foreach ($request->tags as $tag) {
+            $art_tag = new ArticleTag;
+            $art_tag->article_id = $articleId->id;
+            $art_tag->tag_id = $tag;
+            $art_tag->save();
+        }
+
         return redirect()->back();
     }
 
@@ -132,9 +172,6 @@ class ArticleController extends Controller
         $avatar->src = $input['file'];
         $avatar->name = $input['file'];
         $avatar->save();
-
-        
-
 
         return redirect()->back();
     }

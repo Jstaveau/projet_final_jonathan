@@ -47,7 +47,7 @@
                                     <h3 class="tab-title title-border mb-30">Customer comments</h3>
                                     <ul class="product-comments clearfix">
                                         @foreach ($article->comment as $comment)
-                                            <li class="{{ $loop->iteration == 1 ? 'mb-30' : 'threaded-comments' }}">
+                                            <li class="{{ $loop->iteration == 1 ? 'mb-30 w-100' : 'threaded-comments w-100' }}">
                                                 <div class="pro-reviewer">
                                                     <img src="{{ asset('img/images_site/90x100/' . $comment->user->avatar->src) }}"
                                                         alt="" />
@@ -76,7 +76,7 @@
                                     <div class="leave-review">
                                         <h3 class="tab-title title-border mb-30">Leave your comment</h3>
                                         <div class="reply-box">
-                                            <form action="/article" method="POST">
+                                            <form action="/comment" method="POST">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6">

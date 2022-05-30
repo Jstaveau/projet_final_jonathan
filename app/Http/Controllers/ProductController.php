@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewProduct;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Image;
+use App\Models\Newsletter;
 use App\Models\Pp;
 use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Jona;
 
 class ProductController extends Controller
@@ -113,6 +116,17 @@ class ProductController extends Controller
             $pp->name = $input['file'];
             $pp->product_id = $product->id;
             $pp->save();
+        }
+
+        //mail newsletter for new product
+        $newsletterAbos = Newsletter::all();
+        $details = [
+            'subject' => 'New product available',
+            'message' => "Name : ".$request->name.'
+                        Price : '.$request->price,
+        ];
+        foreach ($newsletterAbos as $newsletterAbo) {
+            Mail::to($newsletterAbo->email)->send(new NewProduct($details));
         }
 
         return redirect()->back();

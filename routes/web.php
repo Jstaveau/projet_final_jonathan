@@ -4,6 +4,8 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\NewsletterController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\ResizeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TagController;
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Diapo;
@@ -84,6 +87,12 @@ Route::get('/dashboard/articles', function () {
     return view('pages.pagesDashboard.articles', compact('articles'));
 })->middleware(['auth']);
 
+Route::get('/dashboard/categories', function () {
+    $categories = Category::all();
+    $article_categories = ArticleCategory::all();
+    return view('pages.pagesDashboard.catTag', compact('categories', 'article_categories'));
+})->middleware(['auth']);
+
 Route::get('/user/{id}/edit', [RegisteredUserController::class, 'edit']);
 Route::put('/user/{id}/update', [RegisteredUserController::class, 'update']);
 
@@ -95,9 +104,12 @@ Route::resource('article', ArticleController::class);
 Route::resource('about', AboutController::class);
 Route::resource('contact', InfoController::class);
 Route::resource('review', ReviewController::class);
+Route::resource('comment', CommentController::class);
 Route::resource('article-category', ArticleCategoryController::class);
 Route::resource('tag', TagController::class);
 Route::resource('image', ImageController::class);
+Route::resource('category', CategoryController::class);
+Route::resource('article_category', ArticleCategoryController::class);
 
 Route::get('/file-resize', [ResizeController::class, 'index']);
 Route::post('/resize-file', [ResizeController::class, 'resizeImage'])->name('resizeImage');
