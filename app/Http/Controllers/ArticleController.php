@@ -8,11 +8,13 @@ use App\Models\ArticleTag;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Image;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Jona;
 
 class ArticleController extends Controller
 {
@@ -107,6 +109,33 @@ class ArticleController extends Controller
             $art_tag->save();
         }
 
+        //resize image
+        $avatar = Image::where('article_id', $article->id)->first();
+        $image = $request->file('file');
+        $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+
+        $destinationPath = public_path('/img/images_site/270x230');
+        $imgFile = Jona::make($image->getRealPath());
+        $imgFile->resize(270, 230, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $input['file']);
+        $destinationPath = public_path('/uploads');
+        $image->move($destinationPath, $input['file']);
+        $destinationPath = public_path('/img/images_site/320x200');
+        $imgFile->resize(320, 200, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $input['file']);
+        $destinationPath = public_path('/img/images_site/1090x450');
+        $imgFile->resize(1090, 450, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $input['file']);
+        $avatar->src = $input['file'];
+        $avatar->name = $input['file'];
+        $avatar->save();
+
+        
+
+
         return redirect()->back();
     }
 
@@ -116,8 +145,10 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(Article $article, Request $request)
     {
-        //
+        DB::table('article_tag')->where('article_id', $article->id)->delete();
+        $article->delete();
+        return redirect()->back();
     }
 }

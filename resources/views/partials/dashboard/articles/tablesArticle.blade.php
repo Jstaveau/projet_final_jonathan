@@ -1,4 +1,4 @@
-<h1 class="text-center m-5">Products</h1>
+<h1 class="text-center m-5">Articles</h1>
 <div class="tab-content container m-auto mb-5 row">
     <div class="tab-pane active pb-5" id="elements-preview-3">
         <table class="table table-bordered">
