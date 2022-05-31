@@ -61,34 +61,36 @@
                             </div>
                             <div id="my-billing" class="panel-collapse collapse" data-bs-parent="#accordion">
                                 <div class="panel-body">
-                                    <form class="billing-details shop-cart-table">
+                                    <form class="billing-details shop-cart-table" action="/billing/{{$billing->id}}" method="POST">
+                                        @csrf
+                                        @method('PUT')
                                         <input name="name" value="{{$billing->name}}" type="text" placeholder="Your name here...">
                                         <input name="email" value="{{$billing->email}}" type="text" placeholder="Email address here...">
                                         <input name="phone" value="{{$billing->phone}}" type="text" placeholder="Phone here...">
                                         <input name="company_name" value="{{$billing->company_name}}" type="text" placeholder="Company neme here...">
                                         <select name="country" class="custom-select mb-15">
-                                            <option>Country</option>
-                                            <option>Bangladesh</option>
-                                            <option>United States</option>
-                                            <option>united Kingdom</option>
-                                            <option>Australia</option>
-                                            <option>Canada</option>
+                                            <option value='NULL'>Country</option>
+                                            <option value='Bangladesh' {{$billing->country == 'Bangladesh' ? 'selected' : ''}}>Bangladesh</option>
+                                            <option value='United States' {{$billing->country == 'United States' ? 'selected' : ''}}>United States</option>
+                                            <option value='united Kingdom' {{$billing->country == 'united Kingdom' ? 'selected' : ''}}>united Kingdom</option>
+                                            <option value='Australia' {{$billing->country == 'Australia' ? 'selected' : ''}}>Australia</option>
+                                            <option value='Canada' {{$billing->country == 'Canada' ? 'selected' : ''}}>Canada</option>
                                         </select>
                                         <select name="state" class="custom-select mb-15">
-                                            <option>State</option>
-                                            <option>Dhaka</option>
-                                            <option>New York</option>
-                                            <option>London</option>
-                                            <option>Melbourne</option>
-                                            <option>Ottawa</option>
+                                            <option value="NULL">State</option>
+                                            <option value='Dhaka' {{$billing->state == 'Dhaka' ? 'selected' : ''}}>Dhaka</option>
+                                            <option value='New york' {{$billing->state == 'New york' ? 'selected' : ''}}>New York</option>
+                                            <option value='London' {{$billing->state == 'London' ? 'selected' : ''}}>London</option>
+                                            <option value='Melbourne' {{$billing->state == 'Melbourne' ? 'selected' : ''}}>Melbourne</option>
+                                            <option value='Ottawa' {{$billing->state == 'Ottawa' ? 'selected' : ''}}>Ottawa</option>
                                         </select>
                                         <select name="city" class="custom-select mb-15">
-                                            <option>Town / City</option>
-                                            <option>Dhaka</option>
-                                            <option>New York</option>
-                                            <option>London</option>
-                                            <option>Melbourne</option>
-                                            <option>Ottawa</option>
+                                            <option value="NULL">Town / City</option>
+                                            <option value='Dhaka' {{$billing->city == 'Dhaka' ? 'selected' : ''}}>Dhaka</option>
+                                            <option value='New york' {{$billing->city == 'New york' ? 'selected' : ''}}>New York</option>
+                                            <option value='London' {{$billing->city == 'London' ? 'selected' : ''}}>London</option>
+                                            <option value='Melbourne' {{$billing->city == 'Melbourne' ? 'selected' : ''}}>Melbourne</option>
+                                            <option value='Ottawa' {{$billing->city == 'Ottawa' ? 'selected' : ''}}>Ottawa</option>
                                         </select>
                                         <textarea name="address" placeholder="Your address here..." class="custom-textarea">{{$billing->address}}</textarea>
                                         <button type="submit" data-text="update" class="submit-button submit-btn-2 button-one mt-2">Update</button>

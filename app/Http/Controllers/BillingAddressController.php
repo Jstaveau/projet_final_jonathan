@@ -6,6 +6,7 @@ use App\Models\Billing;
 use App\Models\BillingAddress;
 use App\Models\BillingAdress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BillingAddressController extends Controller
 {
@@ -69,9 +70,20 @@ class BillingAddressController extends Controller
      * @param  \App\Models\BillingAddress  $billingAddress
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BillingAddress $billingAddress)
+    public function update(Request $request, $id)
     {
-        //
+        $billingAddress = BillingAddress::find($id);
+        $billingAddress->name = $request->name;
+        $billingAddress->address = $request->address;
+        $billingAddress->phone = $request->phone;
+        $billingAddress->company_name = $request->company_name;
+        $billingAddress->country = $request->country;
+        $billingAddress->state = $request->state;
+        $billingAddress->city = $request->city;
+        $billingAddress->email = $request->email;
+        $billingAddress->user_id = Auth::user()->id;
+        $billingAddress->save();
+        return redirect()->back();
     }
 
     /**

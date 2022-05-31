@@ -119,21 +119,24 @@ class RegisteredUserController extends Controller
         $image = $request->file('file');
         $input['file'] = time() . '.' . $image->getClientOriginalExtension();
 
-        $destinationPath = public_path('/img/images_site/90x100');
-        $imgFile = Jona::make($image->getRealPath());
-        $imgFile->resize(90, 100, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath . '/' . $input['file']);
-        $destinationPath = public_path('/uploads');
-        $image->move($destinationPath, $input['file']);
-        $avatar->src = $input['file'];
-        $avatar->save();
+        if ($request->file) {
+            $destinationPath = public_path('/img/images_site/90x100');
+            $imgFile = Jona::make($image->getRealPath());
+            $imgFile->resize(90, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+            $image->move($destinationPath, $input['file']);
+            $avatar->src = $input['file'];
+            $avatar->save();
+        }
 
         $user->name = $request->name;
         if ($request->role_id) {
             $user->role_id = $request->role_id;
         } else {
             $user->phone = $request->phone;
+            $user->address = $request->address;
             $user->company_name = $request->company_name;
             $user->country = $request->country;
             $user->state = $request->state;
