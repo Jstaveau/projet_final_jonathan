@@ -20,6 +20,7 @@ use App\Models\Category;
 use App\Models\Diapo;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,8 +38,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $latest = Product::latest()->first(); //last product
+    $latest = Product::orderBy('id','desc')->first(); //last product
     $star = Product::where('star', true)->first(); //star product
+    if ($star == null) {
+        $star = Product::first();
+    }
     $firstCarou = Diapo::where('first', true)->first(); //image selected as first for carousel
     $carous = Diapo::where('first', false)->inRandomOrder()->limit(2)->get(); //2 others images for the carousel
     $featureds = Product::all()->random(5); //5 random products for the section featured products
@@ -90,7 +94,8 @@ Route::get('/dashboard/articles', function () {
 Route::get('/dashboard/categories', function () {
     $categories = Category::all();
     $article_categories = ArticleCategory::all();
-    return view('pages.pagesDashboard.catTag', compact('categories', 'article_categories'));
+    $tags = Tag::all();
+    return view('pages.pagesDashboard.catTag', compact('categories', 'article_categories', 'tags'));
 })->middleware(['auth']);
 
 Route::get('/user/{id}/edit', [RegisteredUserController::class, 'edit']);

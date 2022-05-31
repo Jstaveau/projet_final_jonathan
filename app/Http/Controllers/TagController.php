@@ -38,7 +38,10 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tag = new Tag();
+        $tag->name = $request->name;
+        $tag->save();
+        return redirect()->back();
     }
 
     /**
@@ -64,7 +67,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('pages.pagesDashboard.edit.editTags', compact('tag'));
     }
 
     /**
@@ -76,7 +79,9 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $tag->name = $request->name;
+        $tag->save();
+        return redirect()->back();
     }
 
     /**
@@ -87,6 +92,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->back();
     }
 }

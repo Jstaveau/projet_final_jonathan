@@ -27,7 +27,7 @@
                             <option name="tag" value="{{ $tag->id }}">{{ $tag->name }}</option>
                         @endforeach
                     </select>
-                    <button class="button-one submit-button mt-20" data-text="update" type="submit">Update</button>
+                    <button class="button-one submit-button mt-20" data-text="add" type="submit">Add</button>
                 </form>
             </div>
 

@@ -23,6 +23,9 @@
                         New
                     </th>
                     <th>
+                        Star
+                    </th>
+                    <th>
                         Actions
                     </th>
                 </tr>
@@ -50,7 +53,11 @@
                         <td class="{{ $product->new ? 'bg-success' : 'bg-danger' }}">
                             
                         </td>
+                        <td class="{{ $product->star ? 'bg-warning' : 'bg-white' }}">
+                            
+                        </td>
                         <td class="d-flex h-100">
+                            <a href="/product/{{$product->id}}"><button data-text="See" class="submit-button me-2 submit-btn-2 button-one">See</button></a>
                             <a href="/product/{{$product->id}}/edit"><button data-text="Edit" class="submit-button submit-btn-2 button-one">Edit</button></a>
                             <form class="ms-2" action="/product/{{$product->id}}" method="POST">
                                 @csrf

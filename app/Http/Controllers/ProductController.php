@@ -224,6 +224,11 @@ class ProductController extends Controller
         } else {
             $product->new = false;
         }
+        if ($request->star) {
+            $product->star = true;
+        } else {
+            $product->star = false;
+        }
         $product->save();
 
         return redirect()->back();

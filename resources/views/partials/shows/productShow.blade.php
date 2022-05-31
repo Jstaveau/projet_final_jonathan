@@ -103,7 +103,7 @@
                                     <h3 class="tab-title title-border mb-30">Customer review</h3>
                                     <ul class="product-comments clearfix">
                                         @foreach ($reviews as $review)
-                                            <li class="{{ $loop->iteration == 1 ? 'mb-30' : 'threaded-comments' }}">
+                                            <li class="{{ $loop->iteration == 1 ? 'mb-30 w-100' : 'threaded-comments w-100' }}">
                                                 <div class="pro-reviewer">
                                                     <img src="{{ asset('img/images_site/90x100/' . $review->user->avatar->src) }}"
                                                         alt="" />

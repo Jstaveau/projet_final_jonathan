@@ -59,33 +59,35 @@ class ArticleController extends Controller
         $article->user_id = Auth::user()->id;
 
         $article->save();
-        
+
         $articleId = Article::latest()->first();
 
         //resize image
-        $avatar = new Image();
-        $image = $request->file('file');
-        $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+        if ($request->file) {
+            $avatar = new Image();
+            $image = $request->file('file');
+            $input['file'] = time() . '.' . $image->getClientOriginalExtension();
 
-        $destinationPath = public_path('/img/images_site/270x230');
-        $imgFile = Jona::make($image->getRealPath());
-        $imgFile->resize(270, 230, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath . '/' . $input['file']);
-        $destinationPath = public_path('/uploads');
-        $image->move($destinationPath, $input['file']);
-        $destinationPath = public_path('/img/images_site/320x200');
-        $imgFile->resize(320, 200, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath . '/' . $input['file']);
-        $destinationPath = public_path('/img/images_site/1090x450');
-        $imgFile->resize(1090, 450, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath . '/' . $input['file']);
-        $avatar->src = $input['file'];
-        $avatar->name = $input['file'];
-        $avatar->article_id = $articleId->id;
-        $avatar->save();
+            $destinationPath = public_path('/img/images_site/270x230');
+            $imgFile = Jona::make($image->getRealPath());
+            $imgFile->resize(270, 230, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+            $image->move($destinationPath, $input['file']);
+            $destinationPath = public_path('/img/images_site/320x200');
+            $imgFile->resize(320, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/img/images_site/1090x450');
+            $imgFile->resize(1090, 450, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $avatar->src = $input['file'];
+            $avatar->name = $input['file'];
+            $avatar->article_id = $articleId->id;
+            $avatar->save();
+        }
 
         foreach ($request->tags as $tag) {
             $art_tag = new ArticleTag;
@@ -150,28 +152,30 @@ class ArticleController extends Controller
         }
 
         //resize image
-        $avatar = Image::where('article_id', $article->id)->first();
-        $image = $request->file('file');
-        $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+        if ($request->file) {
+            $avatar = Image::where('article_id', $article->id)->first();
+            $image = $request->file('file');
+            $input['file'] = time() . '.' . $image->getClientOriginalExtension();
 
-        $destinationPath = public_path('/img/images_site/270x230');
-        $imgFile = Jona::make($image->getRealPath());
-        $imgFile->resize(270, 230, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath . '/' . $input['file']);
-        $destinationPath = public_path('/uploads');
-        $image->move($destinationPath, $input['file']);
-        $destinationPath = public_path('/img/images_site/320x200');
-        $imgFile->resize(320, 200, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath . '/' . $input['file']);
-        $destinationPath = public_path('/img/images_site/1090x450');
-        $imgFile->resize(1090, 450, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath . '/' . $input['file']);
-        $avatar->src = $input['file'];
-        $avatar->name = $input['file'];
-        $avatar->save();
+            $destinationPath = public_path('/img/images_site/270x230');
+            $imgFile = Jona::make($image->getRealPath());
+            $imgFile->resize(270, 230, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+            $image->move($destinationPath, $input['file']);
+            $destinationPath = public_path('/img/images_site/320x200');
+            $imgFile->resize(320, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/img/images_site/1090x450');
+            $imgFile->resize(1090, 450, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $avatar->src = $input['file'];
+            $avatar->name = $input['file'];
+            $avatar->save();
+        }
 
         return redirect()->back();
     }
@@ -184,7 +188,6 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article, Request $request)
     {
-        DB::table('article_tag')->where('article_id', $article->id)->delete();
         $article->delete();
         return redirect()->back();
     }

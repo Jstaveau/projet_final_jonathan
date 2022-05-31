@@ -66,7 +66,7 @@ class ArticleCategoryController extends Controller
      */
     public function edit(ArticleCategory $articleCategory)
     {
-        //
+        return view('pages.pagesDashboard.edit.editArticleCategory', compact('articleCategory'));
     }
 
     /**
@@ -78,7 +78,9 @@ class ArticleCategoryController extends Controller
      */
     public function update(Request $request, ArticleCategory $articleCategory)
     {
-        //
+        $articleCategory->name = $request->name;
+        $articleCategory->save();
+        return redirect()->back();
     }
 
     /**
@@ -89,6 +91,7 @@ class ArticleCategoryController extends Controller
      */
     public function destroy(ArticleCategory $articleCategory)
     {
-        //
+        $articleCategory->delete();
+        return redirect()->back();
     }
 }
