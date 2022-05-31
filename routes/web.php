@@ -77,9 +77,10 @@ Route::get('/checkout', function () {
     return view('pages.checkout');
 });
 Route::get('/account', function () {
+    $banner = Banner::where('id', 5)->first();
     $user = Auth::user();
     $billing = $user->billing;
-    return view('pages.myAccount', compact('user', 'billing'));
+    return view('pages.myAccount', compact('user', 'billing', 'banner'));
 })->middleware(['auth']);
 
 Route::get('/dashboard', function () {
