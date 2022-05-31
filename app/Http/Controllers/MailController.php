@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FormMail;
 use App\Models\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail as FacadesMail;
 
 class MailController extends Controller
 {
@@ -35,7 +37,23 @@ class MailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mail = new Mail();
+        $mail->name = $request->name;
+        $mail->mail = $request->mail;
+        $mail->message = $request->message;
+        $mail->readed = false;
+        $mail->archived = false;
+        $mail->save();
+
+        $details = [
+            'subject' => 'Contact form',
+            'name' => $request->name,
+            'mail' => $request->mail,
+            'message' => $request->message,
+        ];
+
+        FacadesMail::to($request->mail)->send(new FormMail($details));
+        return redirect()->back();
     }
 
     /**
@@ -46,7 +64,9 @@ class MailController extends Controller
      */
     public function show(Mail $mail)
     {
-        //
+        $mail->readed = true;
+        $mail->save();
+        return view('pages.pagesDashboard.show.showMail', compact('mail'));
     }
 
     /**
@@ -68,8 +88,10 @@ class MailController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Mail $mail)
-    {
-        //
+    {   
+        $mail->archived = !$mail->archived;
+        $mail->save();
+        return redirect()->back();
     }
 
     /**

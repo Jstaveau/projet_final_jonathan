@@ -42,7 +42,7 @@
                         <input type="checkbox" id="new" name="new" checked>
                         <label for="new"><span>New product</span></label>
                     </p>
-                    <button class="button-one submit-button mt-20" data-text="update" type="submit">Create</button>
+                    <button class="button-one submit-button mt-20" data-text="create" type="submit">Create</button>
                 </form>
             </div>
 

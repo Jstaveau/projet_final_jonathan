@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('mails', function (Blueprint $table) {
             $table->id();
-            $table->boolean('readed');
+            $table->string('name');
+            $table->string('mail');
             $table->longText('message');
-            $table->string('subject');
-            $table->foreignId('user_id')->constrained();
+            $table->boolean('readed');
+            $table->boolean('archived');
             $table->timestamps();
         });
     }

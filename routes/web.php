@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InfoController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResizeController;
@@ -20,6 +21,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Diapo;
 use App\Models\Image;
+use App\Models\Mail;
 use App\Models\Product;
 use App\Models\Tag;
 use App\Models\Teams;
@@ -105,6 +107,16 @@ Route::get('/dashboard/teams', function () {
     return view('pages.pagesDashboard.team', compact('teams'));
 })->middleware(['auth']);
 
+Route::get('/dashboard/mails', function () {
+    $mails = Mail::where('archived', false)->orderBy('id', 'desc')->get();
+    return view('pages.pagesDashboard.mailBox', compact('mails'));
+})->middleware(['auth']);
+
+Route::get('/dashboard/archived', function () {
+    $mails = Mail::where('archived', true)->orderBy('id', 'desc')->get();
+    return view('pages.pagesDashboard.mailBox', compact('mails'));
+})->middleware(['auth']);
+
 Route::get('/user/{id}/edit', [RegisteredUserController::class, 'edit']);
 Route::put('/user/{id}/update', [RegisteredUserController::class, 'update']);
 
@@ -119,6 +131,7 @@ Route::resource('review', ReviewController::class);
 Route::resource('comment', CommentController::class);
 Route::resource('article-category', ArticleCategoryController::class);
 Route::resource('tag', TagController::class);
+Route::resource('mail', MailController::class);
 Route::resource('team', TeamsController::class);
 Route::resource('image', ImageController::class);
 Route::resource('category', CategoryController::class);
