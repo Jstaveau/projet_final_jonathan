@@ -58,6 +58,6 @@
                 @endforeach
             </tbody>
         </table>
-        <a data-text="Add a product" class="button-one style-2 text-uppercase" href="/product/create">Add a member</a><br>
+        <a data-text="Add a member" class="button-one style-2 text-uppercase" href="/team/create">Add a member</a><br>
     </div>
 </div>
