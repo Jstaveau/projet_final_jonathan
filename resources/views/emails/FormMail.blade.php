@@ -1,4 +1,4 @@
 <p>Votre mail a bien été envoyé. Nous vous répondrons dans les plus brefs délais. <br> Votre mail contient : </p>
-<h1>From : {{ $details['name'].' ('.$details['mail'].')' }}</h1>
+<h4>From : {{ $details['name'].' ('.$details['mail'].')' }}</h4>
 <br>
 {{ $details['message'] }}

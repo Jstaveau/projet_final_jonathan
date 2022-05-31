@@ -120,6 +120,9 @@ Route::get('/dashboard/archived', function () {
 Route::get('/user/{id}/edit', [RegisteredUserController::class, 'edit']);
 Route::put('/user/{id}/update', [RegisteredUserController::class, 'update']);
 
+Route::get('/writeanswer/{id}', [MailController::class, 'writeAnswer']);
+Route::put('/sendanswer/{id}', [MailController::class, 'sendAnswer']);
+
 Route::put('/image/{id}/reset', [ImageController::class, 'reset_product']);
 
 Route::resource('newsletter', NewsletterController::class);

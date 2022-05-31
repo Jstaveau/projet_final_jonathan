@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AnswerMail;
 use App\Mail\FormMail;
 use App\Models\Mail;
 use Illuminate\Http\Request;
@@ -102,6 +103,25 @@ class MailController extends Controller
      */
     public function destroy(Mail $mail)
     {
-        //
+        $mail->delete();
+        return redirect()->back();
+    }
+
+    public function writeAnswer($id)
+    {
+        $mail = Mail::find($id);
+        return view('pages.pagesDashboard.writeAnswer', compact('mail'));
+    }
+    public function sendAnswer(Request $request, $id)
+    {   
+        $mail = Mail::find($id);
+        $details = [
+            'subject' => $request->subject,
+            'name' => $mail->name,
+            'message' => $request->message,
+        ];
+        FacadesMail::to($mail->mail)->send(new AnswerMail($details));
+
+        return view('pages.pagesDashboard.writeAnswer', compact('mail'));
     }
 }

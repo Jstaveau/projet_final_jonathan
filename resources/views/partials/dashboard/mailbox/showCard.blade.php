@@ -11,13 +11,16 @@
                             </h4>
                             <p>{{ $mail->message }}</p>
                         </div>
-                        <div class="reply-box">
+                        <div class="reply-box d-flex">
                             <form action="/mail/{{ $mail->id }}" method="POST">
                                 @csrf
                                 @method('PUT')
-                                <button type="submit" data-text="archive mail" class="button-one submit-button mt-20">archive
+                                <button type="submit" data-text="archive mail" class="button-one submit-button mt-20 me-4">archive
                                     mail</button>
                             </form>
+                            <a href="/writeanswer/{{$mail->id}}"><button data-text="answer" class="button-one submit-button mt-20">
+                                answer
+                            </button></a>
                         </div>
                     </div>
                 </div>
