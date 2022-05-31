@@ -132,6 +132,7 @@
                         <li><a href="/dashboard/products">Products</a></li>
                         <li><a href="/dashboard/articles">Articles</a></li>
                         <li><a href='/dashboard/categories'>Categories</a></li>
+                        <li><a href='/dashboard/teams'>Team</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

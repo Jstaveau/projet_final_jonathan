@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResizeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TeamsController;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\Banner;
@@ -21,6 +22,7 @@ use App\Models\Diapo;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\Teams;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -98,6 +100,11 @@ Route::get('/dashboard/categories', function () {
     return view('pages.pagesDashboard.catTag', compact('categories', 'article_categories', 'tags'));
 })->middleware(['auth']);
 
+Route::get('/dashboard/teams', function () {
+    $teams = Teams::all();
+    return view('pages.pagesDashboard.team', compact('teams'));
+})->middleware(['auth']);
+
 Route::get('/user/{id}/edit', [RegisteredUserController::class, 'edit']);
 Route::put('/user/{id}/update', [RegisteredUserController::class, 'update']);
 
@@ -112,6 +119,7 @@ Route::resource('review', ReviewController::class);
 Route::resource('comment', CommentController::class);
 Route::resource('article-category', ArticleCategoryController::class);
 Route::resource('tag', TagController::class);
+Route::resource('team', TeamsController::class);
 Route::resource('image', ImageController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('article_category', ArticleCategoryController::class);

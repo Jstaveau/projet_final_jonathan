@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('size');
             $table->boolean('star')->default(false);
             $table->boolean('new')->default(false);
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

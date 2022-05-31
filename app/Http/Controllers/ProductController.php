@@ -122,8 +122,8 @@ class ProductController extends Controller
         $newsletterAbos = Newsletter::all();
         $details = [
             'subject' => 'New product available',
-            'message' => "Name : ".$request->name.'
-                        Price : '.$request->price,
+            'message' => "Name : " . $request->name . '
+                        Price : ' . $request->price,
         ];
         foreach ($newsletterAbos as $newsletterAbo) {
             Mail::to($newsletterAbo->email)->send(new NewProduct($details));
@@ -219,12 +219,16 @@ class ProductController extends Controller
         }
         $product->description = $request->description;
         $product->category_id = $request->category_id;
+        $oldStar = Product::where('star', true)->first();
         if ($request->new) {
+
             $product->new = true;
         } else {
             $product->new = false;
         }
         if ($request->star) {
+            $oldStar->star = false;
+            $oldStar->save();
             $product->star = true;
         } else {
             $product->star = false;

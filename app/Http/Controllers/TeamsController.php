@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avatar;
 use App\Models\Teams;
 use Illuminate\Http\Request;
+use Jona;
 
 class TeamsController extends Controller
 {
@@ -55,9 +57,10 @@ class TeamsController extends Controller
      * @param  \App\Models\Teams  $teams
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teams $teams)
+    public function edit($id)
     {
-        //
+        $teams = Teams::find($id);
+        return view('pages.pagesDashboard.edit.editTeam', compact('teams'));
     }
 
     /**
@@ -67,9 +70,45 @@ class TeamsController extends Controller
      * @param  \App\Models\Teams  $teams
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teams $teams)
+    public function update(Request $request, $id)
     {
-        //
+        $teams = Teams::find($id);
+        //resize image
+        if ($request->file) {
+            $avatar = new Avatar();
+            $image = $request->file('file');
+            $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+
+            $destinationPath = public_path('/img/images_site/120x120');
+            $imgFile = Jona::make($image->getRealPath());
+            $imgFile->resize(120, 120, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+            $image->move($destinationPath, $input['file']);
+            $avatar->src = $input['file'];
+            $avatar->save();
+
+            $avatar_id = Avatar::orderBy('id', 'desc')->first();
+            $teams->avatar_id = $avatar_id->id;
+        }
+
+        $teams->name = $request->name;
+        $teams->post = $request->post;
+        $teams->description = $request->description;
+        $oldBoss = Teams::where('boss', true)->first();
+        if ($request->boss != null) {
+            if ($oldBoss != null) {
+                $oldBoss->boss = false;
+                $oldBoss->save();
+            }
+            $teams->boss = true;
+        } else {
+            $teams->boss = false;
+        }
+        $teams->save();
+
+        return redirect()->back();
     }
 
     /**

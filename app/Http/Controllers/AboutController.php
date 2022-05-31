@@ -19,7 +19,10 @@ class AboutController extends Controller
         $banner = Banner::where('id', 3)->first(); // banner img
         $about = About::first();
         $boss = Teams::where('boss', true)->first();
-        $teams = Teams::where('boss', false)->inRandomOrder()->limit(3)->get();
+        $teams = Teams::where('boss', false)->inRandomOrder()->limit(4)->get();
+        if ($boss != null) {
+            $teams = Teams::where('boss', false)->inRandomOrder()->limit(3)->get();
+        }
         return view('pages.aboutUs', compact('banner', 'about', 'boss', 'teams'));
     }
 
