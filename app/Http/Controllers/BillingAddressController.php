@@ -46,7 +46,7 @@ class BillingAddressController extends Controller
      * @param  \App\Models\BillingAddress  $billingAddress
      * @return \Illuminate\Http\Response
      */
-    public function show(Billing $billingAddress)
+    public function show(BillingAddress $billingAddress)
     {
         //
     }
@@ -57,7 +57,7 @@ class BillingAddressController extends Controller
      * @param  \App\Models\BillingAddress  $billingAddress
      * @return \Illuminate\Http\Response
      */
-    public function edit(Billing $billingAddress)
+    public function edit(BillingAddress $billingAddress)
     {
         //
     }
@@ -69,7 +69,7 @@ class BillingAddressController extends Controller
      * @param  \App\Models\BillingAddress  $billingAddress
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Billing $billingAddress)
+    public function update(Request $request, BillingAddress $billingAddress)
     {
         //
     }
@@ -80,7 +80,7 @@ class BillingAddressController extends Controller
      * @param  \App\Models\BillingAddress  $billingAddress
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Billing $billingAddress)
+    public function destroy(BillingAddress $billingAddress)
     {
         //
     }

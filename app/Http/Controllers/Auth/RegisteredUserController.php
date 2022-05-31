@@ -113,9 +113,35 @@ class RegisteredUserController extends Controller
         return view('pages.pagesDashboard.edit.editUser', compact('edit', 'roles'));
     }
     public function update(Request $request, $id){
+
         $user = User::find($id);
+        $avatar = Avatar::where('id', $user->avatar_id)->first();
+        $image = $request->file('file');
+        $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+
+        $destinationPath = public_path('/img/images_site/90x100');
+        $imgFile = Jona::make($image->getRealPath());
+        $imgFile->resize(90, 100, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $input['file']);
+        $destinationPath = public_path('/uploads');
+        $image->move($destinationPath, $input['file']);
+        $avatar->src = $input['file'];
+        $avatar->save();
+
         $user->name = $request->name;
-        $user->role_id = $request->role_id;
+        if ($request->role_id) {
+            $user->role_id = $request->role_id;
+        } else {
+            $user->phone = $request->phone;
+            $user->company_name = $request->company_name;
+            $user->country = $request->country;
+            $user->state = $request->state;
+            $user->city = $request->city;
+            $user->email = $request->email;
+        }
+
+
         $user->save();
         return redirect()->back();
     }

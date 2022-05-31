@@ -13,34 +13,39 @@
                             </div>
                             <div id="my-info" class="panel-collapse collapse show" data-bs-parent="#accordion">
                                 <div class="panel-body">
-                                    <form class="billing-details shop-cart-table">
+                                    <form class="billing-details shop-cart-table" action="user/{{$user->id}}/update" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <img src="{{asset('img/images_site/90x100/'.$user->avatar->src)}}" alt="">
+                                        <label for="pp">Change photo</label><br>
+                                        <input type="file" name="file" class="custom-file-input mb-3" id="pp">
                                         <input name="name" value="{{$user->name}}" type="text" placeholder="Your name here...">
                                         <input name="email" value="{{$user->email}}" type="text" placeholder="Email address here...">
                                         <input name="phone" value="{{$user->phone}}" type="text" placeholder="Phone here...">
-                                        <input name="company_name" value="{{$user->company_name}}" type="text" placeholder="Company neme here...">
+                                        <input name="company_name" value="{{$user->company_name}}" type="text" placeholder="Company name here...">
                                         <select name="country" class="custom-select mb-15">
-                                            <option>Country</option>
-                                            <option>Bangladesh</option>
-                                            <option>United States</option>
-                                            <option>united Kingdom</option>
-                                            <option>Australia</option>
-                                            <option>Canada</option>
+                                            <option value='NULL'>Country</option>
+                                            <option value='Bangladesh' {{$user->country == 'Bangladesh' ? 'selected' : ''}}>Bangladesh</option>
+                                            <option value='United States' {{$user->country == 'United States' ? 'selected' : ''}}>United States</option>
+                                            <option value='united Kingdom' {{$user->country == 'united Kingdom' ? 'selected' : ''}}>united Kingdom</option>
+                                            <option value='Australia' {{$user->country == 'Australia' ? 'selected' : ''}}>Australia</option>
+                                            <option value='Canada' {{$user->country == 'Canada' ? 'selected' : ''}}>Canada</option>
                                         </select>
                                         <select name="state" class="custom-select mb-15">
-                                            <option>State</option>
-                                            <option>Dhaka</option>
-                                            <option>New York</option>
-                                            <option>London</option>
-                                            <option>Melbourne</option>
-                                            <option>Ottawa</option>
+                                            <option value="NULL">State</option>
+                                            <option value='Dhaka' {{$user->state == 'Dhaka' ? 'selected' : ''}}>Dhaka</option>
+                                            <option value='New york' {{$user->state == 'New york' ? 'selected' : ''}}>New York</option>
+                                            <option value='London' {{$user->state == 'London' ? 'selected' : ''}}>London</option>
+                                            <option value='Melbourne' {{$user->state == 'Melbourne' ? 'selected' : ''}}>Melbourne</option>
+                                            <option value='Ottawa' {{$user->state == 'Ottawa' ? 'selected' : ''}}>Ottawa</option>
                                         </select>
                                         <select name="city" class="custom-select mb-15">
-                                            <option>Town / City</option>
-                                            <option>Dhaka</option>
-                                            <option>New York</option>
-                                            <option>London</option>
-                                            <option>Melbourne</option>
-                                            <option>Ottawa</option>
+                                            <option value="NULL">Town / City</option>
+                                            <option value='Dhaka' {{$user->city == 'Dhaka' ? 'selected' : ''}}>Dhaka</option>
+                                            <option value='New york' {{$user->city == 'New york' ? 'selected' : ''}}>New York</option>
+                                            <option value='London' {{$user->city == 'London' ? 'selected' : ''}}>London</option>
+                                            <option value='Melbourne' {{$user->city == 'Melbourne' ? 'selected' : ''}}>Melbourne</option>
+                                            <option value='Ottawa' {{$user->city == 'Ottawa' ? 'selected' : ''}}>Ottawa</option>
                                         </select>
                                         <textarea name="address" placeholder="Your address here..." class="custom-textarea">{{$user->address}}</textarea>
                                         <button type="submit" data-text="update" class="submit-button submit-btn-2 button-one mt-2">Update</button>
