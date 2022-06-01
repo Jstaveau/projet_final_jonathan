@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
                 RoleSeeder::class,
                 AvatarSeeder::class,
                 UserSeeder::class,
+                CartSeeder::class,
                 BillingAddressSeeder::class,
                 TeamsSeeder::class,
                 InfoSeeder::class,

@@ -48,15 +48,20 @@
                         </div>
                         <!-- Size end -->
                         <div class="clearfix">
-                            <div class="cart-plus-minus">
-                                <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                            </div>
-                            <div class="product-action clearfix">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#productModal-{{ $product->id }}"
-                                    title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                <a href="cart.html" data-bs-toggle="tooltip" data-placement="top" title="Add To Cart"><i
-                                        class="zmdi zmdi-shopping-cart-plus"></i></a>
-                            </div>
+                            <form action="/cartProduct" method="POST">
+                                @csrf
+                                <input type="number" hidden name="product" value="{{$product->id}}">
+                                <div class="cart-plus-minus">
+                                    <input type="text" value="2" name="qtybutton" class="cart-plus-minus-box">
+                                </div>
+                                <div class="product-action clearfix">
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#productModal-{{ $product->id }}" title="Quick View"><i
+                                            class="zmdi zmdi-zoom-in"></i></a>
+                                    <a href="#" data-bs-toggle="tooltip" data-placement="top"
+                                        title="Add To Cart"><button><i class="zmdi zmdi-shopping-cart-plus"></i></button></a>
+                                </div>
+                            </form>
                         </div>
                         <!-- Single-pro-slider Small-photo start -->
                         <div class="single-pro-slider single-sml-photo slider-nav">
@@ -103,7 +108,8 @@
                                     <h3 class="tab-title title-border mb-30">Customer review</h3>
                                     <ul class="product-comments clearfix">
                                         @foreach ($reviews as $review)
-                                            <li class="{{ $loop->iteration == 1 ? 'mb-30 w-100' : 'threaded-comments w-100' }}">
+                                            <li
+                                                class="{{ $loop->iteration == 1 ? 'mb-30 w-100' : 'threaded-comments w-100' }}">
                                                 <div class="pro-reviewer">
                                                     <img src="{{ asset('img/images_site/90x100/' . $review->user->avatar->src) }}"
                                                         alt="" />
@@ -138,10 +144,11 @@
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input type="text" value="{{Auth::user()->name}}" placeholder="Your name here..." />
+                                                        <input type="text" value="{{ Auth::user()->name }}"
+                                                            placeholder="Your name here..." />
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" placeholder="Subject..."/>
+                                                        <input type="text" placeholder="Subject..." />
                                                     </div>
                                                 </div>
                                                 <div class="row">

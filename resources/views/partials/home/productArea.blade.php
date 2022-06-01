@@ -18,25 +18,38 @@
                                         @elseif ($featured->discount != null)
                                             <span class="pro-label sale-label">Sale</span>
                                         @endif
-                                        <a href="/product/{{$featured->id}}"><img src="{{'img/images_site/270x270/'.$featured->pp->src}}" alt="" /></a>
+                                        <a href="/product/{{ $featured->id }}"><img
+                                                src="{{ 'img/images_site/270x270/' . $featured->pp->src }}" alt="" /></a>
                                         <div class="product-action clearfix">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#productModal-{{$featured->id}}"
-                                                title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                            <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
-                                                title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                            <a href="#" data-bs-toggle="modal"
+                                                data-bs-target="#productModal-{{ $featured->id }}" title="Quick View"><i
+                                                    class="zmdi zmdi-zoom-in"></i></a>
+                                            <form action="/cartProduct" method="POST">
+                                                @csrf
+                                                <input type="number" hidden name="product" value="{{$featured->id}}">
+                                                <a href="#" data-bs-toggle="tooltip" data-placement="top"
+                                                    title="Add To Cart"><button type="submit">
+                                                    <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                                </button>
+                                                </a>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="product-info clearfix">
                                         <div class="fix">
-                                            <h4 class="post-title floatleft"><a href="/product/{{$featured->id}}">{{$featured->name}}</a></h4>
-                                            <p class="floatright hidden-sm d-none d-md-block">{{$featured->category->name}}</p>
+                                            <h4 class="post-title floatleft"><a
+                                                    href="/product/{{ $featured->id }}">{{ $featured->name }}</a></h4>
+                                            <p class="floatright hidden-sm d-none d-md-block">
+                                                {{ $featured->category->name }}</p>
                                         </div>
                                         <div class="fix">
                                             @if ($featured->discount != null)
-                                                <s class="pro-price text-black me-2 floatleft ">$ {{$featured->price}}</s>
-                                                <span class="pro-price floatleft">$ {{$featured->price/100 * (100 - $featured->discount)}}</span>
+                                                <s class="pro-price text-black me-2 floatleft ">$
+                                                    {{ $featured->price }}</s>
+                                                <span class="pro-price floatleft">$
+                                                    {{ ($featured->price / 100) * (100 - $featured->discount) }}</span>
                                             @else
-                                                <span class="pro-price floatleft">$ {{$featured->price}}</span>
+                                                <span class="pro-price floatleft">$ {{ $featured->price }}</span>
                                             @endif
                                         </div>
                                     </div>

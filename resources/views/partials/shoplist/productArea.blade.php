@@ -71,21 +71,30 @@
                                                     <span class="pro-label new-label">new</span>
                                                 @endif
                                                 <span class="pro-price-2">$ {{ $product->price }}</span>
-                                                <a href="{{'/product/'.$product->id}}"><img
+                                                <a href="{{ '/product/' . $product->id }}"><img
                                                         src="{{ asset('img/images_site/270x270/' . $product->pp->src) }}"
                                                         alt="" /></a>
                                             </div>
                                             <div class="product-info clearfix text-center">
                                                 <div class="fix">
-                                                    <h4 class="post-title"><a href="{{'/product/'.$product->id}}">{{ $product->name }}</a></h4>
+                                                    <h4 class="post-title"><a
+                                                            href="{{ '/product/' . $product->id }}">{{ $product->name }}</a>
+                                                    </h4>
                                                 </div>
                                                 <div class="product-action clearfix">
                                                     <a href="#" data-bs-toggle="modal"
                                                         data-bs-target="#productModal-{{ $product->id }}"
                                                         title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                                    <a href="{{'/product/'.$product->id}}" data-bs-toggle="tooltip" data-placement="top"
-                                                        title="Add To Cart"><i
-                                                            class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                    <form action="/cartProduct" method="POST">
+                                                        @csrf
+                                                        <input type="number" hidden name="product"
+                                                            value="{{ $product->id }}">
+                                                        <a href="#" data-bs-toggle="tooltip" data-placement="top"
+                                                            title="Add To Cart"><button type="submit">
+                                                                <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                                            </button>
+                                                        </a>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,14 +119,15 @@
                                                 @else
                                                     <span class="pro-price-2">$ {{ $product->price }}</span>
                                                 @endif
-                                                <a href="{{'/product/'.$product->id}}"><img
+                                                <a href="{{ '/product/' . $product->id }}"><img
                                                         src="{{ asset('img/images_site/270x270/' . $product->pp->src) }}"
                                                         alt="" /></a>
                                             </div>
                                             <div class="product-info">
                                                 <div class="fix">
                                                     <h4 class="post-title floatleft"><a
-                                                            href="{{'/product/'.$product->id}}">{{ $product->name }}</a></h4>
+                                                            href="{{ '/product/' . $product->id }}">{{ $product->name }}</a>
+                                                    </h4>
                                                 </div>
                                                 <div class="fix mb-20">
                                                     @if ($product->discount != null)
@@ -134,7 +144,21 @@
                                                     <p>{{ $product->description }}</p>
                                                 </div>
                                                 <div class="clearfix">
-                                                    <div class="cart-plus-minus">
+                                                    <form action="/cartProduct" method="POST">
+                                                        @csrf
+                                                        <input type="number" hidden name="product" value="{{$product->id}}">
+                                                        <div class="cart-plus-minus">
+                                                            <input type="text" value="2" name="qtybutton" class="cart-plus-minus-box">
+                                                        </div>
+                                                        <div class="product-action clearfix">
+                                                            <a href="#" data-bs-toggle="modal"
+                                                                data-bs-target="#productModal-{{ $product->id }}" title="Quick View"><i
+                                                                    class="zmdi zmdi-zoom-in"></i></a>
+                                                            <a href="#" data-bs-toggle="tooltip" data-placement="top"
+                                                                title="Add To Cart"><button><i class="zmdi zmdi-shopping-cart-plus"></i></button></a>
+                                                        </div>
+                                                    </form>
+                                                    {{-- <div class="cart-plus-minus">
                                                         <input type="text" value="02" name="qtybutton"
                                                             class="cart-plus-minus-box">
                                                     </div>
@@ -145,7 +169,7 @@
                                                         <a href="cart.html" data-bs-toggle="tooltip"
                                                             data-placement="top" title="Add To Cart"><i
                                                                 class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>

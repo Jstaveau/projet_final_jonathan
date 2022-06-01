@@ -7,6 +7,7 @@ use App\Mail\ContactMail;
 use App\Models\Avatar;
 use App\Models\Banner;
 use App\Models\BillingAddress;
+use App\Models\Cart;
 use App\Models\Newsletter;
 use App\Models\Role;
 use App\Models\User;
@@ -92,6 +93,10 @@ class RegisteredUserController extends Controller
         $billing->email = $request->email;
         $billing->user_id = $user_id->id;
         $billing->save();
+
+        $cart = new Cart();
+        $cart->user_id = $user_id->id;
+        $cart->save();
 
         Auth::login($user);
 
