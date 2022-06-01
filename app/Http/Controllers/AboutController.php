@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Image;
 use App\Models\Teams;
 use Illuminate\Http\Request;
+use Jona;
 
 class AboutController extends Controller
 {
@@ -78,7 +80,27 @@ class AboutController extends Controller
      */
     public function update(Request $request, About $about)
     {
-        //
+        $avatar = Image::where('id', $about->image_id)->first();
+
+        if ($request->file) {
+            $image = $request->file('file');
+            $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/img/images_site/530x450');
+            $imgFile = Jona::make($image->getRealPath());
+            $imgFile->resize(530, 450, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+            $image->move($destinationPath, $input['file']);
+            $avatar->src = $input['file'];
+            $avatar->save();
+        }
+
+        $about->title = $request->title;
+        $about->content = $request->content;
+        $about->save();
+
+        return redirect()->back();
     }
 
     /**

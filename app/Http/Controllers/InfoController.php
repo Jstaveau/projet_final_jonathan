@@ -72,7 +72,13 @@ class InfoController extends Controller
      */
     public function update(Request $request, Info $info)
     {
-        //
+        $info->address = $request->address;
+        $info->phone = $request->phone;
+        $info->phone2 = $request->phone2;
+        $info->mail = $request->mail;
+        $info->mail2 = $request->mail2;
+        $info->save();
+        return redirect()->back();
     }
 
     /**

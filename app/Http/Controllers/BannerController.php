@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Jona;
 
 class BannerController extends Controller
 {
@@ -57,7 +59,7 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        //
+        return view('pages.pagesDashboard.edit.bennerEdit', compact('banner'));
     }
 
     /**
@@ -69,7 +71,24 @@ class BannerController extends Controller
      */
     public function update(Request $request, Banner $banner)
     {
-        //
+        $avatar = Image::where('id', $banner->image_id)->first();
+        
+        if ($request->file) {
+            $image = $request->file('file');
+            $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/img/images_site/1920x300');
+            $imgFile = Jona::make($image->getRealPath());
+            $imgFile->resize(1920, 300)->save($destinationPath . '/' . $input['file']);
+            $destinationPath = public_path('/uploads');
+            $image->move($destinationPath, $input['file']);
+            $avatar->src = $input['file'];
+            $avatar->save();
+        }
+
+        $banner->title = $request->title;
+        $banner->save();
+
+        return redirect()->back();
     }
 
     /**

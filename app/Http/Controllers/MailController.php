@@ -53,7 +53,7 @@ class MailController extends Controller
             'message' => $request->message,
         ];
 
-        FacadesMail::to($request->mail)->send(new FormMail($details));
+        FacadesMail::to($details['mail'])->send(new FormMail($details));
         return redirect()->back();
     }
 
