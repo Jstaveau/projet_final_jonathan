@@ -52,7 +52,7 @@ Route::get('/', function () {
     $firstCarou = Diapo::where('first', true)->first(); //image selected as first for carousel
     $carous = Diapo::where('first', false)->inRandomOrder()->limit(2)->get(); //2 others images for the carousel
     $featureds = Product::all()->random(5); //5 random products for the section featured products
-    $articles = Article::all()->take(2); //2 last articles
+    $articles = Article::orderBy('id', 'desc')->limit(2)->get(); //2 last articles
     return view('welcome', compact('star', 'latest', 'carous', 'featureds', 'articles', 'firstCarou'));
 });
 Route::get('/product/tri/{category}', function ($category) { // category filter
