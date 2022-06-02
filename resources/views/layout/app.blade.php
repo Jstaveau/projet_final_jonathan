@@ -91,10 +91,16 @@
                                     use App\Models\CartProduct;
                                     use App\Models\Cart;
                                     use Illuminate\Support\Facades\Auth;
-                                    $cart = Cart::where('user_id', Auth::user()->id)->first();
-                                    $products = $cart->product;
-                                    $products = $products->reverse();
-                                    $totalProducts = CartProduct::where('cart_id', $cart->id)->orderBy('id',  'desc')->get();
+                                    if (Auth::user()) {
+                                        $cart = Cart::where('user_id', Auth::user()->id)->first();
+                                        $products = $cart->product;
+                                        $products = $products->reverse();
+                                        $totalProducts = CartProduct::where('cart_id', $cart->id)->orderBy('id',  'desc')->get();
+                                    } else {
+                                        $cart = null;
+                                        $products = [];
+                                        $totalProducts = [];
+                                    }
                                     $total = 0;
                                     foreach ($totalProducts as $totalProduct) {
                                         if ($totalProduct->product->discount != null) {

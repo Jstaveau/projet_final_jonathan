@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->float('total');
+            $table->boolean('validate')->default(false);
+            $table->integer('command_number')->nullable();
             $table->timestamps();
         });
     }

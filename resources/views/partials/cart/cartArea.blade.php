@@ -69,8 +69,8 @@
                                         <div class="customer-login mt-30">
                                             <h4 class="title-1 title-border text-uppercase">coupon discount</h4>
                                             <p class="text-gray">Enter your coupon code if you have one!</p>
-                                            <input type="text" placeholder="Enter your code here.">
-                                            <button type="submit" data-text="apply coupon" class="button-one submit-button mt-15">apply coupon</button>
+                                            <input id="coupon" type="text" placeholder="Enter your code here.">
+                                            <button id="couponbtn" type="submit" data-text="apply coupon" class="button-one submit-button mt-15">apply coupon</button>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -102,6 +102,7 @@
                     </div>
                     <form action="orderProduct" method="POST">
                         @csrf
+                        <input id="couponValidate" hidden name="reduc">
                         <input type="text" name="amount" hidden id="amoutArray">
                         <button type="submit" data-text="proceed-checkout" class="button-one submit-button mt-15">PROCEED CHECK OUT</button>
                     </form>

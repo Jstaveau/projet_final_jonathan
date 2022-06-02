@@ -14,6 +14,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResizeController;
@@ -32,6 +33,8 @@ use App\Models\Diapo;
 use App\Models\Image;
 use App\Models\Info;
 use App\Models\Mail;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\Tag;
 use App\Models\Teams;
@@ -93,14 +96,34 @@ Route::get('/cart', function () {
     return view('pages.cart', compact('banner', 'totalProducts', 'total'));
 });
 Route::get('/checkout', function () {
+    $user = Auth::user();
+    $order = Order::where('user_id', $user->id)->orderBy('id', 'desc')->first();
+    $order_products = OrderProduct::where('order_id', $order->id)->get();
+    $total = 0;
+    foreach ($order_products as $order_product) {
+        $total += $order_product->product->price * $order_product->amount;
+    }
+    $billing = $user->billing;
     $banner = Banner::where('id', 6)->first();
-    return view('pages.checkout', compact('banner'));
+    return view('pages.checkout', compact('banner', 'billing', 'order', 'order_products', 'total'));
 });
 Route::get('/account', function () {
     $banner = Banner::where('id', 5)->first();
     $user = Auth::user();
     $billing = $user->billing;
     return view('pages.myAccount', compact('user', 'billing', 'banner'));
+})->middleware(['auth']);
+
+Route::get('/orderDone', function () {
+    $user = Auth::user();
+    $order = Order::where('user_id', $user->id)->orderBy('id', 'desc')->first();
+    $order_products = OrderProduct::where('order_id', $order->id)->get();
+    $total = 0;
+    foreach ($order_products as $order_product) {
+        $total += $order_product->product->price * $order_product->amount;
+    }
+    $banner = Banner::where('id', 7)->first();
+    return view('pages.order', compact('banner', 'order', 'order_products', 'total'));
 })->middleware(['auth']);
 
 Route::get('/dashboard', function () {
@@ -175,6 +198,7 @@ Route::resource('image', ImageController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('article_category', ArticleCategoryController::class);
 Route::resource('info', InfoController::class);
+Route::resource('order', OrderController::class);
 
 Route::get('/file-resize', [ResizeController::class, 'index']);
 Route::post('/resize-file', [ResizeController::class, 'resizeImage'])->name('resizeImage');

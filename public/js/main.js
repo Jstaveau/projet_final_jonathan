@@ -200,6 +200,8 @@
     /*----------------------------
 		Cart Plus Minus Button
 	------------------------------ */
+    let couponValidate = document.getElementById("couponValidate");
+
     $(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');
     $(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');
     $(".qtybutton").on("click", function () {
@@ -235,13 +237,16 @@
     count.children[1].children[1].innerHTML =
         "$" + ((totalCart / 121) * 21).toFixed(2);
     count.children[2].children[1].children[0].value = totalCart.toFixed(2);
+    couponValidate.value = (
+        totalCart
+    ).toFixed(2);
 
     let amoutArray = [];
     let inputAmount = document.getElementById("amoutArray");
 
     $(".qtybutton").on("click", function () {
         let totalCart = 0;
-		amoutArray = [];
+        amoutArray = [];
         priceArticle.forEach((element) => {
             let input = element.children[2].children[0].children[1].value;
             element.children[3].innerHTML =
@@ -250,14 +255,34 @@
             totalCart += element.children[1].innerHTML.slice(1) * input;
             amoutArray.push(input);
         });
-        console.log(amoutArray);
         count.firstElementChild.children[1].innerHTML =
             "$" + ((totalCart / 121) * 100).toFixed(2);
         count.children[1].children[1].innerHTML =
             "$" + ((totalCart / 121) * 21).toFixed(2);
         count.children[2].children[1].children[0].value = totalCart.toFixed(2);
         inputAmount.value = amoutArray;
+        couponValidate.value = (
+            totalCart
+        ).toFixed(2);
         console.log(inputAmount.value);
+    });
+
+    let couponInput = document.getElementById("coupon");
+    let couponBtn = document.getElementById("couponbtn");
+
+    couponBtn.addEventListener("click", function reduc() {
+        if (couponInput.value == "cactusBestCoachEver") {
+			couponValidate.value = (
+                totalCart * 1.2
+            ).toFixed(2);
+            count.firstElementChild.children[1].innerHTML =
+                "$" + (((totalCart * 1.2) / 121) * 100).toFixed(2);
+            count.children[1].children[1].innerHTML =
+                "$" + (((totalCart * 1.2) / 121) * 21).toFixed(2);
+            count.children[2].children[1].children[0].value = (
+                totalCart * 1.2
+            ).toFixed(2);
+        }
     });
 
     /*-------------------------

@@ -15,41 +15,40 @@
                     <div class="tab-content">
                         <!-- check-out start -->
                         <div class="tab-pane active" id="check-out">
-                            <form action="#">
+                            <form action="order/{{$order->id}}" method="POST">
+                                @csrf
+                                @method('PUT')
                                 <div class="shop-cart-table check-out-wrap">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="billing-details pr-20">
                                                 <h4 class="title-1 title-border text-uppercase mb-30">billing details</h4>
-                                                <input type="text" placeholder="Your name here...">
-                                                <input type="text" placeholder="Email address here...">
-                                                <input type="text" placeholder="Phone here...">
-                                                <input type="text" placeholder="Company neme here...">
-                                                <select class="custom-select mb-15">
-                                                    <option>Contry</option>
-                                                    <option>Bangladesh</option>
-                                                    <option>United States</option>
-                                                    <option>united Kingdom</option>
-                                                    <option>Australia</option>
-                                                    <option>Canada</option>
-                                                </select>
-                                                <select class="custom-select mb-15">
-                                                    <option>State</option>
-                                                    <option>Dhaka</option>
-                                                    <option>New York</option>
-                                                    <option>London</option>
-                                                    <option>Melbourne</option>
-                                                    <option>Ottawa</option>
-                                                </select>
-                                                <select class="custom-select mb-15">
-                                                    <option>Town / City</option>
-                                                    <option>Dhaka</option>
-                                                    <option>New York</option>
-                                                    <option>London</option>
-                                                    <option>Melbourne</option>
-                                                    <option>Ottawa</option>
-                                                </select>
-                                                <textarea class="custom-textarea" placeholder="Your address here..." ></textarea>
+                                                <input required name="name" value="{{$billing->name}}" type="text" placeholder="Your name here...">
+                                        <input required name="email" value="{{$billing->email}}" type="text" placeholder="Email address here...">
+                                        <input name="phone" value="{{$billing->phone}}" type="text" placeholder="Phone here...">
+                                        <input name="company_name" value="{{$billing->company_name}}" type="text" placeholder="Company neme here...">
+                                        <select required name="country" class="custom-select mb-15">
+                                            <option value='Bangladesh' {{$billing->country == 'Bangladesh' ? 'selected' : ''}}>Bangladesh</option>
+                                            <option value='United States' {{$billing->country == 'United States' ? 'selected' : ''}}>United States</option>
+                                            <option value='united Kingdom' {{$billing->country == 'united Kingdom' ? 'selected' : ''}}>united Kingdom</option>
+                                            <option value='Australia' {{$billing->country == 'Australia' ? 'selected' : ''}}>Australia</option>
+                                            <option value='Canada' {{$billing->country == 'Canada' ? 'selected' : ''}}>Canada</option>
+                                        </select>
+                                        <select required name="state" class="custom-select mb-15">
+                                            <option value='Dhaka' {{$billing->state == 'Dhaka' ? 'selected' : ''}}>Dhaka</option>
+                                            <option value='New york' {{$billing->state == 'New york' ? 'selected' : ''}}>New York</option>
+                                            <option value='London' {{$billing->state == 'London' ? 'selected' : ''}}>London</option>
+                                            <option value='Melbourne' {{$billing->state == 'Melbourne' ? 'selected' : ''}}>Melbourne</option>
+                                            <option value='Ottawa' {{$billing->state == 'Ottawa' ? 'selected' : ''}}>Ottawa</option>
+                                        </select>
+                                        <select required name="city" class="custom-select mb-15">
+                                            <option value='Dhaka' {{$billing->city == 'Dhaka' ? 'selected' : ''}}>Dhaka</option>
+                                            <option value='New york' {{$billing->city == 'New york' ? 'selected' : ''}}>New York</option>
+                                            <option value='London' {{$billing->city == 'London' ? 'selected' : ''}}>London</option>
+                                            <option value='Melbourne' {{$billing->city == 'Melbourne' ? 'selected' : ''}}>Melbourne</option>
+                                            <option value='Ottawa' {{$billing->city == 'Ottawa' ? 'selected' : ''}}>Ottawa</option>
+                                        </select>
+                                        <textarea required name="address" placeholder="Your address here..." class="custom-textarea">{{$billing->address}}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -63,29 +62,23 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Dummy Product Name  x 2</td>
-                                                            <td class="text-end">$86.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Dummy Product Name  x 1</td>
-                                                            <td class="text-end">$69.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Cart Subtotal</td>
-                                                            <td class="text-end">$155.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Shipping and Handing</td>
-                                                            <td class="text-end">$15.00</td>
-                                                        </tr>
+                                                        @foreach ($order_products as $product)
+                                                            <tr>
+                                                                <td>{{$product->product->name.' (Qty : '.$product->amount.')'}}</td>
+                                                                <td class="text-end">${{number_format(($product->product->price/121 * 100) * $product->amount, 2)}}</td>
+                                                            </tr>
+                                                        @endforeach
                                                         <tr>
                                                             <td>Vat</td>
-                                                            <td class="text-end">$00.00</td>
+                                                            <td class="text-end">${{number_format(($order->total/121) * 21, 2)}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Coupon</td>
+                                                            <td class="text-end">${{number_format($order->total - $total, 2)}}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Order Total</td>
-                                                            <td class="text-end">$170.00</td>
+                                                            <td class="text-end">${{number_format($order->total, 2)}}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

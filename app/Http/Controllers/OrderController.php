@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -69,7 +70,25 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->validate = true;
+        $order->command_number = rand(1000000, 9999999);
+        $order->save();
+
+        $billing = Auth::user()->billing;
+        $billing->email = $request->email;
+        $billing->name = $request->name;
+        if ($request->phone) {
+            $billing->phone = $request->phone;
+        }
+        if ($request->company_name) {
+            $billing->company_name = $request->company_name;
+        }
+        $billing->country = $request->country;
+        $billing->state = $request->state;
+        $billing->city = $request->city;
+        $billing->address = $request->address;
+        $billing->save();
+        return redirect('/orderDone');
     }
 
     /**

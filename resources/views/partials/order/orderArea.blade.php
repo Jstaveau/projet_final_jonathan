@@ -22,15 +22,15 @@
                                 <div class="order-info bg-white text-center clearfix mb-30">
                                     <div class="single-order-info">
                                         <h4 class="title-1 text-uppercase text-light-black mb-0">order no</h4>
-                                        <p class="text-uppercase text-light-black mb-0"><strong>m 2653257</strong></p>
+                                        <p class="text-uppercase text-light-black mb-0"><strong>m {{$order->command_number}}</strong></p>
                                     </div>
                                     <div class="single-order-info">
                                         <h4 class="title-1 text-uppercase text-light-black mb-0">Date</h4>
-                                        <p class="text-uppercase text-light-black mb-0"><strong>june 15, 2021</strong></p>
+                                        <p class="text-uppercase text-light-black mb-0"><strong>{{$order->updated_at->format('F d, Y')}}</strong></p>
                                     </div>
                                     <div class="single-order-info">
                                         <h4 class="title-1 text-uppercase text-light-black mb-0">Total</h4>
-                                        <p class="text-uppercase text-light-black mb-0"><strong>$ 170.00</strong></p>
+                                        <p class="text-uppercase text-light-black mb-0"><strong>$ {{number_format($order->total,2)}}</strong></p>
                                     </div>
                                     <div class="single-order-info">
                                         <h4 class="title-1 text-uppercase text-light-black mb-0">payment method</h4>
@@ -50,29 +50,23 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Dummy Product Name  x 2</td>
-                                                            <td class="text-end">$86.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Dummy Product Name  x 1</td>
-                                                            <td class="text-end">$69.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Cart Subtotal</td>
-                                                            <td class="text-end">$155.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Shipping and Handing</td>
-                                                            <td class="text-end">$15.00</td>
-                                                        </tr>
+                                                        @foreach ($order_products as $product)
+                                                            <tr>
+                                                                <td>{{$product->product->name.' (Qty : '.$product->amount.')'}}</td>
+                                                                <td class="text-end">${{number_format(($product->product->price/121 * 100) * $product->amount, 2)}}</td>
+                                                            </tr>
+                                                        @endforeach
                                                         <tr>
                                                             <td>Vat</td>
-                                                            <td class="text-end">$00.00</td>
+                                                            <td class="text-end">${{number_format(($order->total/121) * 21, 2)}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Coupon</td>
+                                                            <td class="text-end">${{number_format($order->total - $total, 2)}}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Order Total</td>
-                                                            <td class="text-end">$170.00</td>
+                                                            <td class="text-end">${{number_format($order->total, 2)}}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
