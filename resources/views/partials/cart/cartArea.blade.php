@@ -3,7 +3,7 @@
     <div class="container">	
         <div class="row">
             <div class="col-lg-12">
-                <div class="shopping-cart">
+                <div class="shopping-cart" >
                     <!-- Nav tabs -->
                     <ul class="cart-page-menu nav row clearfix mb-30">
                         <li><a class="active" href="#shopping-cart" data-bs-toggle="tab">shopping cart</a></li>
@@ -15,7 +15,7 @@
                     <div class="tab-content">
                         <!-- shopping-cart start -->
                         <div class="tab-pane active" id="shopping-cart">
-                            <form action="#">
+                            <div>
                                 <div class="shop-cart-table">
                                     <div class="table-content table-responsive">
                                         <table>
@@ -35,10 +35,10 @@
                                                         <!-- Single-product start -->
                                                         <div class="single-product">
                                                             <div class="product-img">
-                                                                <a href="single-product.html"><img src="{{asset('img/images_site/270x270/'.$totalProduct->product->pp->src)}}" alt="" /></a>
+                                                                <a href="product/{{$totalProduct->product->id}}"><img src="{{asset('img/images_site/270x270/'.$totalProduct->product->pp->src)}}" alt="" /></a>
                                                             </div>
                                                             <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">{{$totalProduct->product->name}}</a></h4>
+                                                                <h4 class="post-title"><a class="text-light-black" href="product/">{{$totalProduct->product->name}}</a></h4>
                                                                 <p class="mb-0">Size :     {{$totalProduct->product->size}}</p>
                                                             </div>
                                                         </div>
@@ -47,12 +47,16 @@
                                                     <td id="priceProduct" class="product-price">${{$totalProduct->product->price}}</td>
                                                     <td class="product-quantity">
                                                         <div class="cart-plus-minus">
-                                                            <input type="text" value="2" name="qtybutton" id="qtty" class="cart-plus-minus-box">
+                                                            <input type="text" disabled value="{{$totalProduct->amount}}" id="qtty" class="cart-plus-minus-box">
                                                         </div>
                                                     </td>
                                                     <td id="total_article" class="product-subtotal">$112.00</td>
                                                     <td class="product-remove">
-                                                        <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                        <form action="cartProduct/{{$totalProduct->id}}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="#"><button type="submit"><i class="zmdi zmdi-close"></i></button></a>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -73,14 +77,10 @@
                                         <div class="customer-login payment-details mt-30">
                                             <h4 class="title-1 title-border text-uppercase">payment details</h4>
                                             <table>
-                                                <tbody>
+                                                <tbody id="countCart">
                                                     <tr>
                                                         <td class="text-left">Cart Subtotal</td>
                                                         <td class="text-end">$155.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left">Cart Subtotal</td>
-                                                        <td class="text-end">$15.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left">Vat</td>
@@ -88,19 +88,23 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left">Order Total</td>
-                                                        <td class="text-end">$170.00</td>
+                                                        <td class="text-end justify-content-end d-flex align-items-center"><input style="color: #c87065; font-weight:bold; width:auto; text-align: right" class="bg-transparent m-0 p-0" type="number" disabled step="0.01">$</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-                            </form>		
+                            </div>		
                         </div>
                         <!-- shopping-cart end -->
                         <!-- check-out end -->
                     </div>
-                    <button type="submit" data-text="proceed-checkout" class="button-one submit-button mt-15">PROCEED CHECK OUT</button>
+                    <form action="orderProduct" method="POST">
+                        @csrf
+                        <input type="text" name="amount" hidden id="amoutArray">
+                        <button type="submit" data-text="proceed-checkout" class="button-one submit-button mt-15">PROCEED CHECK OUT</button>
+                    </form>
                 </div>
             </div>
         </div>
