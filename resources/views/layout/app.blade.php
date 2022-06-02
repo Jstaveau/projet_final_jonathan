@@ -94,15 +94,14 @@
                                     $cart = Cart::where('user_id', Auth::user()->id)->first();
                                     $products = $cart->product;
                                     $products = $products->reverse();
-                                    $totalProducts = CartProduct::where('cart_id', $cart->id)->get();
+                                    $totalProducts = CartProduct::where('cart_id', $cart->id)->orderBy('id',  'desc')->get();
                                     $total = 0;
                                     foreach ($totalProducts as $totalProduct) {
                                         if ($totalProduct->product->discount != null) {
-                                            $total += ($totalProduct->product->price * (1 - $totalProduct->product->discount/100)) * $totalProduct->amount;
+                                            $total += $totalProduct->product->price * (1 - $totalProduct->product->discount / 100) * $totalProduct->amount;
                                         } else {
                                             $total += $totalProduct->product->price * $totalProduct->amount;
                                         }
-                                        
                                     }
                                 @endphp
                                 <ul>
@@ -120,40 +119,45 @@
                                                     shopping bag</p>
                                             </div>
                                             <div class="all-cart-product clearfix">
-                                                @foreach ($products as $product)
+                                                @foreach ($totalProducts as $product)
                                                     @if ($loop->iteration < 3)
                                                         <div class="single-cart clearfix">
                                                             <div class="cart-photo">
                                                                 <a href="#"><img
-                                                                        src="{{ asset('img/images_site/70x83/' . $product->pp->src) }}"
+                                                                        src="{{ asset('img/images_site/70x83/' . $product->product->pp->src) }}"
                                                                         alt="" /></a>
                                                             </div>
                                                             <div class="cart-info">
-                                                                <h5><a href="#">{{ $product->name }}</a></h5>
-                                                                @if ($product->discount == null)
+                                                                <h5><a href="#">{{ $product->product->name }}</a></h5>
+                                                                @if ($product->product->discount == null)
                                                                     <p class="mb-0">Price : $
-                                                                        {{ $product->price }}</p>
+                                                                        {{ $product->product->price }}</p>
                                                                 @else
                                                                     <p class="mb-0">Price (with discount) : $
-                                                                        {{ $product->price * (1 - $product->discount / 100) }}
+                                                                        {{ $product->product->price * (1 - $product->product->discount / 100) }}
                                                                     </p>
                                                                 @endif
-                                                                <p class="mb-0">Qty : @foreach ($product->cartproduct as $qtty)
-                                                                    @if ($qtty->cart_id == $cart->id)
-                                                                        {{$qtty->amount}}
-                                                                    @endif
-                                                                @endforeach
+                                                                <p class="mb-0">Qty : @foreach ($product->product->cartproduct as $qtty)
+                                                                        @if ($qtty->cart_id == $cart->id)
+                                                                            {{ $qtty->amount }}
+                                                                        @endif
+                                                                    @endforeach
                                                                 </p>
-                                                                <span class="cart-delete"><a href="#"><i
-                                                                            class="zmdi zmdi-close"></i></a></span>
+                                                                <form action="cartProduct/{{$product->id}}" method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <span class="cart-delete"><button
+                                                                            type="submit"><i
+                                                                                class="zmdi zmdi-close"></i></button></span>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     @endif
                                                 @endforeach
                                             </div>
                                             <div class="cart-totals">
-                                                <h5 class="mb-0">Total <span
-                                                        class="floatright">$ {{$total}}</span></h5>
+                                                <h5 class="mb-0">Total <span class="floatright">$
+                                                        {{ $total }}</span></h5>
                                             </div>
                                             <div class="cart-bottom  clearfix">
                                                 <a href="/cart" class="button-one floatleft text-uppercase"

@@ -103,6 +103,7 @@ class CartProductController extends Controller
      */
     public function destroy(CartProduct $cartProduct)
     {
-        //
+        $cartProduct->delete();
+        return redirect()->back();
     }
 }
