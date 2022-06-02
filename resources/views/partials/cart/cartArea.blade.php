@@ -29,84 +29,33 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                @foreach ($totalProducts as $totalProduct)
+                                                <tr id="columnproduct">
                                                     <td class="product-thumbnail  text-left">
                                                         <!-- Single-product start -->
                                                         <div class="single-product">
                                                             <div class="product-img">
-                                                                <a href="single-product.html"><img src="img/product/2.jpg" alt="" /></a>
+                                                                <a href="single-product.html"><img src="{{asset('img/images_site/270x270/'.$totalProduct->product->pp->src)}}" alt="" /></a>
                                                             </div>
                                                             <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
-                                                                <p class="mb-0">Color :  Black</p>
-                                                                <p class="mb-0">Size :     SL</p>
+                                                                <h4 class="post-title"><a class="text-light-black" href="#">{{$totalProduct->product->name}}</a></h4>
+                                                                <p class="mb-0">Size :     {{$totalProduct->product->size}}</p>
                                                             </div>
                                                         </div>
                                                         <!-- Single-product end -->												
                                                     </td>
-                                                    <td class="product-price">$56.00</td>
+                                                    <td id="priceProduct" class="product-price">${{$totalProduct->product->price}}</td>
                                                     <td class="product-quantity">
                                                         <div class="cart-plus-minus">
-                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                                            <input type="text" value="2" name="qtybutton" id="qtty" class="cart-plus-minus-box">
                                                         </div>
                                                     </td>
-                                                    <td class="product-subtotal">$112.00</td>
+                                                    <td id="total_article" class="product-subtotal">$112.00</td>
                                                     <td class="product-remove">
                                                         <a href="#"><i class="zmdi zmdi-close"></i></a>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="product-thumbnail  text-left">
-                                                        <!-- Single-product start -->
-                                                        <div class="single-product">
-                                                            <div class="product-img">
-                                                                <a href="single-product.html"><img src="img/product/12.jpg" alt="" /></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
-                                                                <p class="mb-0">Color :  Black</p>
-                                                                <p class="mb-0">Size :     SL</p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Single-product end -->												
-                                                    </td>
-                                                    <td class="product-price">$56.00</td>
-                                                    <td class="product-quantity">
-                                                        <div class="cart-plus-minus">
-                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                        </div>
-                                                    </td>
-                                                    <td class="product-subtotal">$112.00</td>
-                                                    <td class="product-remove">
-                                                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="product-thumbnail  text-left">
-                                                        <!-- Single-product start -->
-                                                        <div class="single-product">
-                                                            <div class="product-img">
-                                                                <a href="single-product.html"><img src="img/product/6.jpg" alt="" /></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
-                                                                <p class="mb-0">Color :  Black</p>
-                                                                <p class="mb-0">Size :     SL</p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Single-product end -->												
-                                                    </td>
-                                                    <td class="product-price">$56.00</td>
-                                                    <td class="product-quantity">
-                                                        <div class="cart-plus-minus">
-                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                        </div>
-                                                    </td>
-                                                    <td class="product-subtotal">$112.00</td>
-                                                    <td class="product-remove">
-                                                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                    </td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

@@ -24,6 +24,7 @@ use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\Banner;
 use App\Models\BillingAddress;
+use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Category;
 use App\Models\Diapo;
@@ -50,7 +51,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $latest = Product::orderBy('id','desc')->first(); //last product
+    $latest = Product::orderBy('id', 'desc')->first(); //last product
     $star = Product::where('star', true)->first(); //star product
     if ($star == null) {
         $star = Product::first();
@@ -77,10 +78,22 @@ Route::get('/product/size/{size}', function ($size) { //size filter
     return view('pages.shopList', compact('banner', 'products', 'lists', 'all_categories'));
 });
 Route::get('/cart', function () {
-    return view('pages.cart');
+    $banner = Banner::where('id', 8)->first();
+    $cart = Cart::where('user_id', Auth::user()->id)->first();
+    $totalProducts = CartProduct::where('cart_id', $cart->id)->orderBy('id',  'desc')->get();
+    $total = 0;
+    foreach ($totalProducts as $totalProduct) {
+        if ($totalProduct->product->discount != null) {
+            $total += $totalProduct->product->price * (1 - $totalProduct->product->discount / 100) * $totalProduct->amount;
+        } else {
+            $total += $totalProduct->product->price * $totalProduct->amount;
+        }
+    }
+    return view('pages.cart', compact('banner', 'totalProducts', 'total'));
 });
 Route::get('/checkout', function () {
-    return view('pages.checkout');
+    $banner = Banner::where('id', 6)->first();
+    return view('pages.checkout', compact('banner'));
 });
 Route::get('/account', function () {
     $banner = Banner::where('id', 5)->first();
@@ -164,4 +177,4 @@ Route::resource('info', InfoController::class);
 Route::get('/file-resize', [ResizeController::class, 'index']);
 Route::post('/resize-file', [ResizeController::class, 'resizeImage'])->name('resizeImage');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

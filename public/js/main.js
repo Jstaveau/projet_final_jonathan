@@ -197,7 +197,19 @@
 		}
 		$button.parent().find("input").val(newVal);
 	});
-
+	let priceArticle = document.querySelectorAll('#columnproduct');
+	priceArticle.forEach(element => {
+		let input = element.children[2].children[0].children[1].value
+		console.log(input);
+		element.children[3].innerHTML = '$' + (element.children[1].innerHTML.slice(1) * input)
+	});
+	$(".qtybutton").on("click", function (){
+		priceArticle.forEach(element => {
+			let input = element.children[2].children[0].children[1].value
+			console.log(input);
+			element.children[3].innerHTML = '$' + (element.children[1].innerHTML.slice(1) * input)
+		});
+	});
 	/*-------------------------
 		accordion toggle function
 	--------------------------*/
