@@ -136,6 +136,11 @@ Route::get('/dashboard/products', function () {
     return view('pages.pagesDashboard.products', compact('products'));
 })->middleware(['auth']);
 
+Route::get('/dashboard/orders', function () {
+    $orders = Order::all();
+    return view('pages.pagesDashboard.orders', compact('orders'));
+})->middleware(['auth']);
+
 Route::get('/dashboard/articles', function () {
     $articles = Article::all();
     return view('pages.pagesDashboard.articles', compact('articles'));

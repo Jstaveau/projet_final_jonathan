@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMail;
+use App\Mail\SendOrderMail;
 use App\Models\Order;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -88,6 +92,22 @@ class OrderController extends Controller
         $billing->city = $request->city;
         $billing->address = $request->address;
         $billing->save();
+        $order_products = OrderProduct::where('order_id', $order->id)->get();
+        $total = 0;
+        foreach ($order_products as $order_product) {
+            $total += $order_product->product->price * $order_product->amount;
+        }
+
+        $details = [
+            'subject' => 'Order',
+            'name' => Auth::user()->name,
+            'products' => $order->product,
+            'total' => $total,
+            'address' => $billing->address,
+        ];
+
+        Mail::to(Auth::user()->email)->send(new OrderMail($details));
+
         return redirect('/orderDone');
     }
 
@@ -99,6 +119,16 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        $details = [
+            'subject' => 'Commande en chemin',
+            'name' => $order->user->billing->name,
+            'products' => $order->product,
+            'number' => $order->command_number,
+            'address' => $order->user->billing->address,
+        ];
+
+        Mail::to('jonathan.staveau@outlook.com')->send(new SendOrderMail($details));
+        return redirect()->back();
     }
 }

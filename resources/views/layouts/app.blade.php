@@ -135,6 +135,7 @@
                         <li><a href='/dashboard/teams'>Team</a></li>
                         <li><a href='/dashboard/mails'>Mailbox</a></li>
                         <li><a href='/dashboard/infos'>Infos</a></li>
+                        <li><a href='/dashboard/orders'>Orders</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

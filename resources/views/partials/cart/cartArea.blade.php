@@ -44,7 +44,7 @@
                                                         </div>
                                                         <!-- Single-product end -->												
                                                     </td>
-                                                    <td id="priceProduct" class="product-price">${{$totalProduct->product->price}}</td>
+                                                    <td id="priceProduct" class="product-price">${{$totalProduct->product->discount != null ? $totalProduct->product->price * (1-$totalProduct->product->discount / 100) : $totalProduct->product->price}}</td>
                                                     <td class="product-quantity">
                                                         <div class="cart-plus-minus">
                                                             <input type="text" disabled value="{{$totalProduct->amount}}" id="qtty" class="cart-plus-minus-box">
