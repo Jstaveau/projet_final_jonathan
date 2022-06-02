@@ -48,7 +48,11 @@ class CartProductController extends Controller
                 $add->cart_id = Auth::user()->cart->id;
                 $add->product_id = $request->product;
             } else {
-                $add->amount += $request->qtybutton;
+                if ($request->qtybutton) {
+                    $add->amount += $request->qtybutton;
+                } else {
+                    $add->amount += 1;
+                }
                 $add->cart_id = Auth::user()->cart->id;
                 $add->product_id = $request->product;
             }

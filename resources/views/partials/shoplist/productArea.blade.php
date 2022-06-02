@@ -158,18 +158,6 @@
                                                                 title="Add To Cart"><button><i class="zmdi zmdi-shopping-cart-plus"></i></button></a>
                                                         </div>
                                                     </form>
-                                                    {{-- <div class="cart-plus-minus">
-                                                        <input type="text" value="02" name="qtybutton"
-                                                            class="cart-plus-minus-box">
-                                                    </div>
-                                                    <div class="product-action clearfix">
-                                                        <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#productModal-{{ $product->id }}"
-                                                            title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                                        <a href="cart.html" data-bs-toggle="tooltip"
-                                                            data-placement="top" title="Add To Cart"><i
-                                                                class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>

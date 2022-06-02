@@ -81,51 +81,79 @@
                     <div class="row">
                         <div class="col-md-4 offset-md-4 col-7">
                             <div class="logo text-md-center">
-                                <a href="/"><img src=" {{asset('img/logo/logo.png')}} " alt="" /></a>
+                                <a href="/"><img src=" {{ asset('img/logo/logo.png') }} " alt="" /></a>
                             </div>
                         </div>
                         <div class="col-md-4 col-5">
                             <div class="mini-cart text-end">
+                                @php
+                                    use App\Models\Product;
+                                    use App\Models\CartProduct;
+                                    use App\Models\Cart;
+                                    use Illuminate\Support\Facades\Auth;
+                                    $cart = Cart::where('user_id', Auth::user()->id)->first();
+                                    $products = $cart->product;
+                                    $products = $products->reverse();
+                                    $totalProducts = CartProduct::where('cart_id', $cart->id)->get();
+                                    $total = 0;
+                                    foreach ($totalProducts as $totalProduct) {
+                                        if ($totalProduct->product->discount != null) {
+                                            $total += ($totalProduct->product->price * (1 - $totalProduct->product->discount/100)) * $totalProduct->amount;
+                                        } else {
+                                            $total += $totalProduct->product->price * $totalProduct->amount;
+                                        }
+                                        
+                                    }
+                                @endphp
                                 <ul>
                                     <li>
                                         <a class="cart-icon" href="#">
                                             <i class="zmdi zmdi-shopping-cart"></i>
-                                            <span>3</span>
+                                            @if (count($products) > 0)
+                                                <span>{{ $products->count() }}</span>
+                                            @endif
                                         </a>
                                         <div class="mini-cart-brief text-left">
                                             <div class="cart-items">
-                                                <p class="mb-0">You have <span>03 items</span> in your
+                                                <p class="mb-0">You have <span>{{ count($products) }}
+                                                        items</span> in your
                                                     shopping bag</p>
                                             </div>
                                             <div class="all-cart-product clearfix">
-                                                <div class="single-cart clearfix">
-                                                    <div class="cart-photo">
-                                                        <a href="#"><img src="img/cart/1.jpg" alt="" /></a>
-                                                    </div>
-                                                    <div class="cart-info">
-                                                        <h5><a href="#">dummy product name</a></h5>
-                                                        <p class="mb-0">Price : $ 100.00</p>
-                                                        <p class="mb-0">Qty : 02 </p>
-                                                        <span class="cart-delete"><a href="#"><i
-                                                                    class="zmdi zmdi-close"></i></a></span>
-                                                    </div>
-                                                </div>
-                                                <div class="single-cart clearfix">
-                                                    <div class="cart-photo">
-                                                        <a href="#"><img src="img/cart/2.jpg" alt="" /></a>
-                                                    </div>
-                                                    <div class="cart-info">
-                                                        <h5><a href="#">dummy product name</a></h5>
-                                                        <p class="mb-0">Price : $ 300.00</p>
-                                                        <p class="mb-0">Qty : 01 </p>
-                                                        <span class="cart-delete"><a href="#"><i
-                                                                    class="zmdi zmdi-close"></i></a></span>
-                                                    </div>
-                                                </div>
+                                                @foreach ($products as $product)
+                                                    @if ($loop->iteration < 3)
+                                                        <div class="single-cart clearfix">
+                                                            <div class="cart-photo">
+                                                                <a href="#"><img
+                                                                        src="{{ asset('img/images_site/70x83/' . $product->pp->src) }}"
+                                                                        alt="" /></a>
+                                                            </div>
+                                                            <div class="cart-info">
+                                                                <h5><a href="#">{{ $product->name }}</a></h5>
+                                                                @if ($product->discount == null)
+                                                                    <p class="mb-0">Price : $
+                                                                        {{ $product->price }}</p>
+                                                                @else
+                                                                    <p class="mb-0">Price (with discount) : $
+                                                                        {{ $product->price * (1 - $product->discount / 100) }}
+                                                                    </p>
+                                                                @endif
+                                                                <p class="mb-0">Qty : @foreach ($product->cartproduct as $qtty)
+                                                                    @if ($qtty->cart_id == $cart->id)
+                                                                        {{$qtty->amount}}
+                                                                    @endif
+                                                                @endforeach
+                                                                </p>
+                                                                <span class="cart-delete"><a href="#"><i
+                                                                            class="zmdi zmdi-close"></i></a></span>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
                                             </div>
                                             <div class="cart-totals">
                                                 <h5 class="mb-0">Total <span
-                                                        class="floatright">$500.00</span></h5>
+                                                        class="floatright">$ {{$total}}</span></h5>
                                             </div>
                                             <div class="cart-bottom  clearfix">
                                                 <a href="/cart" class="button-one floatleft text-uppercase"
@@ -199,9 +227,10 @@
                             <div class="single-footer">
                                 <h3 class="footer-title  title-border">Contact Us</h3>
                                 <ul class="footer-contact">
-                                    <li><span>Address :</span>{{$contact->address}}</li>
-                                    <li><span>Cell-Phone :</span>{{$contact->phone}} - {{$contact->phone2}}</li>
-                                    <li><span>Email :</span>{{$contact->mail}}</li>
+                                    <li><span>Address :</span>{{ $contact->address }}</li>
+                                    <li><span>Cell-Phone :</span>{{ $contact->phone }} - {{ $contact->phone2 }}
+                                    </li>
+                                    <li><span>Email :</span>{{ $contact->mail }}</li>
                                 </ul>
                             </div>
                         </div>
