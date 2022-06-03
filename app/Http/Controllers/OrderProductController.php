@@ -45,35 +45,39 @@ class OrderProductController extends Controller
     public function store(Request $request)
     {
         $cart = Cart::where('user_id', Auth::user()->id)->first();
-        $totalProducts = CartProduct::where('cart_id', $cart->id)->orderBy('id',  'desc')->get();
-        if ($request->amount != null) {
-            $i = 0;
-            $newAmounts = explode(',', $request->amount);
-            foreach ($totalProducts as $product) {
-                $product->amount = $newAmounts[$i];
-                $i++;
-                $product->save();
+        if ($cart->product != null || count($cart->product) > 0) {
+            $totalProducts = CartProduct::where('cart_id', $cart->id)->orderBy('id',  'desc')->get();
+
+            if ($request->amount != null) {
+                $i = 0;
+                $newAmounts = explode(',', $request->amount);
+                foreach ($totalProducts as $product) {
+                    $product->amount = $newAmounts[$i];
+                    $i++;
+                    $product->save();
+                }
             }
-        }
-        if ($cart->product->count() != 0) {
-            $order = new Order();
-            $order->user_id = Auth::user()->id;
-            $order->total = $request->reduc;
-            $order->save();
-            $lastOrder = Order::orderBy('id', 'desc')->first();
-            foreach ($totalProducts as $product) {
-                $order = new OrderProduct();
-                $order->amount = $product->amount;
-                $order->product_id = $product->product_id;
-                $order->order_id = $lastOrder->id;
+            if ($cart->product->count() != 0) {
+                $order = new Order();
+                $order->user_id = Auth::user()->id;
+                $order->total = $request->reduc;
                 $order->save();
+                $lastOrder = Order::orderBy('id', 'desc')->first();
+                foreach ($totalProducts as $product) {
+                    $order = new OrderProduct();
+                    $order->amount = $product->amount;
+                    $order->product_id = $product->product_id;
+                    $order->order_id = $lastOrder->id;
+                    $order->save();
+                }
             }
+            CartProduct::where('cart_id', $cart->id)->orderBy('id',  'desc')->delete();
+    
+            return redirect('/checkout');
+        } else {
+            return redirect('/cart');
         }
 
-
-        CartProduct::where('cart_id', $cart->id)->orderBy('id',  'desc')->delete();
-
-        return redirect('/checkout');
     }
 
     /**

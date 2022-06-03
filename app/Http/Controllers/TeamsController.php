@@ -41,6 +41,12 @@ class TeamsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'file' => ['required'],
+            'post' => ['required'],
+            'description' => ['required'],
+        ]);
         $teams = new Teams();
         //resize image
         if ($request->file) {
@@ -77,7 +83,7 @@ class TeamsController extends Controller
         }
         $teams->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'created');
     }
 
     /**
@@ -112,6 +118,11 @@ class TeamsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'post' => ['required'],
+            'description' => ['required'],
+        ]);
         $teams = Teams::find($id);
         //resize image
         if ($request->file) {
@@ -148,7 +159,7 @@ class TeamsController extends Controller
         }
         $teams->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'updated');
     }
 
     /**

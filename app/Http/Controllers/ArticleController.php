@@ -55,6 +55,12 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required'],
+            'file' => ['required'],
+            'tags' => ['required'],
+        ]);
         //creation article
         $article = new Article();
         $article->title = $request->title;
@@ -100,7 +106,7 @@ class ArticleController extends Controller
             $art_tag->save();
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'article created');
     }
 
     /**
@@ -141,6 +147,11 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required'],
+            'tags' => ['required'],
+        ]);
         $article->title = $request->title;
         $article->content = $request->content;
         $article->article_category_id = $request->article_category_id;
@@ -181,7 +192,7 @@ class ArticleController extends Controller
             $avatar->save();
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Updated');
     }
 
     /**

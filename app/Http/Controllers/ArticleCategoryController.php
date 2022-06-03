@@ -41,11 +41,15 @@ class ArticleCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
         $category = new ArticleCategory();
         $category->name = $request->name;
         $category->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'category created');
     }
 
     /**
@@ -82,9 +86,12 @@ class ArticleCategoryController extends Controller
      */
     public function update(Request $request, ArticleCategory $articleCategory)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
         $articleCategory->name = $request->name;
         $articleCategory->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'category updated');
     }
 
     /**

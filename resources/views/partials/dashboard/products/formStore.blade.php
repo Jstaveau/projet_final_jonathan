@@ -7,6 +7,7 @@
                     <h4 class="title-1 text-uppercase mb-30">
                         Product informations</h4>
                 </div>
+                @include('flash')
                 <form action="/product" method="POST" enctype="multipart/form-data">
                     @csrf
                     <label for="pp">Change photo</label><br>

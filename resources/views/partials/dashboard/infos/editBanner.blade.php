@@ -2,6 +2,7 @@
 <h1 class="text-center m-5">Edit Banner</h1>
 <div class="contact-us-area pb-80">
     <div class="container">
+        @include('flash')
         <div class="contact-us customer-login bg-white">
             <div class="send-message">
                 <div class="d-flex align-items-center justify-content-between">

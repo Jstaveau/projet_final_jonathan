@@ -7,6 +7,7 @@
                     <h4 class="title-1 text-uppercase mb-30">
                         Add a new team member</h4>
                 </div>
+                @include('flash')
                 <form action="/team" method="POST" enctype="multipart/form-data">
                     @csrf
                     <label for="pp">Change photo</label><br>

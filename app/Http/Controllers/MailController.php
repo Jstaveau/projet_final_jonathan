@@ -42,6 +42,11 @@ class MailController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'mail' => ['required', 'email'],
+            'message' => ['required'],
+        ]);
         $mail = new Mail();
         $mail->name = $request->name;
         $mail->mail = $request->mail;
@@ -58,7 +63,7 @@ class MailController extends Controller
         ];
 
         FacadesMail::to($details['mail'])->send(new FormMail($details));
-        return redirect()->back();
+        return redirect()->back()->with('success', 'email send');
     }
 
     /**

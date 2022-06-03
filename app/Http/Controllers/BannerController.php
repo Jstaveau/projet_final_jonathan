@@ -75,6 +75,9 @@ class BannerController extends Controller
      */
     public function update(Request $request, Banner $banner)
     {
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+        ]);
         $avatar = Image::where('id', $banner->image_id)->first();
         
         if ($request->file) {
@@ -92,7 +95,7 @@ class BannerController extends Controller
         $banner->title = $request->title;
         $banner->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'updated');
     }
 
     /**

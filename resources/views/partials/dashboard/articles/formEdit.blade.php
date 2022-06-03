@@ -1,6 +1,7 @@
 <!-- contact-us-AREA START -->
 <div class="contact-us-area  pt-80 pb-80">
     <div class="container">
+        @include('flash')
         <div class="contact-us customer-login bg-white">
             <div class="send-message">
                 <div class="d-flex align-items-center justify-content-between">

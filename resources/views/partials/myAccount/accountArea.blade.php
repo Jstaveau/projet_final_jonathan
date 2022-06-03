@@ -64,6 +64,7 @@
                                     <form class="billing-details shop-cart-table" action="/billing/{{$billing->id}}" method="POST">
                                         @csrf
                                         @method('PUT')
+                                        @include('flash')
                                         <input name="name" value="{{$billing->name}}" type="text" placeholder="Your name here...">
                                         <input name="email" value="{{$billing->email}}" type="text" placeholder="Email address here...">
                                         <input name="phone" value="{{$billing->phone}}" type="text" placeholder="Phone here...">

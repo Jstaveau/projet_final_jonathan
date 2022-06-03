@@ -37,6 +37,9 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
         $newsletters = Newsletter::all();
         $mailsNewsletter = array();
         foreach ($newsletters as $newsletter) {
@@ -57,7 +60,7 @@ class NewsletterController extends Controller
         }
 
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'subscribed');
     }
 
     /**

@@ -42,10 +42,14 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
         $tag = new Tag();
         $tag->name = $request->name;
         $tag->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'created');
     }
 
     /**
@@ -83,9 +87,13 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
         $tag->name = $request->name;
         $tag->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'updated');
     }
 
     /**

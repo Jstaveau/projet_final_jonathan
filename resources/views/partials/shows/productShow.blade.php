@@ -140,6 +140,7 @@
                                         <h3 class="tab-title title-border mb-30">Leave your review</h3>
 
                                         <div class="reply-box">
+                                            @include('flash')
                                             <form action="/review" method="POST">
                                                 @csrf
                                                 <div class="row">

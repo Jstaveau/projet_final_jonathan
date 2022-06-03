@@ -41,12 +41,15 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'content' => ['required'],
+        ]);
         $review = new Review();
         $review->content = $request->content;
         $review->user_id = Auth::user()->id;
         $review->product_id = substr(URL::previous(), -1);
         $review->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'created');
     }
 
     /**

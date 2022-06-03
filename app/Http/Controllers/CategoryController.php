@@ -39,11 +39,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
         $category = new Category();
         $category->name = $request->name;
         $category->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'created');
     }
 
     /**
@@ -77,9 +81,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
         $category->name = $request->name;
         $category->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'updated');
     }
 
     /**

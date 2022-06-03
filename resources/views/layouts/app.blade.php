@@ -139,7 +139,7 @@
                         @can('webmaster')
                             <li><a href="/dashboard/articles">Articles</a></li>
                         @endcan
-                        @can('stock')
+                        @can(['stock'])
                             <li><a href="/dashboard/products">Products</a></li>
                         @endcan
                         <li>

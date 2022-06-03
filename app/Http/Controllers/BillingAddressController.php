@@ -76,6 +76,12 @@ class BillingAddressController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'address' => ['required'],
+            'email' => ['required', 'email'],
+        ]);
+
         $billingAddress = BillingAddress::find($id);
         $billingAddress->name = $request->name;
         $billingAddress->address = $request->address;
@@ -87,7 +93,7 @@ class BillingAddressController extends Controller
         $billingAddress->email = $request->email;
         $billingAddress->user_id = Auth::user()->id;
         $billingAddress->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Updated');
     }
 
     /**

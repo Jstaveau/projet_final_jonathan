@@ -198,9 +198,6 @@
                         <li><a href="/article">blog</a></li>
                         <li><a href="/about">about us</a></li>
                         <li><a href="/contact">contact</a></li>
-                        @can('admin')
-                            <li><a href="/dashboard">dashboard</a></li>
-                        @endcan
                         @can('webmaster')
                             <li><a href="/dashboard/articles">dashboard</a></li>
                         @endcan

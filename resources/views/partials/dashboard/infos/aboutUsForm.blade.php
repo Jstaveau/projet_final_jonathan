@@ -1,5 +1,6 @@
 <!-- contact-us-AREA START -->
 <h1 class="text-center m-5">About</h1>
+@include('flash')
 <div class="contact-us-area">
     <div class="container">
         <div class="contact-us customer-login bg-white">

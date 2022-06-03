@@ -24,12 +24,13 @@
                         </ul>
                     </div>
                     <div class="send-message mt-60">
+                        @include('flash')
                         <form action="/mail" method="POST">
                             @csrf
                             <h4 class="title-1 title-border text-uppercase mb-30">send message</h4>
-                            <input type="text" name="name" placeholder="Your name here..." />
-                            <input type="text" name="mail" placeholder="Your email here..." />
-                            <textarea class="custom-textarea" name="message" placeholder="Your comment here..."></textarea>
+                            <input value="{{old('name')}}" type="text" name="name" placeholder="Your name here..." />
+                            <input value="{{old('mail')}}" type="text" name="mail" placeholder="Your email here..." />
+                            <textarea class="custom-textarea" name="message" placeholder="Your comment here...">{{old('content')}}</textarea>
                             <button class="button-one submit-button mt-20" data-text="submit message"
                                 type="submit">submit message</button>
                             <p class="form-message"></p>

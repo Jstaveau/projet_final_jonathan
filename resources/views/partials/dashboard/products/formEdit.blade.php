@@ -9,6 +9,7 @@
                         {{ $product->name }} -
                         {{ $product->size }}</h4>
                 </div>
+                @include('flash')
                 <form action="/product/{{$product->id}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

@@ -79,6 +79,12 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email'],
+            'address' => ['required'],
+        ]);
+
         $order->validate = true;
         $order->command_number = rand(1000000, 9999999);
         $order->save();

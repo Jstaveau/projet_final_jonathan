@@ -33,10 +33,10 @@ class AuthServiceProvider extends ServiceProvider
             return Auth::user()->role_id == 1;
         });
         Gate::define('webmaster', function(){
-            return Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3;
+            return Auth::user()->role_id == 2 || Auth::user()->role_id == 3;
         });
         Gate::define('stock', function(){
-            return Auth::user()->role_id == 1 || Auth::user()->role_id == 4;
+            return Auth::user()->role_id == 4 || Auth::user()->role_id == 1;
         });
         Gate::define('redac', function($user, $article){
             if (Auth::user()->role_id == 1) {

@@ -6,6 +6,7 @@ use App\Models\About;
 use App\Models\Banner;
 use App\Models\Image;
 use App\Models\Teams;
+use Doctrine\Inflector\Rules\English\Rules;
 use Illuminate\Http\Request;
 use Jona;
 
@@ -84,6 +85,11 @@ class AboutController extends Controller
      */
     public function update(Request $request, About $about)
     {
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required'],
+        ]);
+
         $avatar = Image::where('id', $about->image_id)->first();
 
         if ($request->file) {
@@ -104,7 +110,7 @@ class AboutController extends Controller
         $about->content = $request->content;
         $about->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'infos updated');
     }
 
     /**

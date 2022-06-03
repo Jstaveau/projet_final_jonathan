@@ -76,13 +76,20 @@ class InfoController extends Controller
      */
     public function update(Request $request, Info $info)
     {
+        $request->validate([
+            'address' => ['required'],
+            'phone' => ['required'],
+            'phone2' => ['required'],
+            'mail' => ['required', 'email'],
+            'mail2' => ['required', 'email'],
+        ]);
         $info->address = $request->address;
         $info->phone = $request->phone;
         $info->phone2 = $request->phone2;
         $info->mail = $request->mail;
         $info->mail2 = $request->mail2;
         $info->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'updated');
     }
 
     /**

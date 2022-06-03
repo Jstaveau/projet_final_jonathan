@@ -67,6 +67,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'size' => ['required', 'string', 'max:3'],
+            'file' => ['required'],
+            'price' => ['required'],
+            'stock' => ['required'],
+            'description' => ['required'],
+        ]);
+
         $product = new Product();
         $product->name = $request->name;
         $product->size = $request->size;
@@ -133,7 +142,7 @@ class ProductController extends Controller
             Mail::to($newsletterAbo->email)->send(new NewProduct($details));
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'created');
     }
 
     /**
@@ -171,6 +180,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'size' => ['required', 'string', 'max:3'],
+            'price' => ['required'],
+            'stock' => ['required'],
+            'description' => ['required'],
+        ]);
 
         if ($request->file) {
 
@@ -239,7 +255,7 @@ class ProductController extends Controller
         }
         $product->save();
 
-        return redirect()->back();
+        return redirect()->back()->with("success", 'updated');
     }
 
     /**

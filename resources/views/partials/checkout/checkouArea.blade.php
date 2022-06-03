@@ -15,6 +15,7 @@
                     <div class="tab-content">
                         <!-- check-out start -->
                         <div class="tab-pane active" id="check-out">
+                            @include('flash')
                             <form action="order/{{$order->id}}" method="POST">
                                 @csrf
                                 @method('PUT')

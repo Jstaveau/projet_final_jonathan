@@ -5,6 +5,7 @@
             <div class="col-lg-12">
                 <div class="subscribe">
                     <form action="/newsletter" method="POST">
+                        @include('flash')
                         @csrf
                         <input name="email" type="text" placeholder="Enter your email address" />
                         <button class="submit-button submit-btn-2 button-one" data-text="subscribe" type="submit">subscribe</button>

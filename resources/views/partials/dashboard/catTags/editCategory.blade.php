@@ -1,5 +1,6 @@
 <div class="contact-us customer-login container my-5 bg-white">
     <div class="send-message">
+        @include('flash')
         <form action="/category/{{ $category->id }}" method="POST">
             @csrf
             @method('PUT')

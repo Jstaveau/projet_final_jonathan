@@ -74,6 +74,7 @@
                                 </div>
                                 @can('authentification')
                                     <div class="leave-review">
+                                        @include('flash')
                                         <h3 class="tab-title title-border mb-30">Leave your comment</h3>
                                         <div class="reply-box">
                                             <form action="/comment" method="POST">
