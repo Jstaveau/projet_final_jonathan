@@ -9,6 +9,10 @@ use Jona;
 
 class ImageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin'], ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *

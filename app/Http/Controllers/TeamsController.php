@@ -9,6 +9,10 @@ use Jona;
 
 class TeamsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin'], ['except' => ['store']]);
+    }
     /**
      * Display a listing of the resource.
      *

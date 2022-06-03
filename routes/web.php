@@ -94,7 +94,7 @@ Route::get('/cart', function () {
         }
     }
     return view('pages.cart', compact('banner', 'totalProducts', 'total'));
-});
+})->middleware(['auth']);
 Route::get('/checkout', function () {
     $user = Auth::user();
     $order = Order::where('user_id', $user->id)->orderBy('id', 'desc')->first();
@@ -106,12 +106,23 @@ Route::get('/checkout', function () {
     $billing = $user->billing;
     $banner = Banner::where('id', 6)->first();
     return view('pages.checkout', compact('banner', 'billing', 'order', 'order_products', 'total'));
-});
+})->middleware(['auth']);
 Route::get('/account', function () {
     $banner = Banner::where('id', 5)->first();
     $user = Auth::user();
+    $order = Order::where('user_id', $user->id)->orderBy('id', 'desc')->first();
+    if ($order != null) {
+        $order_products = OrderProduct::where('order_id', $order->id)->get();
+        $total = 0;
+        foreach ($order_products as $order_product) {
+            $total += $order_product->product->price * $order_product->amount;
+        }
+    } else {
+        $total = 0;
+        $order_products = [];
+    }
     $billing = $user->billing;
-    return view('pages.myAccount', compact('user', 'billing', 'banner'));
+    return view('pages.myAccount', compact('user', 'billing', 'banner', 'order_products', 'total', 'order'));
 })->middleware(['auth']);
 
 Route::get('/orderDone', function () {
@@ -129,51 +140,51 @@ Route::get('/orderDone', function () {
 Route::get('/dashboard', function () {
     $users = User::all();
     return view('dashboard', compact('users'));
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'isAdmin'])->name('dashboard');
 
 Route::get('/dashboard/products', function () {
     $products = Product::all();
     return view('pages.pagesDashboard.products', compact('products'));
-})->middleware(['auth']);
+})->middleware(['auth', 'stock']);
 
 Route::get('/dashboard/orders', function () {
     $orders = Order::all();
     return view('pages.pagesDashboard.orders', compact('orders'));
-})->middleware(['auth']);
+})->middleware(['auth', 'isAdmin']);
 
 Route::get('/dashboard/articles', function () {
     $articles = Article::all();
     return view('pages.pagesDashboard.articles', compact('articles'));
-})->middleware(['auth']);
+})->middleware(['auth', 'webmaster']);
 
 Route::get('/dashboard/categories', function () {
     $categories = Category::all();
     $article_categories = ArticleCategory::all();
     $tags = Tag::all();
     return view('pages.pagesDashboard.catTag', compact('categories', 'article_categories', 'tags'));
-})->middleware(['auth']);
+})->middleware(['auth', 'isAdmin']);
 
 Route::get('/dashboard/teams', function () {
     $teams = Teams::all();
     return view('pages.pagesDashboard.team', compact('teams'));
-})->middleware(['auth']);
+})->middleware(['auth', 'isAdmin']);
 
 Route::get('/dashboard/mails', function () {
     $mails = Mail::where('archived', false)->orderBy('id', 'desc')->get();
     return view('pages.pagesDashboard.mailBox', compact('mails'));
-})->middleware(['auth']);
+})->middleware(['auth', 'isAdmin']);
 
 Route::get('/dashboard/infos', function () {
     $about = About::first();
     $info = Info::first();
     $banners = Banner::all();
     return view('pages.pagesDashboard.infos', compact('info', 'banners', 'about'));
-})->middleware(['auth']);
+})->middleware(['auth', 'isAdmin']);
 
 Route::get('/dashboard/archived', function () {
     $mails = Mail::where('archived', true)->orderBy('id', 'desc')->get();
     return view('pages.pagesDashboard.mailBox', compact('mails'));
-})->middleware(['auth']);
+})->middleware(['auth', 'isAdmin']);
 
 Route::get('/user/{id}/edit', [RegisteredUserController::class, 'edit']);
 Route::put('/user/{id}/update', [RegisteredUserController::class, 'update']);

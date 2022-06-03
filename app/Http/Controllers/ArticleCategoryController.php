@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class ArticleCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin'], ['except' => 'show']);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -128,14 +128,20 @@
                 <nav>
                     <ul>
                         <li><a href="/">Back to website</a></li>
-                        <li><a href="/dashboard">Users</a></li>
-                        <li><a href="/dashboard/products">Products</a></li>
-                        <li><a href="/dashboard/articles">Articles</a></li>
-                        <li><a href='/dashboard/categories'>Categories</a></li>
-                        <li><a href='/dashboard/teams'>Team</a></li>
-                        <li><a href='/dashboard/mails'>Mailbox</a></li>
-                        <li><a href='/dashboard/infos'>Infos</a></li>
-                        <li><a href='/dashboard/orders'>Orders</a></li>
+                        @can('admin')
+                            <li><a href="/dashboard">Users</a></li>
+                            <li><a href='/dashboard/categories'>Categories</a></li>
+                            <li><a href='/dashboard/teams'>Team</a></li>
+                            <li><a href='/dashboard/mails'>Mailbox</a></li>
+                            <li><a href='/dashboard/infos'>Infos</a></li>
+                            <li><a href='/dashboard/orders'>Orders</a></li>
+                        @endcan
+                        @can('webmaster')
+                            <li><a href="/dashboard/articles">Articles</a></li>
+                        @endcan
+                        @can('stock')
+                            <li><a href="/dashboard/products">Products</a></li>
+                        @endcan
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

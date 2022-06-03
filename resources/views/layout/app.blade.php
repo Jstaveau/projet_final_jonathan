@@ -95,7 +95,9 @@
                                         $cart = Cart::where('user_id', Auth::user()->id)->first();
                                         $products = $cart->product;
                                         $products = $products->reverse();
-                                        $totalProducts = CartProduct::where('cart_id', $cart->id)->orderBy('id',  'desc')->get();
+                                        $totalProducts = CartProduct::where('cart_id', $cart->id)
+                                            ->orderBy('id', 'desc')
+                                            ->get();
                                     } else {
                                         $cart = null;
                                         $products = [];
@@ -134,7 +136,8 @@
                                                                         alt="" /></a>
                                                             </div>
                                                             <div class="cart-info">
-                                                                <h5><a href="#">{{ $product->product->name }}</a></h5>
+                                                                <h5><a href="#">{{ $product->product->name }}</a>
+                                                                </h5>
                                                                 @if ($product->product->discount == null)
                                                                     <p class="mb-0">Price : $
                                                                         {{ $product->product->price }}</p>
@@ -149,7 +152,8 @@
                                                                         @endif
                                                                     @endforeach
                                                                 </p>
-                                                                <form action="cartProduct/{{$product->id}}" method="POST">
+                                                                <form action="cartProduct/{{ $product->id }}"
+                                                                    method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <span class="cart-delete"><button
@@ -194,6 +198,24 @@
                         <li><a href="/article">blog</a></li>
                         <li><a href="/about">about us</a></li>
                         <li><a href="/contact">contact</a></li>
+                        @can('admin')
+                            <li><a href="/dashboard">dashboard</a></li>
+                        @endcan
+                        @can('webmaster')
+                            <li><a href="/dashboard/articles">dashboard</a></li>
+                        @endcan
+                        @can('stock')
+                            <li><a href="/dashboard/products">dashboard</a></li>
+                        @endcan
+                        @can('authentification')
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    this.closest('form').submit();">logout</a>
+                                </form>
+                            </li>
+                        @endcan
                     </ul>
                 </nav>
             </div>

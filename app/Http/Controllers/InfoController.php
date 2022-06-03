@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class InfoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin'], ['except' => ['index']]);
+    }
     /**
      * Display a listing of the resource.
      *

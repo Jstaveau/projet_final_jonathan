@@ -11,6 +11,10 @@ use Jona;
 
 class AboutController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin'])->only('update');
+    }
     /**
      * Display a listing of the resource.
      *

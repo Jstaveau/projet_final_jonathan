@@ -29,5 +29,21 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('authentification', function(){
             return Auth::user() != null;
         });
+        Gate::define('admin', function(){
+            return Auth::user()->role_id == 1;
+        });
+        Gate::define('webmaster', function(){
+            return Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3;
+        });
+        Gate::define('stock', function(){
+            return Auth::user()->role_id == 1 || Auth::user()->role_id == 4;
+        });
+        Gate::define('redac', function($user, $article){
+            if (Auth::user()->role_id == 1) {
+                return true;
+            } else {
+                return Auth::user()->role_id == 3 && $article->user->id == $user->id;
+            }
+        });
     }
 }

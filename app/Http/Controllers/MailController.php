@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Mail as FacadesMail;
 
 class MailController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin'], ['except' => ['store']]);
+    }
     /**
      * Display a listing of the resource.
      *

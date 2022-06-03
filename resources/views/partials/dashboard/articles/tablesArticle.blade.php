@@ -38,6 +38,8 @@
                         <td>
                             {{ substr($article->content, 0, 70) }}...
                         </td>
+                        @can('redac', $article)
+                            
                         <td class="d-flex h-100">
                             <a href="/article/{{$article->id}}"><button data-text="See" class="submit-button me-2 submit-btn-2 button-one">See</button></a>
                             <a href="/article/{{$article->id}}/edit"><button data-text="Edit" class="submit-button submit-btn-2 button-one">Edit</button></a>
@@ -49,6 +51,7 @@
                                 </button>
                             </form>
                         </td>
+                        @endcan
                     </tr>
                 @endforeach
             </tbody>

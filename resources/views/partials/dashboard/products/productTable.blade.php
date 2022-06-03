@@ -38,7 +38,7 @@
                         </td>
                         <td>
                             <img class="rounded" width="50px" height="45px"
-                                src="{{ asset('img/images_site/70x83/' . $product->pp->src) }}" alt="">
+                                src="{{$product->pp != null ? asset('img/images_site/70x83/' . $product->pp->src) : '' }}" alt="">
                             {{ $product->name }}
                         </td>
                         <td>

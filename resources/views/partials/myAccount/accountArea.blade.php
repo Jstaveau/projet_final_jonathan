@@ -98,6 +98,7 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($order != null)
                         <div class="panel mb-2 mb-md-0">
                             <div class="my-account-menu">
                                 <a class="collapsed"  data-bs-toggle="collapse"  href="#my-order">
@@ -115,36 +116,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Dummy Product Name  x 2</td>
-                                                    <td class="text-end">$86.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Dummy Product Name  x 1</td>
-                                                    <td class="text-end">$69.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cart Subtotal</td>
-                                                    <td class="text-end">$155.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Shipping and Handing</td>
-                                                    <td class="text-end">$15.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Vat</td>
-                                                    <td class="text-end">$00.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Order Total</td>
-                                                    <td class="text-end">$170.00</td>
-                                                </tr>
+                                                @foreach ($order_products as $product)
+                                                            <tr>
+                                                                <td>{{$product->product->name.' (Qty : '.$product->amount.')'}}</td>
+                                                                <td class="text-end">${{number_format(($product->product->price/121 * 100) * $product->amount, 2)}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        <tr>
+                                                            <td>Vat</td>
+                                                            <td class="text-end">${{number_format(($order->total/121) * 21, 2)}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Coupon</td>
+                                                            <td class="text-end">${{number_format($order->total - $total, 2)}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Order Total</td>
+                                                            <td class="text-end">${{number_format($order->total, 2)}}</td>
+                                                        </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                        </div>					
+                        </div>
+                        @endif					
                     </div>
                 </div>
                 <div class="col-md-6">

@@ -17,6 +17,10 @@ use Jona;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'stock'], ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *

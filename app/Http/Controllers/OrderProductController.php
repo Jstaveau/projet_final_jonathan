@@ -12,6 +12,10 @@ use Symfony\Component\Console\Input\Input;
 
 class OrderProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

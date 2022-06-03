@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isAdmin', ['except' => ['update']]);
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
